@@ -7,3 +7,4 @@ pt:
       blank: "obrigatório"
       invalid: "inválido"
       required: "obrigatório"
+      taken: "já foi usado"

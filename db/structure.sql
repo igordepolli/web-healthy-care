@@ -26,6 +26,42 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: doctors; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.doctors (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    last_name character varying NOT NULL,
+    crm character varying NOT NULL,
+    cpf character varying NOT NULL,
+    email character varying,
+    user_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: doctors_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.doctors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: doctors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.doctors_id_seq OWNED BY public.doctors.id;
+
+
+--
 -- Name: patients; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -33,8 +69,8 @@ CREATE TABLE public.patients (
     id bigint NOT NULL,
     name character varying NOT NULL,
     last_name character varying NOT NULL,
-    rg integer,
-    cpf integer,
+    rg character varying,
+    cpf character varying,
     email character varying,
     user_id bigint NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
@@ -107,6 +143,13 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: doctors id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.doctors ALTER COLUMN id SET DEFAULT nextval('public.doctors_id_seq'::regclass);
+
+
+--
 -- Name: patients id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -126,6 +169,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: doctors doctors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.doctors
+    ADD CONSTRAINT doctors_pkey PRIMARY KEY (id);
 
 
 --
@@ -150,6 +201,55 @@ ALTER TABLE ONLY public.schema_migrations
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_doctors_on_cpf; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_doctors_on_cpf ON public.doctors USING btree (cpf);
+
+
+--
+-- Name: index_doctors_on_crm; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_doctors_on_crm ON public.doctors USING btree (crm);
+
+
+--
+-- Name: index_doctors_on_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_doctors_on_email ON public.doctors USING btree (email);
+
+
+--
+-- Name: index_doctors_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_doctors_on_user_id ON public.doctors USING btree (user_id);
+
+
+--
+-- Name: index_patients_on_cpf; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_patients_on_cpf ON public.patients USING btree (cpf);
+
+
+--
+-- Name: index_patients_on_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_patients_on_email ON public.patients USING btree (email);
+
+
+--
+-- Name: index_patients_on_rg; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_patients_on_rg ON public.patients USING btree (rg);
 
 
 --
@@ -182,6 +282,14 @@ ALTER TABLE ONLY public.patients
 
 
 --
+-- Name: doctors fk_rails_899b01ef33; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.doctors
+    ADD CONSTRAINT fk_rails_899b01ef33 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -189,6 +297,7 @@ SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20230403210132'),
-('20230403224044');
+('20230403224044'),
+('20230404170059');
 
 
