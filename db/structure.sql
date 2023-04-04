@@ -96,6 +96,37 @@ ALTER SEQUENCE public.doctors_id_seq OWNED BY public.doctors.id;
 
 
 --
+-- Name: medications; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.medications (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: medications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.medications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: medications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.medications_id_seq OWNED BY public.medications.id;
+
+
+--
 -- Name: patients; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -191,6 +222,13 @@ ALTER TABLE ONLY public.doctors ALTER COLUMN id SET DEFAULT nextval('public.doct
 
 
 --
+-- Name: medications id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.medications ALTER COLUMN id SET DEFAULT nextval('public.medications_id_seq'::regclass);
+
+
+--
 -- Name: patients id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -226,6 +264,14 @@ ALTER TABLE ONLY public.doctor_appointments
 
 ALTER TABLE ONLY public.doctors
     ADD CONSTRAINT doctors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: medications medications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.medications
+    ADD CONSTRAINT medications_pkey PRIMARY KEY (id);
 
 
 --
@@ -292,6 +338,13 @@ CREATE UNIQUE INDEX index_doctors_on_email ON public.doctors USING btree (email)
 --
 
 CREATE UNIQUE INDEX index_doctors_on_user_id ON public.doctors USING btree (user_id);
+
+
+--
+-- Name: index_medications_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_medications_on_name ON public.medications USING btree (name);
 
 
 --
@@ -378,6 +431,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230403210132'),
 ('20230403224044'),
 ('20230404170059'),
-('20230404185602');
+('20230404185602'),
+('20230404192324');
 
 
