@@ -1,0 +1,5 @@
+suspected_flu:
+  patient: leo
+  doctor: milena
+  date: <%= Time.current %>
+  reason: "Léo está com suspeita de gripe"

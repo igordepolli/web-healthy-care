@@ -26,6 +26,40 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: doctor_appointments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.doctor_appointments (
+    id bigint NOT NULL,
+    patient_id bigint NOT NULL,
+    doctor_id bigint NOT NULL,
+    date timestamp(6) without time zone NOT NULL,
+    reason character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: doctor_appointments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.doctor_appointments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: doctor_appointments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.doctor_appointments_id_seq OWNED BY public.doctor_appointments.id;
+
+
+--
 -- Name: doctors; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -143,6 +177,13 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: doctor_appointments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.doctor_appointments ALTER COLUMN id SET DEFAULT nextval('public.doctor_appointments_id_seq'::regclass);
+
+
+--
 -- Name: doctors id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -169,6 +210,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: doctor_appointments doctor_appointments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.doctor_appointments
+    ADD CONSTRAINT doctor_appointments_pkey PRIMARY KEY (id);
 
 
 --
@@ -201,6 +250,20 @@ ALTER TABLE ONLY public.schema_migrations
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_doctor_appointments_on_doctor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_doctor_appointments_on_doctor_id ON public.doctor_appointments USING btree (doctor_id);
+
+
+--
+-- Name: index_doctor_appointments_on_patient_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_doctor_appointments_on_patient_id ON public.doctor_appointments USING btree (patient_id);
 
 
 --
@@ -290,6 +353,22 @@ ALTER TABLE ONLY public.doctors
 
 
 --
+-- Name: doctor_appointments fk_rails_95af2ef7ab; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.doctor_appointments
+    ADD CONSTRAINT fk_rails_95af2ef7ab FOREIGN KEY (patient_id) REFERENCES public.patients(id);
+
+
+--
+-- Name: doctor_appointments fk_rails_c83a28a885; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.doctor_appointments
+    ADD CONSTRAINT fk_rails_c83a28a885 FOREIGN KEY (doctor_id) REFERENCES public.doctors(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -298,6 +377,7 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20230403210132'),
 ('20230403224044'),
-('20230404170059');
+('20230404170059'),
+('20230404185602');
 
 
