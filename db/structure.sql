@@ -26,6 +26,38 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: diseases; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.diseases (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    treatment_indicated character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: diseases_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.diseases_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: diseases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.diseases_id_seq OWNED BY public.diseases.id;
+
+
+--
 -- Name: doctor_appointments; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -208,6 +240,13 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: diseases id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.diseases ALTER COLUMN id SET DEFAULT nextval('public.diseases_id_seq'::regclass);
+
+
+--
 -- Name: doctor_appointments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -248,6 +287,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: diseases diseases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.diseases
+    ADD CONSTRAINT diseases_pkey PRIMARY KEY (id);
 
 
 --
@@ -296,6 +343,13 @@ ALTER TABLE ONLY public.schema_migrations
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_diseases_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_diseases_on_name ON public.diseases USING btree (name);
 
 
 --
@@ -432,6 +486,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230403224044'),
 ('20230404170059'),
 ('20230404185602'),
-('20230404192324');
+('20230404192324'),
+('20230404200012');
 
 
