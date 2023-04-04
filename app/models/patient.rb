@@ -7,6 +7,6 @@ class Patient < ApplicationRecord
   has_many :appointments, class_name: "DoctorAppointment"
 
   validates :name, :last_name, presence: true
-  validates :cpf, cpf: { allow_blank: true }, uniqueness: { allow_blank: true }
-  validates :email, email: { allow_blank: true }, uniqueness: { allow_blank: true }
+  validates :cpf, cpf: true, uniqueness: { allow_blank: true }
+  validates :email, email: true, uniqueness: { allow_blank: true }
 end

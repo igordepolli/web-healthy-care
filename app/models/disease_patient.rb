@@ -6,8 +6,7 @@ class DiseasePatient < ApplicationRecord
   belongs_to :disease
   belongs_to :patient
 
-  # has_one :treatment
-
-  validates :diagnostic_date, presence: true
+  validates :diagnosed_at, presence: true, date: true
+  validates :cured_at, date: true
   validates :status, presence: true, uniqueness: { scope: [:disease_id, :patient_id], message: "O paciente já tem essa doença com este mesmo status!" }
 end

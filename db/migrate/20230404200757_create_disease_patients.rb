@@ -3,8 +3,8 @@ class CreateDiseasePatients < ActiveRecord::Migration[7.0]
     create_table :disease_patients do |t|
       t.references :disease, null: false, foreign_key: true
       t.references :patient, null: false, foreign_key: true
-      t.datetime :diagnostic_date, null: false
-      t.datetime :cure
+      t.datetime :diagnosed_at, null: false
+      t.datetime :cured_at
       t.string :related_symptoms
       t.integer :status, null: false, default: 1
 

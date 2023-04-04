@@ -6,5 +6,5 @@ class DoctorAppointment < ApplicationRecord
 
   has_one_attached :sick_note
 
-  validates :date, presence: true
+  validates :date, presence: true, date: true
 end

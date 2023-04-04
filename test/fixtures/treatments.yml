@@ -1,0 +1,4 @@
+for_flu:
+  disease_patient: leo_flu
+  classification: :medication
+  started_at: <%= Time.current %>

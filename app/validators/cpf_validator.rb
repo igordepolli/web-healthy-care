@@ -2,7 +2,7 @@
 
 class CpfValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    return if value.blank? && options[:allow_blank]
+    return if value.blank?
 
     unless cpf_valid?(value)
       record.errors.add(attribute, options[:message] || "CPF inválido")

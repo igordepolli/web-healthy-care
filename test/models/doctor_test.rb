@@ -15,7 +15,7 @@ class DoctorTest < ActiveSupport::TestCase
     assert_equal ["obrigatório"], blank.errors[:name]
     assert_equal ["obrigatório"], blank.errors[:last_name]
     assert_equal ["obrigatório"], blank.errors[:crm]
-    assert_equal ["CPF inválido"], blank.errors[:cpf]
+    assert_equal ["obrigatório"], blank.errors[:cpf]
     assert_equal ["obrigatório"], blank.errors[:user]
   end
 

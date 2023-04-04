@@ -18,7 +18,7 @@ class DiseasePatientTest < ActiveSupport::TestCase
     assert_equal 3, blank.errors.count
     assert_equal ["obrigatório"], blank.errors[:disease]
     assert_equal ["obrigatório"], blank.errors[:patient]
-    assert_equal ["obrigatório"], blank.errors[:diagnostic_date]
+    assert_equal ["obrigatório"], blank.errors[:diagnosed_at]
   end
 
   test "that a patient's disease does not repeat with the same status" do

@@ -33,8 +33,8 @@ CREATE TABLE public.disease_patients (
     id bigint NOT NULL,
     disease_id bigint NOT NULL,
     patient_id bigint NOT NULL,
-    diagnostic_date timestamp(6) without time zone NOT NULL,
-    cure timestamp(6) without time zone,
+    diagnosed_at timestamp(6) without time zone NOT NULL,
+    cured_at timestamp(6) without time zone,
     related_symptoms character varying,
     status integer DEFAULT 1 NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
@@ -240,6 +240,42 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: treatments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.treatments (
+    id bigint NOT NULL,
+    disease_patient_id bigint NOT NULL,
+    classification integer NOT NULL,
+    recommendation character varying,
+    started_at timestamp(6) without time zone NOT NULL,
+    ended_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    schedule timestamp(6) without time zone[] DEFAULT '{}'::timestamp without time zone[] NOT NULL
+);
+
+
+--
+-- Name: treatments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.treatments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: treatments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.treatments_id_seq OWNED BY public.treatments.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -318,6 +354,13 @@ ALTER TABLE ONLY public.patients ALTER COLUMN id SET DEFAULT nextval('public.pat
 
 
 --
+-- Name: treatments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.treatments ALTER COLUMN id SET DEFAULT nextval('public.treatments_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -386,6 +429,14 @@ ALTER TABLE ONLY public.patients
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: treatments treatments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.treatments
+    ADD CONSTRAINT treatments_pkey PRIMARY KEY (id);
 
 
 --
@@ -502,6 +553,13 @@ CREATE UNIQUE INDEX index_patients_on_user_id ON public.patients USING btree (us
 
 
 --
+-- Name: index_treatments_on_disease_patient_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_treatments_on_disease_patient_id ON public.treatments USING btree (disease_patient_id);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -537,6 +595,14 @@ ALTER TABLE ONLY public.disease_patients
 
 ALTER TABLE ONLY public.doctors
     ADD CONSTRAINT fk_rails_899b01ef33 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: treatments fk_rails_927a96e4ea; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.treatments
+    ADD CONSTRAINT fk_rails_927a96e4ea FOREIGN KEY (disease_patient_id) REFERENCES public.disease_patients(id);
 
 
 --
@@ -576,6 +642,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230404185602'),
 ('20230404192324'),
 ('20230404200012'),
-('20230404200757');
+('20230404200757'),
+('20230404212152');
 
 
