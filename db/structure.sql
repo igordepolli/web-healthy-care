@@ -26,6 +26,42 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: disease_patients; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.disease_patients (
+    id bigint NOT NULL,
+    disease_id bigint NOT NULL,
+    patient_id bigint NOT NULL,
+    diagnostic_date timestamp(6) without time zone NOT NULL,
+    cure timestamp(6) without time zone,
+    related_symptoms character varying,
+    status integer DEFAULT 1 NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: disease_patients_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.disease_patients_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: disease_patients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.disease_patients_id_seq OWNED BY public.disease_patients.id;
+
+
+--
 -- Name: diseases; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -240,6 +276,13 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: disease_patients id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.disease_patients ALTER COLUMN id SET DEFAULT nextval('public.disease_patients_id_seq'::regclass);
+
+
+--
 -- Name: diseases id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -287,6 +330,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: disease_patients disease_patients_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.disease_patients
+    ADD CONSTRAINT disease_patients_pkey PRIMARY KEY (id);
 
 
 --
@@ -343,6 +394,27 @@ ALTER TABLE ONLY public.schema_migrations
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_disease_patients_on_disease_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_disease_patients_on_disease_id ON public.disease_patients USING btree (disease_id);
+
+
+--
+-- Name: index_disease_patients_on_disease_id_and_patient_id_and_status; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_disease_patients_on_disease_id_and_patient_id_and_status ON public.disease_patients USING btree (disease_id, patient_id, status);
+
+
+--
+-- Name: index_disease_patients_on_patient_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_disease_patients_on_patient_id ON public.disease_patients USING btree (patient_id);
 
 
 --
@@ -452,6 +524,14 @@ ALTER TABLE ONLY public.patients
 
 
 --
+-- Name: disease_patients fk_rails_7ddf8477c6; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.disease_patients
+    ADD CONSTRAINT fk_rails_7ddf8477c6 FOREIGN KEY (disease_id) REFERENCES public.diseases(id);
+
+
+--
 -- Name: doctors fk_rails_899b01ef33; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -465,6 +545,14 @@ ALTER TABLE ONLY public.doctors
 
 ALTER TABLE ONLY public.doctor_appointments
     ADD CONSTRAINT fk_rails_95af2ef7ab FOREIGN KEY (patient_id) REFERENCES public.patients(id);
+
+
+--
+-- Name: disease_patients fk_rails_b1b9082c71; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.disease_patients
+    ADD CONSTRAINT fk_rails_b1b9082c71 FOREIGN KEY (patient_id) REFERENCES public.patients(id);
 
 
 --
@@ -487,6 +575,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230404170059'),
 ('20230404185602'),
 ('20230404192324'),
-('20230404200012');
+('20230404200012'),
+('20230404200757');
 
 

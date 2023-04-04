@@ -1,0 +1,5 @@
+leo_flu:
+  disease: flu
+  patient: leo
+  diagnostic_date: <%= Time.current %>
+  related_symptoms: "Corisa, catarro e mal estar"
