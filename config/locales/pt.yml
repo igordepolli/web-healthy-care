@@ -1,0 +1,9 @@
+pt:
+  hello: "Hello world"
+
+  # Model errors
+  errors:
+    messages:
+      blank: "obrigatório"
+      invalid: "inválido"
+      required: "obrigatório"

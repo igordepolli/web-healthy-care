@@ -10,5 +10,8 @@ class CreatePatients < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    remove_index :patients, :user_id, if_exists: true
+    add_index :patients, :user_id, unique: true
   end
 end

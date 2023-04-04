@@ -1,7 +1,5 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  user: one
-
-two:
-  user: two
+leo:
+  user: leo
+  name: "Leonardo"
+  last_name: "Maralha"
+  email: "leo@gmail.com"
