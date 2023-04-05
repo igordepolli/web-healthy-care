@@ -300,6 +300,40 @@ ALTER SEQUENCE public.doctors_id_seq OWNED BY public.doctors.id;
 
 
 --
+-- Name: medication_prescriptions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.medication_prescriptions (
+    id bigint NOT NULL,
+    prescription_id bigint NOT NULL,
+    medication_id bigint NOT NULL,
+    dosage character varying NOT NULL,
+    schedule character varying NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: medication_prescriptions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.medication_prescriptions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: medication_prescriptions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.medication_prescriptions_id_seq OWNED BY public.medication_prescriptions.id;
+
+
+--
 -- Name: medications; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -534,6 +568,13 @@ ALTER TABLE ONLY public.doctors ALTER COLUMN id SET DEFAULT nextval('public.doct
 
 
 --
+-- Name: medication_prescriptions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.medication_prescriptions ALTER COLUMN id SET DEFAULT nextval('public.medication_prescriptions_id_seq'::regclass);
+
+
+--
 -- Name: medications id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -638,6 +679,14 @@ ALTER TABLE ONLY public.doctor_appointments
 
 ALTER TABLE ONLY public.doctors
     ADD CONSTRAINT doctors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: medication_prescriptions medication_prescriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.medication_prescriptions
+    ADD CONSTRAINT medication_prescriptions_pkey PRIMARY KEY (id);
 
 
 --
@@ -794,6 +843,20 @@ CREATE UNIQUE INDEX index_doctors_on_user_id ON public.doctors USING btree (user
 
 
 --
+-- Name: index_medication_prescriptions_on_medication_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_medication_prescriptions_on_medication_id ON public.medication_prescriptions USING btree (medication_id);
+
+
+--
+-- Name: index_medication_prescriptions_on_prescription_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_medication_prescriptions_on_prescription_id ON public.medication_prescriptions USING btree (prescription_id);
+
+
+--
 -- Name: index_medications_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -865,6 +928,14 @@ ALTER TABLE ONLY public.prescriptions
 
 
 --
+-- Name: medication_prescriptions fk_rails_449d392c82; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.medication_prescriptions
+    ADD CONSTRAINT fk_rails_449d392c82 FOREIGN KEY (medication_id) REFERENCES public.medications(id);
+
+
+--
 -- Name: patients fk_rails_623f05c630; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -902,6 +973,14 @@ ALTER TABLE ONLY public.treatments
 
 ALTER TABLE ONLY public.doctor_appointments
     ADD CONSTRAINT fk_rails_95af2ef7ab FOREIGN KEY (patient_id) REFERENCES public.patients(id);
+
+
+--
+-- Name: medication_prescriptions fk_rails_96c6b20244; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.medication_prescriptions
+    ADD CONSTRAINT fk_rails_96c6b20244 FOREIGN KEY (prescription_id) REFERENCES public.prescriptions(id);
 
 
 --
@@ -953,6 +1032,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230404212152'),
 ('20230405153238'),
 ('20230405154840'),
-('20230405162025');
+('20230405162025'),
+('20230405183706');
 
 
