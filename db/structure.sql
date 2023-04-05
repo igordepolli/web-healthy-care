@@ -591,8 +591,9 @@ ALTER SEQUENCE public.treatments_id_seq OWNED BY public.treatments.id;
 
 CREATE TABLE public.users (
     id bigint NOT NULL,
-    email character varying DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    email character varying NOT NULL,
+    name character varying NOT NULL,
+    encrypted_password character varying NOT NULL,
     reset_password_token character varying,
     reset_password_sent_at timestamp(6) without time zone,
     remember_created_at timestamp(6) without time zone,

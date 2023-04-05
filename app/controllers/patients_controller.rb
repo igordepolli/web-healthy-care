@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PatientsController < ApplicationController
-  before_action :authenticate_user!, :set_patient
+  before_action :authenticate_user!, :set_patient, only: :show
 
   def new
   end
