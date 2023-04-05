@@ -1,0 +1,4 @@
+prescription_file:
+  name: file
+  record: for_flu_treatment (Prescription)
+  blob: prescription_file_blob
