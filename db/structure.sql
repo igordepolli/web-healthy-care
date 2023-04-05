@@ -26,6 +26,43 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: diets; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.diets (
+    id bigint NOT NULL,
+    source_type character varying NOT NULL,
+    source_id bigint NOT NULL,
+    breakfast character varying NOT NULL,
+    lunch character varying NOT NULL,
+    dinner character varying NOT NULL,
+    morning_snack character varying,
+    afternoon_snack character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: diets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.diets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: diets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.diets_id_seq OWNED BY public.diets.id;
+
+
+--
 -- Name: disease_patients; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -312,6 +349,13 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: diets id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.diets ALTER COLUMN id SET DEFAULT nextval('public.diets_id_seq'::regclass);
+
+
+--
 -- Name: disease_patients id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -373,6 +417,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: diets diets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.diets
+    ADD CONSTRAINT diets_pkey PRIMARY KEY (id);
 
 
 --
@@ -445,6 +497,13 @@ ALTER TABLE ONLY public.treatments
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_diets_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_diets_on_source ON public.diets USING btree (source_type, source_id);
 
 
 --
@@ -643,6 +702,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230404192324'),
 ('20230404200012'),
 ('20230404200757'),
-('20230404212152');
+('20230404212152'),
+('20230405153238');
 
 
