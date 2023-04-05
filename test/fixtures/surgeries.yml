@@ -1,0 +1,4 @@
+septoplasty:
+  patient: leo
+  classification: :elective
+  date: <%= Time.current %>

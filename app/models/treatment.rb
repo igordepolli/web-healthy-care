@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Treatment < ApplicationRecord
-  enum :classification, { medication: 0, surgery: 1, physiotherapy: 2, therapy: 3, diet: 4 }
+  enum :classification, { medication: 0, surgery: 1, physiotherapy: 2, therapy: 3, diet: 4, other: 5 }
 
   belongs_to :disease_patient
 

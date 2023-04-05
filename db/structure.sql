@@ -515,6 +515,42 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: surgeries; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.surgeries (
+    id bigint NOT NULL,
+    patient_id bigint NOT NULL,
+    doctor_id bigint,
+    classification integer NOT NULL,
+    date timestamp(6) without time zone NOT NULL,
+    hospital character varying,
+    discharged_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: surgeries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.surgeries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: surgeries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.surgeries_id_seq OWNED BY public.surgeries.id;
+
+
+--
 -- Name: treatments; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -684,6 +720,13 @@ ALTER TABLE ONLY public.prescriptions ALTER COLUMN id SET DEFAULT nextval('publi
 
 
 --
+-- Name: surgeries id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.surgeries ALTER COLUMN id SET DEFAULT nextval('public.surgeries_id_seq'::regclass);
+
+
+--
 -- Name: treatments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -823,6 +866,14 @@ ALTER TABLE ONLY public.prescriptions
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: surgeries surgeries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.surgeries
+    ADD CONSTRAINT surgeries_pkey PRIMARY KEY (id);
 
 
 --
@@ -1024,6 +1075,20 @@ CREATE INDEX index_prescriptions_on_treatment_id ON public.prescriptions USING b
 
 
 --
+-- Name: index_surgeries_on_doctor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_surgeries_on_doctor_id ON public.surgeries USING btree (doctor_id);
+
+
+--
+-- Name: index_surgeries_on_patient_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_surgeries_on_patient_id ON public.surgeries USING btree (patient_id);
+
+
+--
 -- Name: index_treatments_on_disease_patient_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1045,6 +1110,14 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 
 --
+-- Name: surgeries fk_rails_02429e3c12; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.surgeries
+    ADD CONSTRAINT fk_rails_02429e3c12 FOREIGN KEY (doctor_id) REFERENCES public.doctors(id);
+
+
+--
 -- Name: prescriptions fk_rails_284c9ea4a7; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1058,6 +1131,14 @@ ALTER TABLE ONLY public.prescriptions
 
 ALTER TABLE ONLY public.medication_prescriptions
     ADD CONSTRAINT fk_rails_449d392c82 FOREIGN KEY (medication_id) REFERENCES public.medications(id);
+
+
+--
+-- Name: surgeries fk_rails_509be18665; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.surgeries
+    ADD CONSTRAINT fk_rails_509be18665 FOREIGN KEY (patient_id) REFERENCES public.patients(id);
 
 
 --
@@ -1176,6 +1257,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230405162025'),
 ('20230405183706'),
 ('20230405184217'),
-('20230405185444');
+('20230405185444'),
+('20230405192424');
 
 
