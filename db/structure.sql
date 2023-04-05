@@ -418,8 +418,7 @@ CREATE TABLE public.treatments (
     started_at timestamp(6) without time zone NOT NULL,
     ended_at timestamp(6) without time zone,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    schedule timestamp(6) without time zone[] DEFAULT '{}'::timestamp without time zone[] NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 

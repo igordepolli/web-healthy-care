@@ -9,7 +9,5 @@ class CreateTreatments < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-
-    add_column :treatments, :schedule, :datetime, array: true, null: false, default: []
   end
 end
