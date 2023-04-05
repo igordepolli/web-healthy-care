@@ -300,6 +300,41 @@ ALTER SEQUENCE public.doctors_id_seq OWNED BY public.doctors.id;
 
 
 --
+-- Name: exams; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.exams (
+    id bigint NOT NULL,
+    patient_id bigint NOT NULL,
+    doctor_appointment_id bigint NOT NULL,
+    classification integer NOT NULL,
+    date timestamp(6) without time zone NOT NULL,
+    local character varying NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: exams_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.exams_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: exams_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.exams_id_seq OWNED BY public.exams.id;
+
+
+--
 -- Name: medication_prescriptions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -568,6 +603,13 @@ ALTER TABLE ONLY public.doctors ALTER COLUMN id SET DEFAULT nextval('public.doct
 
 
 --
+-- Name: exams id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exams ALTER COLUMN id SET DEFAULT nextval('public.exams_id_seq'::regclass);
+
+
+--
 -- Name: medication_prescriptions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -679,6 +721,14 @@ ALTER TABLE ONLY public.doctor_appointments
 
 ALTER TABLE ONLY public.doctors
     ADD CONSTRAINT doctors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: exams exams_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exams
+    ADD CONSTRAINT exams_pkey PRIMARY KEY (id);
 
 
 --
@@ -843,6 +893,20 @@ CREATE UNIQUE INDEX index_doctors_on_user_id ON public.doctors USING btree (user
 
 
 --
+-- Name: index_exams_on_doctor_appointment_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_exams_on_doctor_appointment_id ON public.exams USING btree (doctor_appointment_id);
+
+
+--
+-- Name: index_exams_on_patient_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_exams_on_patient_id ON public.exams USING btree (patient_id);
+
+
+--
 -- Name: index_medication_prescriptions_on_medication_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -944,6 +1008,14 @@ ALTER TABLE ONLY public.patients
 
 
 --
+-- Name: exams fk_rails_6989b69bff; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exams
+    ADD CONSTRAINT fk_rails_6989b69bff FOREIGN KEY (patient_id) REFERENCES public.patients(id);
+
+
+--
 -- Name: disease_patients fk_rails_7ddf8477c6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1016,6 +1088,14 @@ ALTER TABLE ONLY public.doctor_appointments
 
 
 --
+-- Name: exams fk_rails_c85b98ae13; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exams
+    ADD CONSTRAINT fk_rails_c85b98ae13 FOREIGN KEY (doctor_appointment_id) REFERENCES public.doctor_appointments(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -1033,6 +1113,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230405153238'),
 ('20230405154840'),
 ('20230405162025'),
-('20230405183706');
+('20230405183706'),
+('20230405184217');
 
 
