@@ -3,7 +3,13 @@
 class PatientsController < ApplicationController
   before_action :authenticate_user!, :set_patient
 
+  def new
+  end
+
   def show
+  end
+
+  def create
   end
 
   private
