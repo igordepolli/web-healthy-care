@@ -1,5 +1,3 @@
 for_treat_flu:
   source: suspected_flu (DoctorAppointment)
-  breakfast: "Biscoito com leite"
   lunch: "300g de frango, arroz e feijão"
-  dinner: "Arroz, feijão e macarrão"

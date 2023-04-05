@@ -2,17 +2,17 @@
 
 require "test_helper"
 
-class DietTest < ActiveSupport::TestCase
+class BiodataTest < ActiveSupport::TestCase
   test "that fixtures are valid" do
-    assert diets.all?(&:valid?)
+    assert biodatas.all?(&:valid?)
   end
 
   test "mandatory attributes are validated" do
-    blank = Diet.new
+    blank = Biodata.new
 
     assert blank.invalid?
     assert_equal 2, blank.errors.count
     assert_equal ["obrigatório"], blank.errors[:source]
-    assert_equal ["Pelo menos uma das refeições deve conter uma instrução de dieta!"], blank.errors[:base]
+    assert_equal ["Pelo menos um dos biodados deve ter resultados!"], blank.errors[:base]
   end
 end

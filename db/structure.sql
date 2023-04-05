@@ -125,6 +125,45 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: biodata; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.biodata (
+    id bigint NOT NULL,
+    source_type character varying NOT NULL,
+    source_id bigint NOT NULL,
+    systolic_pressure integer,
+    diastolic_pressure integer,
+    glycemia integer,
+    heart_rate integer,
+    cholesterol integer,
+    triglyceride integer,
+    creatinine numeric,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: biodata_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.biodata_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: biodata_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.biodata_id_seq OWNED BY public.biodata.id;
+
+
+--
 -- Name: diets; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -132,9 +171,9 @@ CREATE TABLE public.diets (
     id bigint NOT NULL,
     source_type character varying NOT NULL,
     source_id bigint NOT NULL,
-    breakfast character varying NOT NULL,
-    lunch character varying NOT NULL,
-    dinner character varying NOT NULL,
+    breakfast character varying,
+    lunch character varying,
+    dinner character varying,
     morning_snack character varying,
     afternoon_snack character varying,
     created_at timestamp(6) without time zone NOT NULL,
@@ -568,6 +607,13 @@ ALTER TABLE ONLY public.active_storage_variant_records ALTER COLUMN id SET DEFAU
 
 
 --
+-- Name: biodata id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.biodata ALTER COLUMN id SET DEFAULT nextval('public.biodata_id_seq'::regclass);
+
+
+--
 -- Name: diets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -681,6 +727,14 @@ ALTER TABLE ONLY public.active_storage_variant_records
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: biodata biodata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.biodata
+    ADD CONSTRAINT biodata_pkey PRIMARY KEY (id);
 
 
 --
@@ -813,6 +867,13 @@ CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON public.active_storage_b
 --
 
 CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.active_storage_variant_records USING btree (blob_id, variation_digest);
+
+
+--
+-- Name: index_biodata_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_biodata_on_source ON public.biodata USING btree (source_type, source_id);
 
 
 --
@@ -1114,6 +1175,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230405154840'),
 ('20230405162025'),
 ('20230405183706'),
-('20230405184217');
+('20230405184217'),
+('20230405185444');
 
 
