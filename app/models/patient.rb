@@ -3,7 +3,7 @@
 class Patient < ApplicationRecord
   belongs_to :user
 
-  has_many :diseases, through: :disease_patients, class_name: "Disease"
+  has_many :diagnostics
   has_many :consultations
 
   validates :name, :last_name, presence: true

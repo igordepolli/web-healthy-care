@@ -2,17 +2,17 @@
 
 require "test_helper"
 
-class DiseasePatientTest < ActiveSupport::TestCase
+class DiagnosticTest < ActiveSupport::TestCase
   test "that fixtures are valid" do
-    assert disease_patients.all?(&:valid?)
+    assert diagnostics.all?(&:valid?)
   end
 
   test "database defaults are set" do
-    assert disease_patients(:leo_flu).active?
+    assert diagnostics(:leo_flu).active?
   end
 
   test "mandatory attributes are validated" do
-    blank = DiseasePatient.new
+    blank = Diagnostic.new
 
     assert blank.invalid?
     assert_equal 3, blank.errors.count
@@ -22,7 +22,7 @@ class DiseasePatientTest < ActiveSupport::TestCase
   end
 
   test "that a patient's disease does not repeat with the same status" do
-    new_disease = disease_patients(:leo_flu).dup
+    new_disease = diagnostics(:leo_flu).dup
 
     assert new_disease.invalid?
     assert_equal 1, new_disease.errors.count

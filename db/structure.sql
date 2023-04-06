@@ -198,6 +198,42 @@ ALTER SEQUENCE public.consultations_id_seq OWNED BY public.consultations.id;
 
 
 --
+-- Name: diagnostics; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.diagnostics (
+    id bigint NOT NULL,
+    disease_id bigint NOT NULL,
+    patient_id bigint NOT NULL,
+    diagnosed_at timestamp(6) without time zone NOT NULL,
+    cured_at timestamp(6) without time zone,
+    related_symptoms character varying,
+    status integer DEFAULT 1 NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: diagnostics_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.diagnostics_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: diagnostics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.diagnostics_id_seq OWNED BY public.diagnostics.id;
+
+
+--
 -- Name: diets; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -232,42 +268,6 @@ CREATE SEQUENCE public.diets_id_seq
 --
 
 ALTER SEQUENCE public.diets_id_seq OWNED BY public.diets.id;
-
-
---
--- Name: disease_patients; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.disease_patients (
-    id bigint NOT NULL,
-    disease_id bigint NOT NULL,
-    patient_id bigint NOT NULL,
-    diagnosed_at timestamp(6) without time zone NOT NULL,
-    cured_at timestamp(6) without time zone,
-    related_symptoms character varying,
-    status integer DEFAULT 1 NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: disease_patients_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.disease_patients_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: disease_patients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.disease_patients_id_seq OWNED BY public.disease_patients.id;
 
 
 --
@@ -556,7 +556,7 @@ ALTER SEQUENCE public.surgeries_id_seq OWNED BY public.surgeries.id;
 
 CREATE TABLE public.treatments (
     id bigint NOT NULL,
-    disease_patient_id bigint NOT NULL,
+    diagnostic_id bigint NOT NULL,
     classification integer NOT NULL,
     recommendation character varying,
     started_at timestamp(6) without time zone NOT NULL,
@@ -657,17 +657,17 @@ ALTER TABLE ONLY public.consultations ALTER COLUMN id SET DEFAULT nextval('publi
 
 
 --
+-- Name: diagnostics id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.diagnostics ALTER COLUMN id SET DEFAULT nextval('public.diagnostics_id_seq'::regclass);
+
+
+--
 -- Name: diets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.diets ALTER COLUMN id SET DEFAULT nextval('public.diets_id_seq'::regclass);
-
-
---
--- Name: disease_patients id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.disease_patients ALTER COLUMN id SET DEFAULT nextval('public.disease_patients_id_seq'::regclass);
 
 
 --
@@ -789,19 +789,19 @@ ALTER TABLE ONLY public.consultations
 
 
 --
+-- Name: diagnostics diagnostics_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.diagnostics
+    ADD CONSTRAINT diagnostics_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: diets diets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.diets
     ADD CONSTRAINT diets_pkey PRIMARY KEY (id);
-
-
---
--- Name: disease_patients disease_patients_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.disease_patients
-    ADD CONSTRAINT disease_patients_pkey PRIMARY KEY (id);
 
 
 --
@@ -942,31 +942,31 @@ CREATE INDEX index_consultations_on_patient_id ON public.consultations USING btr
 
 
 --
+-- Name: index_diagnostics_on_disease_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_diagnostics_on_disease_id ON public.diagnostics USING btree (disease_id);
+
+
+--
+-- Name: index_diagnostics_on_disease_id_and_patient_id_and_status; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_diagnostics_on_disease_id_and_patient_id_and_status ON public.diagnostics USING btree (disease_id, patient_id, status);
+
+
+--
+-- Name: index_diagnostics_on_patient_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_diagnostics_on_patient_id ON public.diagnostics USING btree (patient_id);
+
+
+--
 -- Name: index_diets_on_source; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_diets_on_source ON public.diets USING btree (source_type, source_id);
-
-
---
--- Name: index_disease_patients_on_disease_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_disease_patients_on_disease_id ON public.disease_patients USING btree (disease_id);
-
-
---
--- Name: index_disease_patients_on_disease_id_and_patient_id_and_status; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_disease_patients_on_disease_id_and_patient_id_and_status ON public.disease_patients USING btree (disease_id, patient_id, status);
-
-
---
--- Name: index_disease_patients_on_patient_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_disease_patients_on_patient_id ON public.disease_patients USING btree (patient_id);
 
 
 --
@@ -1089,10 +1089,10 @@ CREATE INDEX index_surgeries_on_patient_id ON public.surgeries USING btree (pati
 
 
 --
--- Name: index_treatments_on_disease_patient_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_treatments_on_diagnostic_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_treatments_on_disease_patient_id ON public.treatments USING btree (disease_patient_id);
+CREATE INDEX index_treatments_on_diagnostic_id ON public.treatments USING btree (diagnostic_id);
 
 
 --
@@ -1115,6 +1115,14 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 ALTER TABLE ONLY public.surgeries
     ADD CONSTRAINT fk_rails_02429e3c12 FOREIGN KEY (doctor_id) REFERENCES public.doctors(id);
+
+
+--
+-- Name: treatments fk_rails_259bed4182; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.treatments
+    ADD CONSTRAINT fk_rails_259bed4182 FOREIGN KEY (diagnostic_id) REFERENCES public.diagnostics(id);
 
 
 --
@@ -1158,6 +1166,14 @@ ALTER TABLE ONLY public.patients
 
 
 --
+-- Name: diagnostics fk_rails_69125e86e7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.diagnostics
+    ADD CONSTRAINT fk_rails_69125e86e7 FOREIGN KEY (disease_id) REFERENCES public.diseases(id);
+
+
+--
 -- Name: exams fk_rails_6989b69bff; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1166,27 +1182,11 @@ ALTER TABLE ONLY public.exams
 
 
 --
--- Name: disease_patients fk_rails_7ddf8477c6; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.disease_patients
-    ADD CONSTRAINT fk_rails_7ddf8477c6 FOREIGN KEY (disease_id) REFERENCES public.diseases(id);
-
-
---
 -- Name: doctors fk_rails_899b01ef33; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.doctors
     ADD CONSTRAINT fk_rails_899b01ef33 FOREIGN KEY (user_id) REFERENCES public.users(id);
-
-
---
--- Name: treatments fk_rails_927a96e4ea; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.treatments
-    ADD CONSTRAINT fk_rails_927a96e4ea FOREIGN KEY (disease_patient_id) REFERENCES public.disease_patients(id);
 
 
 --
@@ -1206,11 +1206,11 @@ ALTER TABLE ONLY public.active_storage_variant_records
 
 
 --
--- Name: disease_patients fk_rails_b1b9082c71; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: diagnostics fk_rails_a388f83a55; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.disease_patients
-    ADD CONSTRAINT fk_rails_b1b9082c71 FOREIGN KEY (patient_id) REFERENCES public.patients(id);
+ALTER TABLE ONLY public.diagnostics
+    ADD CONSTRAINT fk_rails_a388f83a55 FOREIGN KEY (patient_id) REFERENCES public.patients(id);
 
 
 --
