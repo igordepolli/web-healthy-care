@@ -15,6 +15,7 @@
     </div>
     <div>
       <% if user_signed_in? %>
+        <%= navbar_button "Minha página", url: dispatches_path %>
         <%= navbar_button "Logout", { url: destroy_user_session_path }, { data: { turbo_method: :delete } } %>
       <% else %>
         <%= navbar_button "Registrar-se", url: new_user_registration_path %>
