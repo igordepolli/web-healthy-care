@@ -1,0 +1,36 @@
+<div class="container flex items-center justify-center">
+  <div class="w-3/12">
+    <h2 class="text-center text-4xl font-semibold text-xl tracking-tight">Registrar-se como médico</h2>
+
+    <%= form_for(@doctor, url: doctors_path, html: { class: "mt-8" }) do |f| %>
+      <div class="field">
+        <%= f.label :name, "Nome" %><br />
+        <%= f.text_field :name, autofocus: true, required: true, class: "w-full" %>
+      </div>
+
+      <div class="field mt-4">
+        <%= f.label :last_name, "Sobrenome" %><br />
+        <%= f.text_field :last_name, required: true, class: "w-full" %>
+      </div>
+
+      <div class="field mt-4">
+        <%= f.label :crm, "CRM" %><br />
+        <%= f.text_field :crm, class: "w-full" %>
+      </div>
+
+      <div class="field mt-4">
+        <%= f.label :cpf, "CPF" %><br />
+        <%= f.text_field :cpf, class: "w-full" %>
+      </div>
+
+      <div class="field mt-4">
+        <%= f.label :email, "E-mail de contato" %><br />
+        <%= f.email_field :email, value: current_user.email, class: "w-full" %>
+      </div>
+
+      <div class="actions mt-5">
+        <%= f.submit "Registrar-se", class: "bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded w-full" %>
+      </div>
+    <% end %>
+  </div>
+</div>

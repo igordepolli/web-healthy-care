@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
     resource :dispatches, only: :show,                  path: "ir-para"
     resources :patients,  only: [:new, :show, :create], path: "pacientes"
+    resources :doctors,   only: [:new, :show, :create], path: "medicos"
   end
 end

@@ -51,13 +51,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # The path used after sign up.
     def after_sign_up_path_for(resource)
-      if resource.patient?
-        new_patient_path
-      elsif resouce.doctor?
-        new_doctor_path
-      else
-        super(resource)
-      end
+      dispatches_path
     end
 
     # The path used after sign up for inactive accounts.
