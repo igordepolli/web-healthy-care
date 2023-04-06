@@ -2,7 +2,7 @@
   <div class="w-3/12">
     <h2 class="text-center text-4xl font-semibold text-xl tracking-tight">Registrar-se como paciente</h2>
 
-    <%= form_for(@patient, url: patients_path, html: { class: "mt-8" }) do |f| %>
+    <%= form_for(@patient, url: patients_path, html: { class: "mt-8", data: { controller: "mask" } }) do |f| %>
       <div class="field">
         <%= f.label :name, "Nome" %><br />
         <%= f.text_field :name, autofocus: true, required: true, class: "w-full" %>
@@ -20,7 +20,7 @@
 
       <div class="field mt-4">
         <%= f.label :cpf, "CPF" %><br />
-        <%= f.text_field :cpf, class: "w-full" %>
+        <%= f.text_field :cpf, class: "w-full", data: { mask_target: "cpf" } %>
       </div>
 
       <div class="field mt-4">
