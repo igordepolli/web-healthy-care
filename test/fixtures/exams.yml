@@ -1,6 +1,6 @@
 hemogram:
   patient: leo
-  doctor_appointment: suspected_flu
+  consultation: suspected_flu
   classification: :hemogram
   date: <%= Time.current %>
   local: "Hospital de Alegre"

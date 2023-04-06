@@ -4,7 +4,7 @@ class Patient < ApplicationRecord
   belongs_to :user
 
   has_many :diseases, through: :disease_patients, class_name: "Disease"
-  has_many :appointments, class_name: "DoctorAppointment"
+  has_many :consultations
 
   validates :name, :last_name, presence: true
   validates :cpf, cpf: true, uniqueness: { allow_blank: true }

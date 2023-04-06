@@ -1,6 +1,6 @@
-class CreateDoctorAppointments < ActiveRecord::Migration[7.0]
+class CreateConsultations < ActiveRecord::Migration[7.0]
   def change
-    create_table :doctor_appointments do |t|
+    create_table :consultations do |t|
       t.references :patient, null: false, foreign_key: true
       t.references :doctor, null: false, foreign_key: true
       t.datetime :date, null: false

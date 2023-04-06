@@ -1,3 +1,3 @@
 for_treat_flu:
-  source: suspected_flu (DoctorAppointment)
+  source: suspected_flu (Consultation)
   lunch: "300g de frango, arroz e feijão"

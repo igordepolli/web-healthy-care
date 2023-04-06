@@ -2,13 +2,13 @@
 
 require "test_helper"
 
-class DoctorAppointmentTest < ActiveSupport::TestCase
+class ConsultationTest < ActiveSupport::TestCase
   test "that fixtures are valid" do
-    assert doctor_appointments.all?(&:valid?)
+    assert consultations.all?(&:valid?)
   end
 
   test "mandatory attributes are validated" do
-    blank = DoctorAppointment.new
+    blank = Consultation.new
 
     assert blank.invalid?
     assert_equal 3, blank.errors.count

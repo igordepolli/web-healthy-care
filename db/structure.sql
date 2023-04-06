@@ -164,6 +164,40 @@ ALTER SEQUENCE public.biodata_id_seq OWNED BY public.biodata.id;
 
 
 --
+-- Name: consultations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.consultations (
+    id bigint NOT NULL,
+    patient_id bigint NOT NULL,
+    doctor_id bigint NOT NULL,
+    date timestamp(6) without time zone NOT NULL,
+    reason character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: consultations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.consultations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: consultations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.consultations_id_seq OWNED BY public.consultations.id;
+
+
+--
 -- Name: diets; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -269,40 +303,6 @@ ALTER SEQUENCE public.diseases_id_seq OWNED BY public.diseases.id;
 
 
 --
--- Name: doctor_appointments; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.doctor_appointments (
-    id bigint NOT NULL,
-    patient_id bigint NOT NULL,
-    doctor_id bigint NOT NULL,
-    date timestamp(6) without time zone NOT NULL,
-    reason character varying,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: doctor_appointments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.doctor_appointments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: doctor_appointments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.doctor_appointments_id_seq OWNED BY public.doctor_appointments.id;
-
-
---
 -- Name: doctors; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -345,7 +345,7 @@ ALTER SEQUENCE public.doctors_id_seq OWNED BY public.doctors.id;
 CREATE TABLE public.exams (
     id bigint NOT NULL,
     patient_id bigint NOT NULL,
-    doctor_appointment_id bigint NOT NULL,
+    consultation_id bigint NOT NULL,
     classification integer NOT NULL,
     date timestamp(6) without time zone NOT NULL,
     local character varying NOT NULL,
@@ -650,6 +650,13 @@ ALTER TABLE ONLY public.biodata ALTER COLUMN id SET DEFAULT nextval('public.biod
 
 
 --
+-- Name: consultations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.consultations ALTER COLUMN id SET DEFAULT nextval('public.consultations_id_seq'::regclass);
+
+
+--
 -- Name: diets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -668,13 +675,6 @@ ALTER TABLE ONLY public.disease_patients ALTER COLUMN id SET DEFAULT nextval('pu
 --
 
 ALTER TABLE ONLY public.diseases ALTER COLUMN id SET DEFAULT nextval('public.diseases_id_seq'::regclass);
-
-
---
--- Name: doctor_appointments id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.doctor_appointments ALTER COLUMN id SET DEFAULT nextval('public.doctor_appointments_id_seq'::regclass);
 
 
 --
@@ -781,6 +781,14 @@ ALTER TABLE ONLY public.biodata
 
 
 --
+-- Name: consultations consultations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.consultations
+    ADD CONSTRAINT consultations_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: diets diets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -802,14 +810,6 @@ ALTER TABLE ONLY public.disease_patients
 
 ALTER TABLE ONLY public.diseases
     ADD CONSTRAINT diseases_pkey PRIMARY KEY (id);
-
-
---
--- Name: doctor_appointments doctor_appointments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.doctor_appointments
-    ADD CONSTRAINT doctor_appointments_pkey PRIMARY KEY (id);
 
 
 --
@@ -928,6 +928,20 @@ CREATE INDEX index_biodata_on_source ON public.biodata USING btree (source_type,
 
 
 --
+-- Name: index_consultations_on_doctor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_consultations_on_doctor_id ON public.consultations USING btree (doctor_id);
+
+
+--
+-- Name: index_consultations_on_patient_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_consultations_on_patient_id ON public.consultations USING btree (patient_id);
+
+
+--
 -- Name: index_diets_on_source; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -963,20 +977,6 @@ CREATE INDEX index_diseases_on_name ON public.diseases USING btree (name);
 
 
 --
--- Name: index_doctor_appointments_on_doctor_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_doctor_appointments_on_doctor_id ON public.doctor_appointments USING btree (doctor_id);
-
-
---
--- Name: index_doctor_appointments_on_patient_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_doctor_appointments_on_patient_id ON public.doctor_appointments USING btree (patient_id);
-
-
---
 -- Name: index_doctors_on_cpf; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1005,10 +1005,10 @@ CREATE UNIQUE INDEX index_doctors_on_user_id ON public.doctors USING btree (user
 
 
 --
--- Name: index_exams_on_doctor_appointment_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_exams_on_consultation_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_exams_on_doctor_appointment_id ON public.exams USING btree (doctor_appointment_id);
+CREATE INDEX index_exams_on_consultation_id ON public.exams USING btree (consultation_id);
 
 
 --
@@ -1126,6 +1126,14 @@ ALTER TABLE ONLY public.prescriptions
 
 
 --
+-- Name: consultations fk_rails_33c52f1c05; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.consultations
+    ADD CONSTRAINT fk_rails_33c52f1c05 FOREIGN KEY (patient_id) REFERENCES public.patients(id);
+
+
+--
 -- Name: medication_prescriptions fk_rails_449d392c82; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1182,14 +1190,6 @@ ALTER TABLE ONLY public.treatments
 
 
 --
--- Name: doctor_appointments fk_rails_95af2ef7ab; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.doctor_appointments
-    ADD CONSTRAINT fk_rails_95af2ef7ab FOREIGN KEY (patient_id) REFERENCES public.patients(id);
-
-
---
 -- Name: medication_prescriptions fk_rails_96c6b20244; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1214,27 +1214,27 @@ ALTER TABLE ONLY public.disease_patients
 
 
 --
+-- Name: consultations fk_rails_b1f629cdac; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.consultations
+    ADD CONSTRAINT fk_rails_b1f629cdac FOREIGN KEY (doctor_id) REFERENCES public.doctors(id);
+
+
+--
+-- Name: exams fk_rails_b7263b3b83; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exams
+    ADD CONSTRAINT fk_rails_b7263b3b83 FOREIGN KEY (consultation_id) REFERENCES public.consultations(id);
+
+
+--
 -- Name: active_storage_attachments fk_rails_c3b3935057; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.active_storage_attachments
     ADD CONSTRAINT fk_rails_c3b3935057 FOREIGN KEY (blob_id) REFERENCES public.active_storage_blobs(id);
-
-
---
--- Name: doctor_appointments fk_rails_c83a28a885; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.doctor_appointments
-    ADD CONSTRAINT fk_rails_c83a28a885 FOREIGN KEY (doctor_id) REFERENCES public.doctors(id);
-
-
---
--- Name: exams fk_rails_c85b98ae13; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.exams
-    ADD CONSTRAINT fk_rails_c85b98ae13 FOREIGN KEY (doctor_appointment_id) REFERENCES public.doctor_appointments(id);
 
 
 --
