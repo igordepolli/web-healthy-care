@@ -7,7 +7,7 @@
 
       <div class="field">
         <%= f.label :email, "E-mail" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: "w-full" %>
       </div>
 
       <div class="field mt-4">
@@ -15,12 +15,17 @@
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> caracteres no mínimo)</em>
         <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password", class: "w-full" %>
+        <%= f.password_field :password, autocomplete: "new-password", required: true, class: "w-full" %>
       </div>
 
       <div class="field mt-4">
         <%= f.label :password_confirmation, "Repita a senha" %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "w-full" %>
+      </div>
+
+      <div class="field mt-4">
+        <%= f.label :classification, "Tipo de usuário" %><br />
+        <%= f.select :classification, options_for_user_classification, {}, { required: true, class: "w-full" } %>
       </div>
 
       <div class="actions mt-5">

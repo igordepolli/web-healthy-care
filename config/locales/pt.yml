@@ -8,3 +8,4 @@ pt:
       invalid: "inválido"
       required: "obrigatório"
       taken: "já foi usado"
+      too_short: "muito curto(a)"

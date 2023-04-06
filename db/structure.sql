@@ -596,7 +596,7 @@ CREATE TABLE public.users (
     reset_password_token character varying,
     reset_password_sent_at timestamp(6) without time zone,
     remember_created_at timestamp(6) without time zone,
-    admin boolean DEFAULT false NOT NULL,
+    classification integer NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
