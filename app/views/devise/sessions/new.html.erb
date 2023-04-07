@@ -1,25 +1,14 @@
 <div class="container flex items-center justify-center">
   <div class="w-3/12">
-    <h2 class="text-center text-4xl font-semibold text-xl tracking-tight">Login</h2>
+    <h2>Login</h2>
 
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "mt-8" }) do |f| %>
-      <div class="field">
-        <%= f.label :email, "E-mail" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full" %>
-      </div>
+    <%= fudgeball_form model: resource, url: session_path(resource_name), class: "mt-8" do |form| %>
+      <%= form.input :email, :email, label: "E-mail", autofocus: true, autocomplete: "email", class: "w-full" %>
+      <%= form.input :password, :password, label: "Senha", autocomplete: "current-password", class: "w-full" %>
 
-      <div class="field mt-4">
-        <%= f.label :password, "Senha" %><br />
-        <%= f.password_field :password, autocomplete: "current-password", class: "w-full" %>
-      </div>
-
-      <div class="actions mt-5">
-        <%= f.submit "Login", class: "bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded w-full" %>
-      </div>
+      <%= form.submit "Login", class: "mt-5 w-full" %>
     <% end %>
 
-    <div class="mt-5">
-      <%= render "devise/shared/links" %>
-    </div>
+    <%= render "devise/shared/links" %>
   </div>
 </div>
