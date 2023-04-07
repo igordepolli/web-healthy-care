@@ -1,8 +1,14 @@
 pt:
   hello: "Hello world"
 
-  # Model attributes
   activerecord:
+    # Model names
+    models:
+      user: "Usuário"
+      patient: "Paciente"
+      doctor: "Médico"
+
+    # Model attributes
     attributes:
       user/classification:
         admin: "Admin"

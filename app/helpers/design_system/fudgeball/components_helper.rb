@@ -3,8 +3,6 @@
 module DesignSystem::Fudgeball::ComponentsHelper
   def fudgeball_button(text, options = {}, html_options = {})
     url        = options.delete(:url)
-    color      = options.delete(:color) || "teal"
-    text_color = options.delete(:text_color) || "white"
     classes    = html_options.delete(:class)
 
     link_to text, url, class: "btn-primary #{classes}", **html_options
@@ -26,6 +24,22 @@ module DesignSystem::Fudgeball::ComponentsHelper
     options[:data]    = options[:data].merge(controller: "mask")
 
     form_with model:, scope:, url:, format:, **options, &block
+  end
+
+  def fudgeball_form_alert(options = {})
+    return if flash[:alert].blank?
+    flash.discard
+
+    fudgeball_alert(flash[:alert], :red, options)
+  end
+
+  def fudgeball_alert(text, color, options = {})
+    classes    = options.delete(:class)
+    text_class = options.delete(:text_class)
+
+    content_tag "div", class: "bg-#{color}-200 px-4 py-2 rounded #{classes}".squish, **options do
+      tag.p text, class: "text-center #{text_class}"
+    end
   end
 
   private

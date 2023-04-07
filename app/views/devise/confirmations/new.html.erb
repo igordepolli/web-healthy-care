@@ -1,16 +1,15 @@
-<h2>Resend confirmation instructions</h2>
+<div class="container flex items-center justify-center">
+  <div class="w-3/12">
+    <h2>Reenviar instruções de confirmação</h2>
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= fudgeball_form model: resource, url: confirmation_path(resource_name), method: :post do |form| %>
+      <%= render "shared/error_messages", resource: %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+      <%= form.input :email, :email, label: "E-mail", autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+
+      <%= form.submit "Reenviar instruções de confirmação", class: "mt-5 w-full" %>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

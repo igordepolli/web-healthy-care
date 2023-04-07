@@ -3,6 +3,8 @@
     <h2>Login</h2>
 
     <%= fudgeball_form model: resource, url: session_path(resource_name), class: "mt-8" do |form| %>
+      <%= fudgeball_form_alert class: "my-4" %>
+
       <%= form.input :email, :email, label: "E-mail", autofocus: true, autocomplete: "email", class: "w-full" %>
       <%= form.input :password, :password, label: "Senha", autocomplete: "current-password", class: "w-full" %>
 
