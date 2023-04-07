@@ -17,6 +17,7 @@ class PatientsController < ApplicationController
     if patient.save
       redirect_to patient_path(patient)
     else
+      flash[:error] = patient.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end

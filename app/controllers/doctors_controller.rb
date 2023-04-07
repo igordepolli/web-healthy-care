@@ -17,6 +17,7 @@ class DoctorsController < ApplicationController
     if doctor.save
       redirect_to doctor_path(doctor)
     else
+      flash[:error] = doctor.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end

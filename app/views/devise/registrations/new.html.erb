@@ -3,7 +3,7 @@
     <h2>Registrar</h2>
 
     <%= fudgeball_form model: resource, url: registration_path(resource_name), class: "mt-8" do |form| %>
-      <%= render  shared/error_messages", resource: %>
+      <%= render "shared/error_messages", resource: %>
 
       <%= form.input :email, :email, label: "E-mail", autofocus: true, autocomplete: "email", required: true, class: "w-full" %>
       <%= form.input :password, :password, label: "Senha", autocomplete: "new-password", required: true, class: "w-full" %>

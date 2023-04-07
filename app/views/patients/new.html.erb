@@ -3,6 +3,8 @@
     <h2>Registrar-se como paciente</h2>
 
     <%= fudgeball_form model: @patient, url: patients_path, class: "mt-8" do |form| %>
+      <%= fudgeball_form_alert class: "my-4" %>
+
       <%= form.input :name, :text, label: "Nome", autofocus: true, required: true, class: "w-full" %>
       <%= form.input :last_name, :text, label: "Sobrenome", required: true, class: "w-full" %>
       <%= form.input :rg, :text, label: "RG", class: "w-full" %>

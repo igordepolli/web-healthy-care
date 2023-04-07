@@ -27,10 +27,18 @@ module DesignSystem::Fudgeball::ComponentsHelper
   end
 
   def fudgeball_form_alert(options = {})
-    return if flash[:alert].blank?
-    flash.discard
+    if flash[:alert].present?
+      message = flash[:alert]
+      flash.discard
+      fudgeball_alert(message, :red, options)
+    elsif flash[:error].present?
+      messages = flash[:error]
+      flash.discard
 
-    fudgeball_alert(flash[:alert], :red, options)
+      content_tag "div", id: "alerts" do
+        messages.each { concat(fudgeball_alert(_1, :red, options)) }
+      end
+    end
   end
 
   def fudgeball_alert(text, color, options = {})

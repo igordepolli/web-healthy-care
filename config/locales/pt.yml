@@ -10,6 +10,18 @@ pt:
 
     # Model attributes
     attributes:
+      doctor:
+        cpf: "CPF"
+        crm: "CRM"
+        name: "Nome"
+        last_name: "Sobrenome"
+        email: "E-mail"
+      patient:
+        cpf: "CPF"
+        rg: "RG"
+        name: "Nome"
+        last_name: "Sobrenome"
+        email: "E-mail"
       user/classification:
         admin: "Admin"
         patient: "Paciente"
