@@ -10,6 +10,10 @@ pt:
 
     # Model attributes
     attributes:
+      user:
+        email: "E-mail"
+        password: "Senha"
+        classification: "Tipo de usuário"
       doctor:
         cpf: "CPF"
         crm: "CRM"
@@ -35,3 +39,4 @@ pt:
       required: "obrigatório"
       taken: "já foi usado"
       too_short: "muito curto(a)"
+      inclusion: "não é uma opção válida"

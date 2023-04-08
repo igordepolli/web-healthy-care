@@ -23,12 +23,12 @@ module Permission
       end
 
       def user_custom_permission(user)
-        allow "patients", [:new, :create] do |_|
-          user.patient?
+        allow "patients", [:new, :create] do |patient|
+          user.patient? && patient.new_record?
         end
 
-        allow "doctors", [:new, :create] do |_|
-          user.doctor?
+        allow "doctors", [:new, :create] do |doctor|
+          user.doctor? && doctor.new_record?
         end
 
         allow "patients", [:show] do |patient|

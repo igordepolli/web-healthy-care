@@ -13,6 +13,6 @@ module DoctorScoped
     end
 
     def set_doctor
-      @doctor = Doctor.find_by(id: params[:id]) || Doctor.new
+      @doctor = Doctor.find_by(id: params[:id]) || Doctor.find_by(user: current_user) || Doctor.new
     end
 end

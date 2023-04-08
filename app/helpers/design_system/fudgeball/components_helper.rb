@@ -32,11 +32,11 @@ module DesignSystem::Fudgeball::ComponentsHelper
       flash.discard
       fudgeball_alert(message, :red, options)
     elsif flash[:error].present?
-      messages = flash[:error]
+      response = flash[:error]
       flash.discard
 
       content_tag "div", id: "alerts" do
-        messages.each { concat(fudgeball_alert(_1, :red, options)) }
+        render_flash_error(response, options)
       end
     end
   end
@@ -45,7 +45,7 @@ module DesignSystem::Fudgeball::ComponentsHelper
     classes    = options.delete(:class)
     text_class = options.delete(:text_class)
 
-    content_tag "div", class: "bg-#{color}-200 px-4 py-2 rounded #{classes}".squish, **options do
+    content_tag "div", class: "alert bg-#{color}-200 px-4 py-2 rounded #{classes}".squish, **options do
       tag.p text, class: "text-center #{text_class}"
     end
   end
@@ -61,5 +61,13 @@ module DesignSystem::Fudgeball::ComponentsHelper
       data[:turbo]  = false if options.delete(:turbo) == false
       data[:action] = "turbo:submit-start->form#validate #{options.dig(:data, :action)}".squish
       data
+    end
+
+    def render_flash_error(response, options)
+      if response.is_a?(Array)
+        response.each { concat(fudgeball_alert(_1, :red, options)) }
+      else
+        concat(fudgeball_alert(response, :red, options))
+      end
     end
 end
