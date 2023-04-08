@@ -1,24 +1,18 @@
-# README
+# Web Healthy Care
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is the implementation of the Web Healthy Care system, software to store medical information from patients and allow the doctors who consult it to read and edit this information if necessary.
 
-Things you may want to cover:
+## Stack
 
-* Ruby version
+* Ruby on Rails(with Minitest)
+* Stimulus
+* PostgreSQL
 
-* System dependencies
+## Used Gems
 
-* Configuration
+* Devise
+* Tailwind
 
-* Database creation
+## Status
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Work in Progress
