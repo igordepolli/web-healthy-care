@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class DispatchesController < ApplicationController
-  before_action :authenticate_user!
-
   def show
     if current_user.patient?
       redirect_to redirect_for_patient
