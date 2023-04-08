@@ -2,7 +2,7 @@
   <div class="w-3/12">
     <h2>Reenviar instruções de confirmação</h2>
 
-    <%= fudgeball_form model: resource, url: confirmation_path(resource_name), method: :post do |form| %>
+    <%= fudgeball_form model: resource, url: confirmation_path(resource_name) do |form| %>
       <%= render "shared/error_messages", resource: %>
 
       <%= form.input :email, :email, label: "E-mail", autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>

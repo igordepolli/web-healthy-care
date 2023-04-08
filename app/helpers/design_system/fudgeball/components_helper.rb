@@ -3,9 +3,10 @@
 module DesignSystem::Fudgeball::ComponentsHelper
   def fudgeball_button(text, options = {}, html_options = {})
     url        = options.delete(:url)
+    color      = options.delete(:color)
     classes    = html_options.delete(:class)
 
-    link_to text, url, class: "btn-primary #{classes}", **html_options
+    link_to text, url, class: "btn-#{color} #{classes}", **html_options
   end
 
   def fudgeball_navbar_button(text, options = {}, html_options = {})

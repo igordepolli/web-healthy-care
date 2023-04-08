@@ -19,6 +19,7 @@ module Permission
 
       def user_basic_permission
         allow "dispatches", [:show]
+        allow "users/registrations", [:edit, :update, :destroy]
         allow "devise/sessions", [:destroy]
       end
 

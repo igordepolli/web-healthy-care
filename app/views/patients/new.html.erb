@@ -9,9 +9,13 @@
       <%= form.input :last_name, :text, label: "Sobrenome", required: true, class: "w-full" %>
       <%= form.input :rg, :text, label: "RG", class: "w-full" %>
       <%= form.input :cpf, :cpf, label: "CPF", class: "w-full" %>
-      <%= form.input :email, :email, label: "E-mail", class: "w-full" %>
+      <%= form.input :email, :email, label: "E-mail", class: "w-full", value: current_user.email %>
 
       <%= form.submit "Registrar-se", class: "mt-5 w-full" %>
     <% end %>
+
+    <div class="mt-5">
+      <%= link_to "Editar dados de usuário", edit_user_registration_path %>
+    </div>
   </div>
 </div>

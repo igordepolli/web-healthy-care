@@ -42,6 +42,8 @@ class PatientsTest < ActionDispatch::IntegrationTest
       assert_select "input[name='patient[email]']"
       assert_select "input[type='submit'][value='Registrar-se']"
     end
+
+    assert_select "a[href='#{edit_user_registration_path}']", text: "Editar dados de usuário"
   end
 
   test "create success" do

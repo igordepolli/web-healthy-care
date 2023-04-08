@@ -13,7 +13,7 @@ module Permission
     private
       def visitor_basic_permission
         allow "home", [:show]
-        allow "users/registrations", [:new, :edit, :create, :update, :destroy, :cancel]
+        allow "users/registrations", [:new, :create]
         allow "devise/sessions", [:new, :create]
         allow "devise/passwords", [:edit, :update, :create]
       end
