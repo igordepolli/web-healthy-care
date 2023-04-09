@@ -1,20 +1,4 @@
 <div class="container">
-  <h2><%= @patient.name %></h2>
-  <ul class="mt-5 flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200">
-      <li class="mr-2">
-          <a href="#" aria-current="page" class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active">Profile</a>
-      </li>
-      <li class="mr-2">
-          <a href="#" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Dashboard</a>
-      </li>
-      <li class="mr-2">
-          <a href="#" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Settings</a>
-      </li>
-      <li class="mr-2">
-          <a href="#" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Contacts</a>
-      </li>
-      <li>
-          <a class="inline-block p-4 text-gray-400 rounded-t-lg cursor-not-allowed">Disabled</a>
-      </li>
-  </ul>
+  <%= render "patients/show/aside_menu" %>
+  <%= render "patients/show/content", patient: @patient %>
 </div>

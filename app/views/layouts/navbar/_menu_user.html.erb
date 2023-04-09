@@ -1,6 +1,10 @@
 <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
   <span class="sr-only">Menu de Usuário</span>
-  <%= image_tag current_user.profile_photo, class: "w-8 h-8 rounded-full", alt: "Foto do usuário" %>
+  <% if current_user.profile_photo.attached? %>
+    <%= image_tag current_user.profile_photo, class: "w-8 h-8 rounded-full", alt: "Foto do usuário" %>
+  <% else %>
+    <%= image_tag "icons/user.svg", class: "w-8 h-8 bg-white rounded-full", alt: "Foto do usuário" %>
+  <% end %>
 </button>
 
 <!-- Dropdown menu -->
