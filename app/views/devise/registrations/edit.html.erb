@@ -9,13 +9,13 @@
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
 
-      <%= form.input :email, :email, label: "E-mail", required: true, autofocus: true, autocomplete: "email", class: "w-full" %>
-      <%= form.input :name, :text, label: "Nome", autocomplete: "name", required: true, class: "w-full" %>
-      <%= form.input :last_name, :text, label: "Sobrenome", autocomplete: "last_name", required: true, class: "w-full" %>
-      <%= form.input :password, :password, label: "Senha", autocomplete: "new-password", class: "w-full" %>
-      <%= form.input :password_confirmation, :password, label: "Confirme a senha", autocomplete: "new-password", class: "w-full" %>
-      <%= form.input :current_password, :password, label: "Senha atual", required: true, autocomplete: "current-password", class: "w-full" %>
-      <%= form.attach_input :profile_photo, label: "Foto de perfil", accept: "image/png, image/jpeg" %>
+      <%= form.input :email, :email, required: true, autofocus: true, autocomplete: "email", class: "w-full" %>
+      <%= form.input :name, :text, autocomplete: "name", required: true, class: "w-full" %>
+      <%= form.input :last_name, :text, autocomplete: "last_name", required: true, class: "w-full" %>
+      <%= form.input :password, :password, autocomplete: "new-password", class: "w-full" %>
+      <%= form.input :password_confirmation, :password, autocomplete: "new-password", class: "w-full" %>
+      <%= form.input :current_password, :password, required: true, autocomplete: "current-password", class: "w-full" %>
+      <%= form.attach_input :profile_photo, accept: "image/png, image/jpeg" %>
 
       <%= form.submit "Atualizar dados", class: "mt-5 w-full" %>
     <% end %>

@@ -6,8 +6,8 @@
       <%= render "shared/error_messages", resource: %>
 
       <%= form.hidden_field :reset_password_token %>
-      <%= form.input :password, :password, label: "Senha (#{@minimum_password_length} caracteres no mínimo)", autofocus: true, autocomplete: "new-password" %>
-      <%= form.input :password_confirmation, :password, label: "Confirme a senha", autocomplete: "new-password" %>
+      <%= form.input :password, :password, autofocus: true, autocomplete: "new-password" %>
+      <%= form.input :password_confirmation, :password, autocomplete: "new-password" %>
 
       <%= form.submit "Alterar senha", class: "mt-5 w-full" %>
     <% end %>

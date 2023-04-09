@@ -5,13 +5,13 @@
     <%= fudgeball_form model: resource, url: registration_path(resource_name), class: "mt-8" do |form| %>
       <%= render "shared/error_messages", resource: %>
 
-      <%= form.input :email, :email, label: "E-mail", autofocus: true, autocomplete: "email", required: true, class: "w-full" %>
-      <%= form.input :name, :text, label: "Nome", autocomplete: "name", required: true, class: "w-full" %>
-      <%= form.input :last_name, :text, label: "Sobrenome", autocomplete: "last_name", required: true, class: "w-full" %>
-      <%= form.input :password, :password, label: "Senha", autocomplete: "new-password", required: true, class: "w-full" %>
-      <%= form.input :password_confirmation, :password, label: "Confirme a senha", autocomplete: "new-password", required: true, class: "w-full" %>
-      <%= form.select :classification, { label: "Tipo de usuário" }, { required: true, class: "w-full" } %>
-      <%= form.attach_input :profile_photo, label: "Foto de perfil", accept: "image/png, image/jpeg" %>
+      <%= form.input :email, :email, autofocus: true, autocomplete: "email", required: true, class: "w-full" %>
+      <%= form.input :name, :text, autocomplete: "name", required: true, class: "w-full" %>
+      <%= form.input :last_name, :text, autocomplete: "last_name", required: true, class: "w-full" %>
+      <%= form.input :password, :password, autocomplete: "new-password", required: true, class: "w-full" %>
+      <%= form.input :password_confirmation, :password, autocomplete: "new-password", required: true, class: "w-full" %>
+      <%= form.select :classification, {}, { required: true, class: "w-full" } %>
+      <%= form.attach_input :profile_photo, accept: "image/png, image/jpeg" %>
 
       <%= form.submit "Registrar-se", class: "mt-5 w-full" %>
     <% end %>

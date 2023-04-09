@@ -4,7 +4,7 @@ class Fudgeball::FormBuilder < ActionView::Helpers::FormBuilder
   include SelectHelper
 
   def input(attribute, type = "text", options = {})
-    label_text = options.delete(:label)
+    label_text = options.delete(:label) || translate_attribute(attribute)
 
     @template.content_tag "div", class: "field" do
       label(attribute, label_text, options) + form_field(attribute, type, options)
@@ -19,7 +19,7 @@ class Fudgeball::FormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def select(attribute, options = {}, html_options = {})
-    label_text = options.delete(:label)
+    label_text = options.delete(:label) || translate_attribute(attribute)
     choices    = options.delete(:choices) || choices_for(object, attribute)
 
     @template.content_tag "div", class: "field" do
@@ -28,7 +28,7 @@ class Fudgeball::FormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def attach_input(attribute, options = {})
-    label_text = options.delete(:label)
+    label_text = options.delete(:label) || translate_attribute(attribute)
 
     @template.content_tag "div", class: "field" do
       label(attribute, label_text) + file_field(attribute, options)
@@ -48,5 +48,9 @@ class Fudgeball::FormBuilder < ActionView::Helpers::FormBuilder
       options[:data] ||= {}
       options[:data][:mask_target] = type
       text_field attribute, options
+    end
+
+    def translate_attribute(attribute)
+      I18n.t(attribute, scope: "activerecord.attributes.#{object.class.model_name.singular}")
     end
 end

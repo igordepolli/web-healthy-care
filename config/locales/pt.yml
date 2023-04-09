@@ -1,42 +1,45 @@
 pt:
-  hello: "Hello world"
-
   activerecord:
-    # Model names
-    models:
-      user: "Usuário"
-      patient: "Paciente"
-      doctor: "Médico"
-
     # Model attributes
     attributes:
       user:
-        email: "E-mail"
-        password: "Senha"
         classification: "Tipo de usuário"
+        current_password: "Senha atual"
+        email: "E-mail"
+        last_name: "Sobrenome"
+        name: "Nome"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+        profile_photo: "Foto de perfil"
       doctor:
+        email: "E-mail"
         cpf: "CPF"
         crm: "CRM"
-        name: "Nome"
         last_name: "Sobrenome"
-        email: "E-mail"
+        name: "Nome"
       patient:
-        cpf: "CPF"
-        rg: "RG"
-        name: "Nome"
-        last_name: "Sobrenome"
         email: "E-mail"
+        cpf: "CPF"
+        last_name: "Sobrenome"
+        name: "Nome"
+        rg: "RG"
       user/classification:
         admin: "Admin"
         patient: "Paciente"
         doctor: "Médico"
 
+    # Model names
+    models:
+      doctor: "Médico"
+      patient: "Paciente"
+      user: "Usuário"
+
   # Model errors
   errors:
     messages:
       blank: "obrigatório"
+      inclusion: "não é uma opção válida"
       invalid: "inválido"
       required: "obrigatório"
       taken: "já foi usado"
       too_short: "muito curto(a)"
-      inclusion: "não é uma opção válida"
