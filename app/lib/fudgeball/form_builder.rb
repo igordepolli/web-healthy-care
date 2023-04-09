@@ -12,9 +12,10 @@ class Fudgeball::FormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def submit(text, options = {})
+    color   = options.delete(:color) || :primary
     classes = options.delete(:class)
 
-    super text, class: "btn-primary #{classes}".squish, **options
+    super text, class: "btn-#{color} #{classes}".squish, **options
   end
 
   def select(attribute, options = {}, html_options = {})

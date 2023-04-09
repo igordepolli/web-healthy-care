@@ -11,8 +11,10 @@ class UserTest < ActiveSupport::TestCase
     blank = User.new
 
     assert blank.invalid?
-    assert_equal 3, blank.errors.count
+    assert_equal 5, blank.errors.count
     assert_equal ["obrigatório"], blank.errors[:email]
+    assert_equal ["obrigatório"], blank.errors[:name]
+    assert_equal ["obrigatório"], blank.errors[:last_name]
     assert_equal ["obrigatório"], blank.errors[:password]
     assert_equal ["obrigatório"], blank.errors[:classification]
   end

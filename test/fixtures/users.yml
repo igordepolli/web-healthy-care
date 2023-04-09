@@ -1,19 +1,27 @@
 igor:
   email: "igor@gmail.com"
+  name: "Igor"
+  last_name: "Depolli"
   encrypted_password: <%= User.new.send(:password_digest, '123456') %>
   classification: :admin
 
 leo:
   email: "leo@gmail.com"
+  name: "Leonardo"
+  last_name: "Maralha"
   encrypted_password: <%= User.new.send(:password_digest, '123456') %>
   classification: :patient
 
 milena:
   email: "milena@gmail.com"
+  name: "Milena"
+  last_name: "Regiani"
   encrypted_password: <%= User.new.send(:password_digest, '123456') %>
   classification: :doctor
 
 pending:
-  email: "pending@gmail.com"
+  email: "oreo@gmail.com"
+  name: "Oreo"
+  last_name: "Depolli"
   encrypted_password: <%= User.new.send(:password_digest, '123456') %>
   classification: :patient

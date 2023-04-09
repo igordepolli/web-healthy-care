@@ -22,8 +22,7 @@ class HomeTest < ActionDispatch::IntegrationTest
 
     assert_select "nav" do
       assert_select "a[href='#{root_path}']", text: "Web Healthy Care"
-      assert_select "a[href='#{new_user_registration_path}']", text: "Registrar-se"
-      assert_select "a[href='#{new_user_session_path}']", text: "Login"
+      assert_select "a[href='#{new_user_session_path}']", text: "Entrar"
     end
   end
 
@@ -35,6 +34,7 @@ class HomeTest < ActionDispatch::IntegrationTest
     assert_select "nav" do
       assert_select "a[href='#{root_path}']", text: "Web Healthy Care"
       assert_select "a[href='#{dispatches_path}']", text: "Minha página"
+      assert_select "a[href='#{edit_user_registration_path}']", text: "Editar"
       assert_select "a[href='#{destroy_user_session_path}']", text: "Logout"
     end
   end

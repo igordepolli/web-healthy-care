@@ -7,4 +7,10 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  validates :name, :last_name, presence: true
+
+  def full_name
+    "#{name} #{last_name}"
+  end
 end

@@ -10,6 +10,8 @@
       <% end %>
 
       <%= form.input :email, :email, label: "E-mail", required: true, autofocus: true, autocomplete: "email", class: "w-full" %>
+      <%= form.input :name, :text, label: "Nome", autocomplete: "name", required: true, class: "w-full" %>
+      <%= form.input :last_name, :text, label: "Sobrenome", autocomplete: "last_name", required: true, class: "w-full" %>
       <%= form.input :password, :password, label: "Senha", autocomplete: "new-password", class: "w-full" %>
       <%= form.input :password_confirmation, :password, label: "Confirme a senha", autocomplete: "new-password", class: "w-full" %>
       <%= form.input :current_password, :password, label: "Senha atual", required: true, autocomplete: "current-password", class: "w-full" %>
