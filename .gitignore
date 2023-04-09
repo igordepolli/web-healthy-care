@@ -34,3 +34,6 @@
 !/app/assets/builds/.keep
 
 /node_modules
+
+# Ignore annoying OS generated files
+.DS_Store

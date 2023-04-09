@@ -7,6 +7,12 @@ class PatientsController < ApplicationController
   end
 
   def show
+    @doctor         = Doctor.find_by(user: current_user)
+    @access_control = @patient.access_controls.where(doctor: @doctor).order(:id).last
+  end
+
+  def index
+    @patients = Patient.where("last_name ~* ?", params[:last_name])
   end
 
   def create

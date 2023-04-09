@@ -38,4 +38,27 @@ class HomeTest < ActionDispatch::IntegrationTest
       assert_select "a[href='#{destroy_user_session_path}']", text: "Logout"
     end
   end
+
+  test "search for patient is just showing for admin or doctor" do
+    sign_in users(:igor)
+
+    get root_path
+    assert_select "nav" do
+      assert_select "a[href='#{patients_path}']", text: "Buscar pacientes"
+    end
+
+    sign_in users(:milena)
+
+    get root_path
+    assert_select "nav" do
+      assert_select "a[href='#{patients_path}']", text: "Buscar pacientes"
+    end
+
+    sign_in users(:leo)
+
+    get root_path
+    assert_select "nav" do
+      assert_select "a[href='#{patients_path}']", text: "Buscar pacientes", count: 0
+    end
+  end
 end

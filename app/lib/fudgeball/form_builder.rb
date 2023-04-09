@@ -4,10 +4,9 @@ class Fudgeball::FormBuilder < ActionView::Helpers::FormBuilder
   include SelectHelper
 
   def input(attribute, type = "text", options = {})
-    label_text = options.delete(:label) || translate_attribute(attribute)
-
     @template.content_tag "div", class: "field" do
-      label(attribute, label_text, options) + form_field(attribute, type, options)
+      @template.concat(label(attribute, options))
+      @template.concat(form_field(attribute, type, options))
     end
   end
 
@@ -19,19 +18,25 @@ class Fudgeball::FormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def select(attribute, options = {}, html_options = {})
-    label_text = options.delete(:label) || translate_attribute(attribute)
-    choices    = options.delete(:choices) || choices_for(object, attribute)
+    choices = options.delete(:choices) || choices_for(object, attribute)
 
     @template.content_tag "div", class: "field" do
-      label(attribute, label_text, html_options) + super(attribute, choices, options, html_options)
+      @template.concat(label(attribute, options))
+      @template.concat(super(attribute, choices, options, html_options))
     end
   end
 
-  def attach_input(attribute, options = {})
-    label_text = options.delete(:label) || translate_attribute(attribute)
+  def label(attribute, options = {})
+    label = options.delete(:label)
+    label = translate_attribute(attribute) if label.nil?
 
+    super(attribute, label, options) if label
+  end
+
+  def attach_input(attribute, options = {})
     @template.content_tag "div", class: "field" do
-      label(attribute, label_text) + file_field(attribute, options)
+      @template.concat(label(attribute, options))
+      @template.concat(file_field(attribute, options))
     end
   end
 

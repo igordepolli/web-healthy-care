@@ -17,6 +17,10 @@ module Permission
         model&.try(:user_id) == user.id
       end
 
+      def doctor_has_access_control?(patient, doctor)
+        patient.access_controls.where(doctor:, expires_at: Time.zone.now..2.hours.from_now).exists?
+      end
+
       def user_basic_permission
         allow "dispatches", [:show]
         allow "users/registrations", [:edit, :update, :destroy]
@@ -33,11 +37,31 @@ module Permission
         end
 
         allow "patients", [:show] do |patient|
-          owner?(patient, user)
+          owner?(patient, user) || user.doctor?
+        end
+
+        allow "patients", [:index] do |patient|
+          user.doctor?
         end
 
         allow "doctors", [:show] do |doctor|
           owner?(doctor, user)
+        end
+
+        allow "patients/access_controls", [:create] do |(_, _)|
+          user.doctor?
+        end
+
+        allow "patients/access_controls", [:update, :index, :destroy] do |(patient, _)|
+          owner?(patient, user)
+        end
+
+        allow "patients/consultations", [:show, :index] do |(patient, doctor)|
+          owner?(patient, user) || doctor_has_access_control?(patient, doctor)
+        end
+
+        allow "patients/consultations", [:new, :create] do |(patient, doctor)|
+          doctor_has_access_control?(patient, doctor)
         end
       end
   end

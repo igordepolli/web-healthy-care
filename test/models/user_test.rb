@@ -18,4 +18,8 @@ class UserTest < ActiveSupport::TestCase
     assert_equal ["obrigatório"], blank.errors[:password]
     assert_equal ["obrigatório"], blank.errors[:classification]
   end
+
+  test "full name" do
+    assert_equal "Igor Depolli", users(:igor).full_name
+  end
 end

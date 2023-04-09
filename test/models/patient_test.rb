@@ -60,4 +60,8 @@ class PatientTest < ActiveSupport::TestCase
     assert_equal 1, new_patient.errors.count
     assert_equal ["já foi usado"], new_patient.errors[:email]
   end
+
+  test "full name" do
+    assert_equal "Leonardo Maralha", patients(:leo).full_name
+  end
 end

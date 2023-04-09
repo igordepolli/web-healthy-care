@@ -1,0 +1,11 @@
+<div class="container flex items-center justify-center">
+  <div class="w-full">
+    <h2>Pacientes</h2>
+    <%= fudgeball_form url: patients_path, method: :get, class: "mt-8 flex justify-center items-center" do |form| %>
+      <%= form.input :last_name, :text, autofocus: true, required: true, label: false, placeholder: "Buscar por sobrenome", class: "w-96 mr-24" %>
+      <%= form.submit "Buscar", class: "ml-4" %>
+    <% end %>
+
+    <%= render "patients/index/patients", patients: @patients if @patients.present? %>
+  </div>
+</div>

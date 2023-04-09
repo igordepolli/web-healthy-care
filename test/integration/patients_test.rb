@@ -14,7 +14,7 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
     sign_in users(:milena)
     get patient_path(patients(:leo))
-    assert_response :redirect
+    assert_response :ok
 
     sign_in users(:leo)
     get patient_path(patients(:leo))
@@ -44,6 +44,89 @@ class PatientsTest < ActionDispatch::IntegrationTest
     end
 
     assert_select "a[href='#{edit_user_registration_path}']", text: "Editar dados de usuário"
+  end
+
+  test "show layout for patient" do
+    sign_in users(:leo)
+
+    get patient_path(patients(:leo))
+
+    assert_select "h2", text: "Leonardo"
+    assert_select "#aside-menu" do
+      assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']" do
+        assert_select "span", text: "Autorizações"
+        assert_select "span", text: "1"
+      end
+      assert_select "a[href='#{patient_consultations_path(patients(:leo))}']", text: "Consultas"
+    end
+  end
+
+  test "show layout for doctor" do
+    AccessControl.delete_all
+
+    sign_in users(:milena)
+
+    get patient_path(patients(:leo))
+
+    assert_select "h2", text: "Leonardo"
+    assert_select "#aside-menu" do
+      assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']", text: "Autorizações", count: 0
+      assert_select "a[href='#{patient_consultations_path(patients(:leo))}']", text: "Consultas", count: 0
+      assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']", text: "Solicitar informações"
+    end
+
+    access_control = AccessControl.create! doctor: doctors(:milena), patient: patients(:leo)
+
+    get patient_path(patients(:leo))
+
+    assert_select "h2", text: "Leonardo"
+    assert_select "#aside-menu" do
+      assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']", text: "Autorizações", count: 0
+      assert_select "a[href='#{patient_consultations_path(patients(:leo))}']", text: "Consultas", count: 0
+      assert_select "span", text: "Aguardando autorização"
+    end
+
+    access_control.update_column :expires_at, Time.zone.now + 2.hours
+
+    get patient_path(patients(:leo))
+
+    assert_select "h2", text: "Leonardo"
+    assert_select "#aside-menu" do
+      assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']", text: "Autorizações", count: 0
+      assert_select "a[href='#{patient_consultations_path(patients(:leo))}']", text: "Consultas"
+      assert_select "span", text: "Acesso autorizado até #{access_control.expires_at.strftime("%d/%m/%Y %Hh%M")}"
+    end
+  end
+
+  test "index" do
+    patients(:leo).update_columns cpf: "053.725.450-11", email: "leo@gmail.com"
+
+    sign_in users(:milena)
+
+    get patients_path
+
+    assert_select "h2", text: "Pacientes"
+    assert_select "input[name='last_name'][placeholder='Buscar por sobrenome']"
+    assert_select "input[type='submit'][value='Buscar']"
+
+    get patients_path(last_name: "maralha")
+
+    assert_select "h2", text: "Pacientes"
+    assert_select "input[name='last_name'][placeholder='Buscar por sobrenome']"
+    assert_select "input[type='submit'][value='Buscar']"
+    assert_select "table" do
+      assert_select "th", text: "Nome"
+      assert_select "th", text: "CPF"
+      assert_select "th", text: "Ação"
+      assert_select "th" do
+        assert_select "div", text: "Leonardo Maralha"
+        assert_select "div", text: "leo@gmail.com"
+      end
+      assert_select "td", text: "053.725.450-11"
+      assert_select "td" do
+        assert_select "a[href='#{patient_path(patients(:leo))}']", text: "Visualizar"
+      end
+    end
   end
 
   test "create success" do

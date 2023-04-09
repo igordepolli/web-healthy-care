@@ -41,6 +41,10 @@
   @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100;
 }
 
+#mobile-menu-2 a {
+  @apply block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0;
+}
+
 /* Typography */
 h2 {
   @apply text-center text-4xl font-semibold text-xl tracking-tight;

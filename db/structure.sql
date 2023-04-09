@@ -14,6 +14,39 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: access_controls; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.access_controls (
+    id bigint NOT NULL,
+    doctor_id bigint NOT NULL,
+    patient_id bigint NOT NULL,
+    expires_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: access_controls_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.access_controls_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: access_controls_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.access_controls_id_seq OWNED BY public.access_controls.id;
+
+
+--
 -- Name: active_storage_attachments; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -592,13 +625,13 @@ ALTER SEQUENCE public.treatments_id_seq OWNED BY public.treatments.id;
 CREATE TABLE public.users (
     id bigint NOT NULL,
     email character varying NOT NULL,
-    name character varying NOT NULL,
-    last_name character varying NOT NULL,
     encrypted_password character varying NOT NULL,
     reset_password_token character varying,
     reset_password_sent_at timestamp(6) without time zone,
     remember_created_at timestamp(6) without time zone,
     classification integer NOT NULL,
+    name character varying NOT NULL,
+    last_name character varying NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -621,6 +654,13 @@ CREATE SEQUENCE public.users_id_seq
 --
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: access_controls id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.access_controls ALTER COLUMN id SET DEFAULT nextval('public.access_controls_id_seq'::regclass);
 
 
 --
@@ -740,6 +780,14 @@ ALTER TABLE ONLY public.treatments ALTER COLUMN id SET DEFAULT nextval('public.t
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: access_controls access_controls_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.access_controls
+    ADD CONSTRAINT access_controls_pkey PRIMARY KEY (id);
 
 
 --
@@ -892,6 +940,20 @@ ALTER TABLE ONLY public.treatments
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_access_controls_on_doctor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_access_controls_on_doctor_id ON public.access_controls USING btree (doctor_id);
+
+
+--
+-- Name: index_access_controls_on_patient_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_access_controls_on_patient_id ON public.access_controls USING btree (patient_id);
 
 
 --
@@ -1184,6 +1246,14 @@ ALTER TABLE ONLY public.exams
 
 
 --
+-- Name: access_controls fk_rails_6ade8072eb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.access_controls
+    ADD CONSTRAINT fk_rails_6ade8072eb FOREIGN KEY (patient_id) REFERENCES public.patients(id);
+
+
+--
 -- Name: doctors fk_rails_899b01ef33; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1240,6 +1310,14 @@ ALTER TABLE ONLY public.active_storage_attachments
 
 
 --
+-- Name: access_controls fk_rails_e682fd5c31; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.access_controls
+    ADD CONSTRAINT fk_rails_e682fd5c31 FOREIGN KEY (doctor_id) REFERENCES public.doctors(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -1260,6 +1338,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230405183706'),
 ('20230405184217'),
 ('20230405185444'),
-('20230405192424');
+('20230405192424'),
+('20230409191321');
 
 

@@ -72,4 +72,8 @@ class DoctorTest < ActiveSupport::TestCase
     assert_equal 1, new_doctor.errors.count
     assert_equal ["já foi usado"], new_doctor.errors[:email]
   end
+
+  test "full name" do
+    assert_equal "Milena Regiani", doctors(:milena).full_name
+  end
 end
