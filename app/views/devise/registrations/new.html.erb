@@ -11,6 +11,7 @@
       <%= form.input :password, :password, label: "Senha", autocomplete: "new-password", required: true, class: "w-full" %>
       <%= form.input :password_confirmation, :password, label: "Confirme a senha", autocomplete: "new-password", required: true, class: "w-full" %>
       <%= form.select :classification, { label: "Tipo de usuário" }, { required: true, class: "w-full" } %>
+      <%= form.attach_input :profile_photo, label: "Foto de perfil", accept: "image/png, image/jpeg" %>
 
       <%= form.submit "Registrar-se", class: "mt-5 w-full" %>
     <% end %>

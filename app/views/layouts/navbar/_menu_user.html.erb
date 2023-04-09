@@ -1,6 +1,6 @@
 <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
   <span class="sr-only">Menu de Usuário</span>
-  <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+  <%= image_tag current_user.profile_photo, class: "w-8 h-8 rounded-full", alt: "Foto do usuário" %>
 </button>
 
 <!-- Dropdown menu -->

@@ -27,6 +27,14 @@ class Fudgeball::FormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def attach_input(attribute, options = {})
+    label_text = options.delete(:label)
+
+    @template.content_tag "div", class: "field" do
+      label(attribute, label_text) + file_field(attribute, options)
+    end
+  end
+
   private
     def form_field(attribute, type, options)
       if respond_to?("#{type}_field")
