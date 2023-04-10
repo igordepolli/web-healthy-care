@@ -43,10 +43,8 @@ class Patients::AccessControlsTest < ActionDispatch::IntegrationTest
   test "destroy" do
     sign_in users(:leo)
 
-    assert_equal 1, AccessControl.count
-
-    delete patient_access_control_path(patients(:leo), access_controls(:milena_leo))
-
-    assert_equal 0, AccessControl.count
+    assert_difference -> { AccessControl.count } => -1 do
+      delete patient_access_control_path(patients(:leo), access_controls(:milena_leo))
+    end
   end
 end

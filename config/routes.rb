@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
+require "sidekiq/web"
+
 Rails.application.routes.draw do
   scope(path_names: { new: "novo", edit: "editar" }) do
+    constraints lambda { |request| Rails.env.development? || User.find(request.cookie_jar.signed["user_id"]).admin? } do
+      mount Sidekiq::Web => "/sidekiq"
+    end
+
     root to: "home#show"
 
     devise_for :users, path: "usuarios",
