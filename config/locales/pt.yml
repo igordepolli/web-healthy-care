@@ -43,3 +43,4 @@ pt:
       required: "obrigatório"
       taken: "já foi usado"
       too_short: "muito curto(a)"
+      record_invalid: "Validação falhou: %{errors}"
