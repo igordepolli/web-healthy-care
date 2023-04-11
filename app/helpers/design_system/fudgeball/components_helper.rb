@@ -44,6 +44,16 @@ module DesignSystem::Fudgeball::ComponentsHelper
     end
   end
 
+  def fudgeball_icon(icon, size: nil, color: nil, width: nil, height: nil)
+    return "" if icon.blank?
+
+    svg = File.read("app/assets/images/icons/#{icon}.svg")
+    svg.gsub!(/height=".*?"/, "height=\"#{height || size}\"") if height || size
+    svg.gsub!(/width=".*?"/, "width=\"#{width || size}\"") if width || size
+    svg.gsub!(/fill=".*?"/, "fill=\"#{color}\"") if color
+    svg.html_safe
+  end
+
   private
     def fudgeball_form_id(model, prefix = nil)
       model = model.last if model.is_a?(Array)

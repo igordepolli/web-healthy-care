@@ -6,6 +6,7 @@ class Patients::AccessControlsController < ApplicationController
   before_action :set_access_control, only: [:update, :destroy]
 
   def index
+    @access_controls = @patient.access_controls.pendings
   end
 
   def create
@@ -22,6 +23,8 @@ class Patients::AccessControlsController < ApplicationController
 
   def destroy
     @access_control.destroy!
+
+    render turbo_stream: turbo_stream.replace("aside-menu", partial: "patients/show/aside_menu", locals: { patient: @patient, doctor: @doctor, access_control: @access_control })
   end
 
   private

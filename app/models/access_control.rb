@@ -7,4 +7,6 @@ class AccessControl < ApplicationRecord
   belongs_to :patient
 
   validates :expires_at, date: true
+
+  scope :pendings, -> { where(expires_at: nil) }
 end
