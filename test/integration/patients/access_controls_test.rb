@@ -34,9 +34,7 @@ class Patients::AccessControlsTest < ActionDispatch::IntegrationTest
     sign_in users(:leo)
 
     assert_nil access_controls(:milena_leo).expires_at
-
     patch patient_access_control_path(patients(:leo), access_controls(:milena_leo))
-
     assert_not_nil access_controls(:milena_leo).reload.expires_at
   end
 

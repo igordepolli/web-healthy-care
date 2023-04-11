@@ -15,11 +15,13 @@ class Patients::AccessControlsController < ApplicationController
   end
 
   def update
-    @access_control.update! expires_at: Time.zone.now + 2.hours
+    @access_control.allow!
+
+    render turbo_stream: turbo_stream.replace("aside-menu", partial: "patients/show/aside_menu", locals: { patient: @patient, doctor: @doctor, access_control: @access_control })
   end
 
   def destroy
-    @access_control.destroy
+    @access_control.destroy!
   end
 
   private

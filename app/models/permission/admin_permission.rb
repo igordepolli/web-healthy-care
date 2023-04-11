@@ -11,8 +11,8 @@ module Permission
     end
 
     private
-      def owner?(model, user)
-        true
+      def user_custom_permission(user)
+        allow "*", ["*"]
       end
   end
 end
