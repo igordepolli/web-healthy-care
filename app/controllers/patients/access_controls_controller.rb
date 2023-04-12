@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class Patients::AccessControlsController < ApplicationController
-  include PatientDoctorScoped
-
+class Patients::AccessControlsController < Patients::AccessController
   before_action :set_access_control, only: [:update, :destroy]
 
   def index
@@ -12,19 +10,19 @@ class Patients::AccessControlsController < ApplicationController
   def create
     access_control = AccessControl.create! doctor: @doctor, patient: @patient
 
-    render turbo_stream: turbo_stream.replace("aside-menu", partial: "patients/show/aside_menu", locals: { patient: @patient, doctor: @doctor, access_control: })
+    render turbo_stream: turbo_stream.replace("aside-menu", partial: "patients/shared/aside_menu", locals: { patient: @patient, doctor: @doctor, access_control: })
   end
 
   def update
     @access_control.allow!
 
-    render turbo_stream: turbo_stream.replace("aside-menu", partial: "patients/show/aside_menu", locals: { patient: @patient, doctor: @doctor, access_control: @access_control })
+    render turbo_stream: turbo_stream.replace("aside-menu", partial: "patients/shared/aside_menu", locals: { patient: @patient, doctor: @doctor, access_control: @access_control })
   end
 
   def destroy
     @access_control.destroy!
 
-    render turbo_stream: turbo_stream.replace("aside-menu", partial: "patients/show/aside_menu", locals: { patient: @patient, doctor: @doctor, access_control: @access_control })
+    render turbo_stream: turbo_stream.replace("aside-menu", partial: "patients/shared/aside_menu", locals: { patient: @patient, doctor: @doctor, access_control: @access_control })
   end
 
   private

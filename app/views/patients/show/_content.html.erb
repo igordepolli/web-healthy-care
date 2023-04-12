@@ -1,6 +1,9 @@
-<div class="p-4 sm:ml-64">
-  <h2><%= patient.name %></h2>
-  <div class="mt-5 p-4">
-    <p>Content here</p>
+<div class="p-4 sm:ml-64 flex flex-col items-center">
+  <div class="mt-48 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+    <div class="mt-5 flex flex-col items-center pb-5">
+      <%= image_tag patient.user.profile_photo, class: "w-24 h-24 mb-3 rounded-full shadow-lg", alt: "Patient photo" if patient.user.profile_photo.attached? %>
+      <h5 class="text-xl font-medium text-gray-900"><%= patient.full_name %></h5>
+      <span class="mt-2 text-sm text-gray-500"><%= patient.email %></span>
+    </div>
   </div>
 </div>

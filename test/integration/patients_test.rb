@@ -47,11 +47,13 @@ class PatientsTest < ActionDispatch::IntegrationTest
   end
 
   test "show layout for patient" do
+
     sign_in users(:leo)
 
     get patient_path(patients(:leo))
 
-    assert_select "h2", text: "Leonardo"
+    assert_select "h5", text: "Leonardo Maralha"
+    assert_select "span", text: "leo@gmail.com"
     assert_select "#aside-menu" do
       assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']" do
         assert_select "span", text: "Autorizações"
@@ -68,7 +70,7 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
     get patient_path(patients(:leo))
 
-    assert_select "h2", text: "Leonardo"
+    assert_select "h5", text: "Leonardo Maralha"
     assert_select "#aside-menu" do
       assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']", text: "Autorizações", count: 0
       assert_select "a[href='#{patient_consultations_path(patients(:leo))}']", text: "Consultas", count: 0
@@ -79,7 +81,7 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
     get patient_path(patients(:leo))
 
-    assert_select "h2", text: "Leonardo"
+    assert_select "h5", text: "Leonardo Maralha"
     assert_select "#aside-menu" do
       assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']", text: "Autorizações", count: 0
       assert_select "a[href='#{patient_consultations_path(patients(:leo))}']", text: "Consultas", count: 0
@@ -90,7 +92,7 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
     get patient_path(patients(:leo))
 
-    assert_select "h2", text: "Leonardo"
+    assert_select "h5", text: "Leonardo Maralha"
     assert_select "#aside-menu" do
       assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']", text: "Autorizações", count: 0
       assert_select "a[href='#{patient_consultations_path(patients(:leo))}']", text: "Consultas"

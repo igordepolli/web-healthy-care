@@ -1,4 +1,4 @@
-<%= render "patients/show/aside_menu/authorization_control", patient:, doctor:, access_control: %>
+<%= render "patients/shared/aside_menu/authorization_control", patient:, doctor:, access_control: %>
 
 <%= tag.li do %>
   <%= link_to patient_consultations_path(patient), class: "flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100" do %>

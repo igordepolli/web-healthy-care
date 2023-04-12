@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class Patients::ConsultationsController < ApplicationController
-  include PatientDoctorScoped
-
+class Patients::ConsultationsController < Patients::AccessController
   def new
   end
 

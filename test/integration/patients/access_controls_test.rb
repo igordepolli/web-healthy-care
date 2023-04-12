@@ -17,6 +17,25 @@ class Patients::AccessControlsTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
+  test "index" do
+    sign_in users(:leo)
+
+    get patient_access_controls_path(patients(:leo))
+
+    assert_select "#aside-menu"
+    assert_select "#access_control_#{access_controls(:milena_leo).id}" do
+      assert_select "div", text: "O(a) doutor(a) Milena Regiani deseja acessar as suas informações médicas"
+      assert_select "form[action='#{patient_access_control_path(patients(:leo), access_controls(:milena_leo))}']" do
+        assert_select "input[name='_method'][value='patch']"
+        assert_select "button[type='submit']"
+      end
+      assert_select "form[action='#{patient_access_control_path(patients(:leo), access_controls(:milena_leo))}']" do
+        assert_select "input[name='_method'][value='delete']"
+        assert_select "button[type='submit']"
+      end
+    end
+  end
+
   test "create" do
     sign_in users(:milena)
 

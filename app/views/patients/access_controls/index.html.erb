@@ -1,3 +1,4 @@
 <div class="container">
-  <%= render partial: "patients/access_controls/index/authorization", collection: @access_controls, as: :access_control, locals: { patient: @patient } %>
+  <%= render "patients/shared/aside_menu", patient: @patient, doctor: @doctor, access_control: @access_control %>
+  <%= render "patients/access_controls/index/content", access_controls: @access_controls, patient: @patient %>
 </div>
