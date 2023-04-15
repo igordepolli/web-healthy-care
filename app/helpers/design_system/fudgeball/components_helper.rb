@@ -9,6 +9,14 @@ module DesignSystem::Fudgeball::ComponentsHelper
     link_to text, url, class: "btn-#{color} #{classes}", **html_options
   end
 
+  def fudgeball_return_button(url, options = {})
+    classes = options.delete(:class)
+
+    link_to url, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center #{classes}", **options do
+      fudgeball_icon "arrow-left", size: 30, color_stroke: :white
+    end
+  end
+
   def fudgeball_form(model: nil, scope: nil, url: nil, format: nil, remote: true, **options, &block)
     options[:turbo]   = true unless options.key?(:turbo)
     options[:local]   = true
@@ -44,13 +52,14 @@ module DesignSystem::Fudgeball::ComponentsHelper
     end
   end
 
-  def fudgeball_icon(icon, size: nil, color: nil, width: nil, height: nil)
+  def fudgeball_icon(icon, size: nil, color: nil, color_stroke: nil, width: nil, height: nil)
     return "" if icon.blank?
 
     svg = File.read("app/assets/images/icons/#{icon}.svg")
     svg.gsub!(/height=".*?"/, "height=\"#{height || size}\"") if height || size
     svg.gsub!(/width=".*?"/, "width=\"#{width || size}\"") if width || size
-    svg.gsub!(/fill=".*?"/, "fill=\"#{color}\"") if color
+    svg.gsub!(/fill=".*?"/, "fill=\"#{color_to_hex(color)}\"") if color
+    svg.gsub!(/stroke=".*?"/, "stroke=\"#{color_to_hex(color_stroke)}\"") if color_stroke
     svg.html_safe
   end
 
@@ -72,6 +81,21 @@ module DesignSystem::Fudgeball::ComponentsHelper
         response.each { concat(fudgeball_alert(_1, :red, options)) }
       else
         concat(fudgeball_alert(response, :red, options))
+      end
+    end
+
+    def color_to_hex(color)
+      case color.to_sym
+      when :green
+        "#0E9F6E"
+      when :red
+        "#F05252"
+      when :white
+        "#FFFFFF"
+      when :black
+        "#000000"
+      else
+        "#3B82F6"
       end
     end
 end

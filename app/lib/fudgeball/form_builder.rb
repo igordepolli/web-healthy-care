@@ -40,6 +40,13 @@ class Fudgeball::FormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def text_area(attribute, options = {})
+    @template.content_tag "div", class: "field" do
+      @template.concat(label(attribute, options))
+      @template.concat(super(attribute, options))
+    end
+  end
+
   private
     def form_field(attribute, type, options)
       if respond_to?("#{type}_field")
