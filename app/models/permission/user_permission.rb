@@ -53,11 +53,11 @@ module Permission
         end
 
         allow "patients/consultations", [:show, :index] do |(patient, doctor)|
-          owner?(patient, user) || AccessControl.allowed_for?(patient, doctor)
+          owner?(patient, user) || doctor&.allowed_by?(patient)
         end
 
         allow "patients/consultations", [:new, :create] do |(patient, doctor)|
-          AccessControl.allowed_for?(patient, doctor)
+          doctor&.allowed_by?(patient)
         end
       end
   end

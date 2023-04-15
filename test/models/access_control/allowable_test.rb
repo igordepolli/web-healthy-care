@@ -3,19 +3,6 @@
 require "test_helper"
 
 class AccessControl::AllowableTest < ActiveSupport::TestCase
-  test "allowed for?" do
-    assert_not AccessControl.allowed_for?(patients(:leo), doctors(:milena))
-
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
-    assert AccessControl.allowed_for?(patients(:leo), doctors(:milena))
-
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now - 1.minute
-    assert_not AccessControl.allowed_for?(patients(:leo), doctors(:milena))
-
-    access_controls(:milena_leo).delete
-    assert_not AccessControl.allowed_for?(patients(:leo), doctors(:milena))
-  end
-
   test "allowed?" do
     assert_not access_controls(:milena_leo).allowed?
 

@@ -4,10 +4,6 @@ module AccessControl::Allowable
   extend ActiveSupport::Concern
 
   included do
-    def self.allowed_for?(patient, doctor)
-      where(doctor:, patient:, expires_at: Time.zone.now..2.hours.from_now).exists?
-    end
-
     def allowed?
       expires_at&.future?
     end

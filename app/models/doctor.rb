@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class Doctor < ApplicationRecord
+  include Allowable
+
   belongs_to :user
+
+  has_many :access_controls
 
   validates :name, :last_name, presence: true
   validates :cpf, presence: true, cpf: true, uniqueness: true
