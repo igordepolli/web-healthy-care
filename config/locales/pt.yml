@@ -2,15 +2,10 @@ pt:
   activerecord:
     # Model attributes
     attributes:
-      user:
-        classification: "Tipo de usuário"
-        current_password: "Senha atual"
-        email: "E-mail"
-        last_name: "Sobrenome"
-        name: "Nome"
-        password: "Senha"
-        password_confirmation: "Confirmação de senha"
-        profile_photo: "Foto de perfil"
+      consultation:
+        date: "Data da consulta"
+        reason: "Razão da consulta"
+        sick_note: "Atestado médico"
       doctor:
         email: "E-mail"
         cpf: "CPF"
@@ -23,6 +18,15 @@ pt:
         last_name: "Sobrenome"
         name: "Nome"
         rg: "RG"
+      user:
+        classification: "Tipo de usuário"
+        current_password: "Senha atual"
+        email: "E-mail"
+        last_name: "Sobrenome"
+        name: "Nome"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+        profile_photo: "Foto de perfil"
       user/classification:
         admin: "Admin"
         patient: "Paciente"

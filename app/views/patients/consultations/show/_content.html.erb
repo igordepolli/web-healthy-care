@@ -1,0 +1,11 @@
+<div id="content" class="p-4 sm:ml-64 mb-5">
+  <%= fudgeball_return_button patient_consultations_path(patient) %>
+  <div class="mt-8">
+    <p class="mt-2"><span class="font-bold">Paciente: </span> <%= consultation.patient.full_name %></p>
+    <p class="mt-2"><span class="font-bold">Médico: </span> <%= consultation.doctor.full_name %></p>
+    <p class="mt-2"><span class="font-bold">Data da consulta: </span> <%= consultation.date.strftime("%d/%m/%Y") %></p>
+    <p class="mt-2 font-bold">Razão da consulta:</p>
+    <p class="mt-2 mb-5"><%= consultation.reason %></p>
+    <%= fudgeball_button "Baixar Atestado", url: rails_blob_path(consultation.sick_note, disposition: :attachment) if consultation.sick_note.attached? %>
+  </div>
+</div>
