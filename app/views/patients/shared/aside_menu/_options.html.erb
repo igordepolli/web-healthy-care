@@ -8,7 +8,7 @@
 <% end if allow?("patients/consultations", "show", [patient, doctor]) %>
 
 <%= tag.li do %>
-  <%= link_to nil, class: "flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100" do %>
+  <%= link_to patient_surgeries_path(patient), class: "flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100" do %>
     <%= image_tag "icons/surgeries.svg", class: "w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" %>
     <span class="ml-3">Cirurgias</span>
   <% end %>

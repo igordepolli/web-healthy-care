@@ -554,11 +554,11 @@ CREATE TABLE public.schema_migrations (
 CREATE TABLE public.surgeries (
     id bigint NOT NULL,
     patient_id bigint NOT NULL,
-    doctor_id bigint,
+    doctor_id bigint NOT NULL,
     classification integer NOT NULL,
-    date timestamp(6) without time zone NOT NULL,
+    date date NOT NULL,
     hospital character varying,
-    discharged_at timestamp(6) without time zone,
+    discharged_at date,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );

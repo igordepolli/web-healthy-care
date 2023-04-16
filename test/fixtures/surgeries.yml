@@ -1,4 +1,5 @@
 septoplasty:
   patient: leo
+  doctor: milena
   classification: :elective
   date: <%= Time.current %>

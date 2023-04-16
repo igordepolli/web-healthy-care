@@ -1,0 +1,9 @@
+<div id="content" class="p-4 sm:ml-64 mb-5">
+  <%= fudgeball_return_button patient_surgeries_path(patient) %>
+  <div class="mt-8">
+    <p class="mt-2"><span class="font-bold">Paciente: </span> <%= surgery.patient.full_name %></p>
+    <p class="mt-2"><span class="font-bold">Médico: </span> <%= surgery.doctor.full_name %></p>
+    <p class="mt-2"><span class="font-bold">Data da cirurgia: </span> <%= surgery.date.strftime("%d/%m/%Y") %></p>
+    <p class="mt-2"><span class="font-bold">Tipo da cirurgia: </span> <%= t(surgery.classification, scope: "activerecord.attributes.surgery/classification") %></p>
+  </div>
+</div>

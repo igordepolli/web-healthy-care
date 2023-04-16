@@ -1,0 +1,14 @@
+<div class="relative mt-8 overflow-x-auto shadow-md sm:rounded-lg">
+  <table class="w-full text-sm text-left text-gray-500">
+    <thead class="text-xs text-gray-700 uppercase bg-blue-100">
+      <tr>
+        <th scope="col" class="px-6 py-3">Data</th>
+        <th scope="col" class="px-6 py-3">Médico</th>
+        <th scope="col" class="px-6 py-3">Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "patients/surgeries/index/surgery", collection: surgeries %>
+    </tbody>
+  </table>
+</div>

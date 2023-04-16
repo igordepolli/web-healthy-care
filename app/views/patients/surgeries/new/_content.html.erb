@@ -1,0 +1,17 @@
+<div id="content" class="p-4 sm:ml-64 mb-5">
+  <div class="w-6/12 mx-auto">
+    <%= fudgeball_return_button patient_surgeries_path(patient) %>
+    <h2>Cadastrar nova cirurgia</h2>
+
+    <%= fudgeball_form model: surgery, url: patient_surgeries_path(patient), class: "mt-8" do |form| %>
+      <%= fudgeball_form_alert class: "my-4" %>
+
+      <%= form.input :date, :date, autofocus: true, required: true, class: "w-full" %>
+      <%= form.select :classification, {}, { required: true, class: "w-full" } %>
+      <%= form.input :hospital, :text, class: "w-full" %>
+      <%= form.input :discharged_at, :date, class: "w-full" %>
+
+      <%= form.submit "Cadastrar", class: "mt-8 w-full" %>
+    <% end %>
+  </div>
+</div>

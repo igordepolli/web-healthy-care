@@ -18,6 +18,15 @@ pt:
         last_name: "Sobrenome"
         name: "Nome"
         rg: "RG"
+      surgery:
+        date: "Data da cirurgia"
+        classification: "Tipo da cirurgia"
+        hospital: "Hospital"
+        discharged_at: "Data da alta"
+      surgery/classification:
+        elective: "Eletiva"
+        urgency: "Urgente"
+        other: "Outro(a)"
       user:
         classification: "Tipo de usuário"
         current_password: "Senha atual"

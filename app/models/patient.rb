@@ -5,6 +5,7 @@ class Patient < ApplicationRecord
 
   has_many :diagnostics
   has_many :consultations
+  has_many :surgeries
   has_many :access_controls
 
   validates :name, :last_name, presence: true

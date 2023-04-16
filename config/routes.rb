@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       scope module: :patients do
         resources :access_controls, only: [:create, :update, :destroy, :index], path: "autorizacoes"
         resources :consultations,   only: [:new, :create, :show, :index],       path: "consultas"
+        resources :surgeries,       only: [:new, :create, :show, :index],       path: "cirurgias"
       end
     end
   end
