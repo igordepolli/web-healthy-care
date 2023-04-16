@@ -1,4 +1,4 @@
-<div class="p-4 sm:ml-64 mb-5">
+<div id="content" class="p-4 sm:ml-64 mb-5">
   <%= fudgeball_button "Nova consulta", url: new_patient_consultation_path(patient) if current_user.doctor? %>
 
   <%= render "patients/consultations/index/consultations", consultations: @consultations if @consultations.any? %>

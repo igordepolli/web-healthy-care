@@ -1,4 +1,4 @@
-<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50">
+<tr id="<%= dom_id consultation %>" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50">
   <td class="px-6 py-4"><%= consultation.date.strftime("%d/%m/%Y") %></td>
   <td class="px-6 py-4"><%= consultation.doctor.full_name %></td>
   <td class="px-6 py-4"><%= link_to "Visualizar", patient_consultation_path(consultation.patient, consultation), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %></td>

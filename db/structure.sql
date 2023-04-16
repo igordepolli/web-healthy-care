@@ -204,7 +204,7 @@ CREATE TABLE public.consultations (
     id bigint NOT NULL,
     patient_id bigint NOT NULL,
     doctor_id bigint NOT NULL,
-    date timestamp(6) without time zone NOT NULL,
+    date date NOT NULL,
     reason character varying,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
