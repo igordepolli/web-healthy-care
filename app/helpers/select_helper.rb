@@ -5,6 +5,10 @@ module SelectHelper
     choices_for_enum(model.class, attribute)
   end
 
+  def disease_options
+    Disease.all.map { [_1.name, _1.id] }.sort_by(&:first)
+  end
+
   private
     def choices_for_enum(klass, attribute)
       pluralized_attribute = attribute.to_s.pluralize

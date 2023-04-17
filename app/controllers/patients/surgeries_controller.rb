@@ -4,7 +4,7 @@ class Patients::SurgeriesController < Patients::AccessController
   before_action :set_surgery, only: :show
 
   def new
-    @surgery = Surgery.new
+    @surgery = @patient.surgeries.new
   end
 
   def index
@@ -15,12 +15,12 @@ class Patients::SurgeriesController < Patients::AccessController
   end
 
   def create
-    surgery = @patient.surgeries.new doctor: @doctor, **surgery_params
+    @surgery = @patient.surgeries.new doctor: @doctor, **surgery_params
 
-    if surgery.save
-      redirect_to patient_surgery_path(@patient, surgery)
+    if @surgery.save
+      redirect_to patient_surgery_path(@patient, @surgery)
     else
-      flash[:error] = surgery.errors.full_messages
+      flash[:error] = @surgery.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end

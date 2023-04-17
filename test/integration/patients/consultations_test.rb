@@ -100,9 +100,9 @@ class Patients::ConsultationsTest < ActionDispatch::IntegrationTest
     assert_select "#aside-menu"
     assert_select "#content" do
       assert_select "a[href='#{patient_consultations_path(patients(:leo))}']"
-      assert_select "p", text: "Paciente:  Leonardo Maralha"
-      assert_select "p", text: "Médico:  Milena Regiani"
-      assert_select "p", text: "Data da consulta:  #{Date.current.strftime("%d/%m/%Y")}"
+      assert_select "p", text: "Paciente: Leonardo Maralha"
+      assert_select "p", text: "Médico: Milena Regiani"
+      assert_select "p", text: "Data da consulta: #{Date.current.strftime("%d/%m/%Y")}"
       assert_select "p", text: "Léo está com suspeita de gripe"
     end
   end

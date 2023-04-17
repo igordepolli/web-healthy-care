@@ -14,13 +14,14 @@ Rails.application.routes.draw do
                        path_names: { sign_in: "login", sign_up: "registrar", sign_out: "logout", password: "senha" },
                        controllers: { registrations: "users/registrations" }
 
-    resource :dispatches,           only: :show,                                path: "ir-para"
-    resources :doctors,             only: [:new, :show, :create],               path: "medicos"
-    resources :patients,            only: [:new, :show, :create, :index],       path: "pacientes" do
+    resource :dispatches,           only: :show,                                   path: "ir-para"
+    resources :doctors,             only: [:new, :show, :create],                  path: "medicos"
+    resources :patients,            only: [:new, :show, :create, :index],          path: "pacientes" do
       scope module: :patients do
-        resources :access_controls, only: [:create, :update, :destroy, :index], path: "autorizacoes"
-        resources :consultations,   only: [:new, :create, :show, :index],       path: "consultas"
-        resources :surgeries,       only: [:new, :create, :show, :index],       path: "cirurgias"
+        resources :access_controls, only: [:create, :update, :destroy, :index],    path: "autorizacoes"
+        resources :consultations,   only: [:new, :create, :show, :index],          path: "consultas"
+        resources :surgeries,       only: [:new, :create, :show, :index],          path: "cirurgias"
+        resources :diagnostics,     only: [:new, :create, :show, :index, :update], path: "diagnosticos"
       end
     end
   end

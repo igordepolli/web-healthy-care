@@ -6,6 +6,20 @@ pt:
         date: "Data da consulta"
         reason: "Razão da consulta"
         sick_note: "Atestado médico"
+      diagnostic:
+        disease: Doença
+        diagnosed_at: "Data do diagnóstico"
+        cured_at: "Data da cura"
+        related_symptoms: "Sintomas relatados"
+        status: "Status"
+      diagnostic/status:
+        active: "Ativa"
+        acute: "Aguda"
+        chronic: "Crônica"
+        cured: "Curada"
+        inactive: "Inativa"
+        remission: "Em remissão"
+        terminal: "Terminal"
       doctor:
         email: "E-mail"
         cpf: "CPF"

@@ -21,3 +21,13 @@ milena_doctor = Doctor.create!  user: milena, name: "Milena",   last_name: "Regi
 
 # Authorizations
 AccessControl.create! doctor: milena_doctor, patient: leo_patient, expires_at: Time.zone.now + 2.hours
+
+# Consultations
+consultation = Consultation.create! doctor: milena_doctor, patient: leo_patient, date: Time.zone.now
+consultation.sick_note.attach io: File.open(Rails.root.join("test/fixtures/files", "sick_note.pdf")), filename: "sick_note.pdf"
+
+# Medications
+%w[Paracetamol Dipirona Ibuprofeno Dorflex].each { Medication.create! name: _1 }
+
+# Diseases
+%w[Gripe Cancer Gonorreia Hepatite].each { Disease.create! name: _1 }

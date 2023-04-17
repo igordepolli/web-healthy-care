@@ -47,7 +47,6 @@ class PatientsTest < ActionDispatch::IntegrationTest
   end
 
   test "show layout for patient" do
-
     sign_in users(:leo)
 
     get patient_path(patients(:leo))
@@ -60,6 +59,8 @@ class PatientsTest < ActionDispatch::IntegrationTest
         assert_select "span", text: "1"
       end
       assert_select "a[href='#{patient_consultations_path(patients(:leo))}']", text: "Consultas"
+      assert_select "a[href='#{patient_surgeries_path(patients(:leo))}']",     text: "Cirurgias"
+      assert_select "a[href='#{patient_diagnostics_path(patients(:leo))}']",   text: "Diagnósticos"
     end
   end
 
@@ -72,8 +73,10 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
     assert_select "h5", text: "Leonardo Maralha"
     assert_select "#aside-menu" do
-      assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']", text: "Autorizações", count: 0
-      assert_select "a[href='#{patient_consultations_path(patients(:leo))}']", text: "Consultas", count: 0
+      assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']", text: "Autorizações",         count: 0
+      assert_select "a[href='#{patient_consultations_path(patients(:leo))}']",   text: "Consultas",            count: 0
+      assert_select "a[href='#{patient_surgeries_path(patients(:leo))}']",       text: "Cirurgias",            count: 0
+      assert_select "a[href='#{patient_diagnostics_path(patients(:leo))}']",     text: "Diagnósticos",         count: 0
       assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']", text: "Solicitar informações"
     end
 
@@ -84,7 +87,9 @@ class PatientsTest < ActionDispatch::IntegrationTest
     assert_select "h5", text: "Leonardo Maralha"
     assert_select "#aside-menu" do
       assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']", text: "Autorizações", count: 0
-      assert_select "a[href='#{patient_consultations_path(patients(:leo))}']", text: "Consultas", count: 0
+      assert_select "a[href='#{patient_consultations_path(patients(:leo))}']",   text: "Consultas",    count: 0
+      assert_select "a[href='#{patient_surgeries_path(patients(:leo))}']",       text: "Cirurgias",    count: 0
+      assert_select "a[href='#{patient_diagnostics_path(patients(:leo))}']",     text: "Diagnósticos", count: 0
       assert_select "span", text: "Aguardando autorização"
     end
 
@@ -95,7 +100,9 @@ class PatientsTest < ActionDispatch::IntegrationTest
     assert_select "h5", text: "Leonardo Maralha"
     assert_select "#aside-menu" do
       assert_select "a[href='#{patient_access_controls_path(patients(:leo))}']", text: "Autorizações", count: 0
-      assert_select "a[href='#{patient_consultations_path(patients(:leo))}']", text: "Consultas"
+      assert_select "a[href='#{patient_consultations_path(patients(:leo))}']",   text: "Consultas"
+      assert_select "a[href='#{patient_surgeries_path(patients(:leo))}']",       text: "Cirurgias"
+      assert_select "a[href='#{patient_diagnostics_path(patients(:leo))}']",     text: "Diagnósticos"
       assert_select "span", text: "Acesso autorizado até #{access_control.expires_at.strftime("%d/%m/%Y %Hh%M")}"
     end
   end

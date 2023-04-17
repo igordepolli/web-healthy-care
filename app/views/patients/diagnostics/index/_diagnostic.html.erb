@@ -1,0 +1,6 @@
+<tr id="<%= dom_id diagnostic %>" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50">
+  <td class="px-6 py-4"><%= diagnostic.diagnosed_at.strftime("%d/%m/%Y") %></td>
+  <td class="px-6 py-4"><%= diagnostic.disease.name %></td>
+  <td class="px-6 py-4"><%= t(diagnostic.status, scope: "activerecord.attributes.diagnostic/status") %></td>
+  <td class="px-6 py-4"><%= link_to "Visualizar", patient_diagnostic_path(diagnostic.patient, diagnostic), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %></td>
+</tr>

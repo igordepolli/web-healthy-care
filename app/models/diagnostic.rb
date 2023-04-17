@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Diagnostic < ApplicationRecord
-  enum :status, { inactive: 0, active: 1, chronic: 2, acute: 3, remission: 4, terminal: 5 }, default: :active
+  enum :status, { inactive: 0, active: 1, chronic: 2, acute: 3, remission: 4, terminal: 5, cured: 6 }, default: :active
 
   belongs_to :disease
   belongs_to :patient

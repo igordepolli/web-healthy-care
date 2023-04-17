@@ -1,0 +1,21 @@
+<div id="content" class="p-4 sm:ml-64 mb-5">
+  <%= fudgeball_return_button patient_diagnostics_path(patient) %>
+  <div class="mt-8">
+    <p class="mt-2"><span class="font-bold">Paciente:</span> <%= diagnostic.patient.full_name %></p>
+    <p class="mt-2"><span class="font-bold">Doença:</span> <%= diagnostic.disease.name %></p>
+    <p class="mt-2"><span class="font-bold">Data do diagnóstico:</span> <%= diagnostic.diagnosed_at.strftime("%d/%m/%Y") %></p>
+    <p class="mt-2"><span class="font-bold">Data da cura:</span> <%= diagnostic.cured_at&.strftime("%d/%m/%Y") %></p>
+    <p class="mt-2 font-bold">Sintomas relatados:</p>
+    <p class="mt-2 mb-5"><%= diagnostic.related_symptoms %></p>
+
+    <% if current_user.doctor? %>
+      <%= fudgeball_form model: diagnostic, url: patient_diagnostic_path(patient, diagnostic), method: :patch, class: "mt-2" do |form| %>
+        <%= fudgeball_form_alert class: "my-4" %>
+        <p class="font-bold">Status:</p>
+        <%= form.select :status, { label: false }, { onchange: "this.form.requestSubmit()", class: "w-96" } %>
+      <% end %>
+    <% else %>
+      <p class="mt-2"><span class="font-bold">Status:</span> <%= t(diagnostic.status, scope: "activerecord.attributes.diagnostic/status") %></p>
+    <% end %>
+  </div>
+</div>

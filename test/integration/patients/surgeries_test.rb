@@ -105,10 +105,10 @@ class Patients::SurgeriesTest < ActionDispatch::IntegrationTest
     assert_select "#aside-menu"
     assert_select "#content" do
       assert_select "a[href='#{patient_surgeries_path(patients(:leo))}']"
-      assert_select "p", text: "Paciente:  Leonardo Maralha"
-      assert_select "p", text: "Médico:  Milena Regiani"
-      assert_select "p", text: "Data da cirurgia:  #{Date.current.strftime("%d/%m/%Y")}"
-      assert_select "p", text: "Tipo da cirurgia:  Eletiva"
+      assert_select "p", text: "Paciente: Leonardo Maralha"
+      assert_select "p", text: "Médico: Milena Regiani"
+      assert_select "p", text: "Data da cirurgia: #{Date.current.strftime("%d/%m/%Y")}"
+      assert_select "p", text: "Tipo da cirurgia: Eletiva"
     end
   end
 
