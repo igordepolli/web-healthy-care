@@ -18,4 +18,8 @@
       <p class="mt-2"><span class="font-bold">Status:</span> <%= t(diagnostic.status, scope: "activerecord.attributes.diagnostic/status") %></p>
     <% end %>
   </div>
+
+  <div class="mt-16">
+    <%= fudgeball_call_to_action "Tratamentos", url: patient_diagnostic_treatments_path(patient, diagnostic), icon: :treatments %>
+  </div>
 </div>

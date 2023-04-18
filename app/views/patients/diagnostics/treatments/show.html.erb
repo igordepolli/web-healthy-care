@@ -1,0 +1,4 @@
+<div class="container">
+  <%= render "patients/shared/aside_menu", patient: @patient, doctor: @doctor, access_control: @access_control %>
+  <%= render "patients/diagnostics/treatments/show/content", patient: @patient, diagnostic: @diagnostic, treatment: @treatment %>
+</div>

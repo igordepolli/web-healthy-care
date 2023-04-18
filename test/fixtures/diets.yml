@@ -1,3 +1,4 @@
 for_treat_flu:
+  patient: leo
   source: suspected_flu (Consultation)
   lunch: "300g de frango, arroz e feijão"

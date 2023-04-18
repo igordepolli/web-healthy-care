@@ -11,8 +11,9 @@ class DietTest < ActiveSupport::TestCase
     blank = Diet.new
 
     assert blank.invalid?
-    assert_equal 2, blank.errors.count
+    assert_equal 3, blank.errors.count
     assert_equal ["obrigatório"], blank.errors[:source]
+    assert_equal ["obrigatório"], blank.errors[:patient]
     assert_equal ["Pelo menos uma das refeições deve conter uma instrução de dieta!"], blank.errors[:base]
   end
 end

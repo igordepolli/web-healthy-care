@@ -1,0 +1,6 @@
+<tr id="<%= dom_id treatment %>" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50">
+  <td class="px-6 py-4"><%= treatment.treatable.class.model_name.human %></td>
+  <td class="px-6 py-4"><%= treatment.started_at.strftime("%d/%m/%Y") %></td>
+  <td class="px-6 py-4"><%= treatment.ended_at&.strftime("%d/%m/%Y") %></td>
+  <td class="px-6 py-4"><%= link_to "Visualizar", patient_diagnostic_treatment_path(treatment.diagnostic.patient, treatment.diagnostic, treatment), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %></td>
+</tr>

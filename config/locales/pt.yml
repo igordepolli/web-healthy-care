@@ -41,6 +41,11 @@ pt:
         elective: "Eletiva"
         urgency: "Urgente"
         other: "Outro(a)"
+      treatment:
+        treatable_type: "Tipo de tratamento"
+        recommendation: "Recomendação"
+        started_at: "Data de início"
+        ended_at: "Data do fim"
       user:
         classification: "Tipo de usuário"
         current_password: "Senha atual"
@@ -60,6 +65,9 @@ pt:
       doctor: "Médico"
       patient: "Paciente"
       user: "Usuário"
+      surgery: "Cirurgia"
+      diet: "Dieta"
+      prescription: "Receita médica"
 
   # Model errors
   errors:

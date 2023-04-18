@@ -1,5 +1,5 @@
 septoplasty:
   patient: leo
-  doctor: milena
+  source: for_flu (Treatment)
   classification: :elective
   date: <%= Time.current %>

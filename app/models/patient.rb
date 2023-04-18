@@ -3,10 +3,11 @@
 class Patient < ApplicationRecord
   belongs_to :user
 
-  has_many :diagnostics
-  has_many :consultations
-  has_many :surgeries
   has_many :access_controls
+  has_many :consultations
+  has_many :diagnostics
+  has_many :surgeries
+  has_many :diets
 
   validates :name, :last_name, presence: true
   validates :rg, uniqueness: { allow_blank: true }

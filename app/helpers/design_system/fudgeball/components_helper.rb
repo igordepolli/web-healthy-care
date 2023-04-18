@@ -13,7 +13,19 @@ module DesignSystem::Fudgeball::ComponentsHelper
     classes = options.delete(:class)
 
     link_to url, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center #{classes}", **options do
-      fudgeball_icon "arrow-left", size: 30, color_stroke: :white
+      concat(fudgeball_icon "arrow-left", size: 30, color_stroke: :white)
+    end
+  end
+
+  def fudgeball_call_to_action(text, options = {}, html_options = {})
+    url     = options.delete(:url)
+    icon    = options.delete(:icon)
+    color   = options.delete(:color) || :blue
+    classes = html_options.delete(:class)
+
+    link_to url, class: "max-w-sm p-6 bg-#{color}-200 border border-gray-200 rounded-lg shadow flex flex-col items-center hover:bg-#{color}-100 #{classes}" do
+      concat(fudgeball_icon icon, size: 80, color: :primary) if icon
+      concat(tag.h5 text, class: "mt-2 text-2xl font-semibold tracking-tight text-gray-900")
     end
   end
 
@@ -48,7 +60,7 @@ module DesignSystem::Fudgeball::ComponentsHelper
     text_class = options.delete(:text_class)
 
     content_tag "div", class: "alert bg-#{color}-200 px-4 py-2 rounded #{classes}".squish, **options do
-      tag.p text, class: "text-center #{text_class}"
+      concat(tag.p text, class: "text-center #{text_class}")
     end
   end
 

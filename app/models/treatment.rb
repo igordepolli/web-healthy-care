@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class Treatment < ApplicationRecord
-  enum :classification, { medication: 0, surgery: 1, physiotherapy: 2, therapy: 3, diet: 4, other: 5 }
-
   belongs_to :diagnostic
+  belongs_to :treatable, polymorphic: true, optional: true
 
-  validates :classification, presence: true
+  delegate :patient, to: :diagnostic
+
   validates :started_at, presence: true, date: true
   validates :ended_at, date: true
 end
