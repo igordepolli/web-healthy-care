@@ -20,6 +20,12 @@ pt:
         inactive: "Inativa"
         remission: "Em remissão"
         terminal: "Terminal"
+      diet:
+        breakfast: "Café da manhã"
+        lunch: "Almoço"
+        dinner: "Jantar"
+        morning_snack: "Lanche da manhã"
+        afternoon_snack: "Lanche da tarde"
       doctor:
         email: "E-mail"
         cpf: "CPF"

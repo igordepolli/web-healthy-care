@@ -273,8 +273,6 @@ ALTER SEQUENCE public.diagnostics_id_seq OWNED BY public.diagnostics.id;
 CREATE TABLE public.diets (
     id bigint NOT NULL,
     patient_id bigint NOT NULL,
-    source_type character varying NOT NULL,
-    source_id bigint NOT NULL,
     breakfast character varying,
     lunch character varying,
     dinner character varying,
@@ -514,7 +512,8 @@ ALTER SEQUENCE public.patients_id_seq OWNED BY public.patients.id;
 
 CREATE TABLE public.prescriptions (
     id bigint NOT NULL,
-    treatment_id bigint NOT NULL,
+    patient_id bigint NOT NULL,
+    date date NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -555,8 +554,6 @@ CREATE TABLE public.schema_migrations (
 CREATE TABLE public.surgeries (
     id bigint NOT NULL,
     patient_id bigint NOT NULL,
-    source_type character varying NOT NULL,
-    source_id bigint NOT NULL,
     classification integer NOT NULL,
     date date NOT NULL,
     hospital character varying,
@@ -592,9 +589,9 @@ ALTER SEQUENCE public.surgeries_id_seq OWNED BY public.surgeries.id;
 CREATE TABLE public.treatments (
     id bigint NOT NULL,
     diagnostic_id bigint NOT NULL,
-    treatable_type character varying,
-    treatable_id bigint,
-    started_at timestamp(6) without time zone NOT NULL,
+    treatable_type character varying NOT NULL,
+    treatable_id bigint NOT NULL,
+    started_at timestamp(6) without time zone,
     ended_at timestamp(6) without time zone,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
@@ -1036,13 +1033,6 @@ CREATE INDEX index_diets_on_patient_id ON public.diets USING btree (patient_id);
 
 
 --
--- Name: index_diets_on_source; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_diets_on_source ON public.diets USING btree (source_type, source_id);
-
-
---
 -- Name: index_diseases_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1141,10 +1131,10 @@ CREATE UNIQUE INDEX index_patients_on_user_id ON public.patients USING btree (us
 
 
 --
--- Name: index_prescriptions_on_treatment_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_prescriptions_on_patient_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_prescriptions_on_treatment_id ON public.prescriptions USING btree (treatment_id);
+CREATE INDEX index_prescriptions_on_patient_id ON public.prescriptions USING btree (patient_id);
 
 
 --
@@ -1152,13 +1142,6 @@ CREATE INDEX index_prescriptions_on_treatment_id ON public.prescriptions USING b
 --
 
 CREATE INDEX index_surgeries_on_patient_id ON public.surgeries USING btree (patient_id);
-
-
---
--- Name: index_surgeries_on_source; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_surgeries_on_source ON public.surgeries USING btree (source_type, source_id);
 
 
 --
@@ -1195,14 +1178,6 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 ALTER TABLE ONLY public.treatments
     ADD CONSTRAINT fk_rails_259bed4182 FOREIGN KEY (diagnostic_id) REFERENCES public.diagnostics(id);
-
-
---
--- Name: prescriptions fk_rails_284c9ea4a7; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.prescriptions
-    ADD CONSTRAINT fk_rails_284c9ea4a7 FOREIGN KEY (treatment_id) REFERENCES public.treatments(id);
 
 
 --
@@ -1315,6 +1290,14 @@ ALTER TABLE ONLY public.consultations
 
 ALTER TABLE ONLY public.exams
     ADD CONSTRAINT fk_rails_b7263b3b83 FOREIGN KEY (consultation_id) REFERENCES public.consultations(id);
+
+
+--
+-- Name: prescriptions fk_rails_bede94f0a0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.prescriptions
+    ADD CONSTRAINT fk_rails_bede94f0a0 FOREIGN KEY (patient_id) REFERENCES public.patients(id);
 
 
 --

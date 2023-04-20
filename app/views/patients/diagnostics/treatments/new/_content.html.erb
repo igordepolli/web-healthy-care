@@ -1,16 +1,10 @@
 <div id="content" class="p-4 sm:ml-64 mb-5">
-  <div class="w-6/12 mx-auto">
-    <%= fudgeball_return_button patient_diagnostic_treatments_path(patient, diagnostic) %>
-    <h2>Cadastrar novo tratamento</h2>
+  <%= fudgeball_return_button patient_diagnostic_treatments_path(patient, diagnostic) %>
+  <h2 class="mt-8">Cadastrar novo tratamento</h2>
 
-    <%= fudgeball_form model: treatment, url: patient_diagnostic_treatments_path(patient, diagnostic), method: :post, class: "mt-8" do |form| %>
-      <%= fudgeball_form_alert class: "my-4" %>
-
-      <%= form.select :classification, {}, { autofocus: true, required: true, class: "w-full" } %>
-      <%= form.input :started_at, :date, required: true, class: "w-full" %>
-      <%= form.input :ended_at, :date, class: "w-full" %>
-
-      <%= form.submit "Cadastrar", class: "mt-8 w-full" %>
-    <% end %>
+  <div class="mt-5 flex justify-around items-center">
+    <%= fudgeball_call_to_action "Cirurgia", { url: nil, icon: :treatments }, { class: "mt-5 w-80" } %>
+    <%= fudgeball_call_to_action "Dieta", { url: new_patient_diagnostic_diet_path(patient, diagnostic), icon: :treatments }, { class: "mt-5 w-80" } %>
+    <%= fudgeball_call_to_action "Receita", { url: nil, icon: :treatments }, { class: "mt-5 w-80" } %>
   </div>
 </div>

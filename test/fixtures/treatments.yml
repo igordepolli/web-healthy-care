@@ -1,4 +1,14 @@
-for_flu:
+prescription_for_flu:
   diagnostic: leo_flu
-  treatable: for_flu_treatment (Prescription)
+  treatable: for_flu (Prescription)
+  started_at: <%= Time.current %>
+
+septoplasty_for_flu:
+  diagnostic: leo_flu
+  treatable: septoplasty (Surgery)
+  started_at: <%= Time.current %>
+
+diet_for_flu:
+  diagnostic: leo_flu
+  treatable: for_treat_flu (Diet)
   started_at: <%= Time.current %>

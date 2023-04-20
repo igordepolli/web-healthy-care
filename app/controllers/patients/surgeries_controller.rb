@@ -15,7 +15,7 @@ class Patients::SurgeriesController < Patients::AccessController
   end
 
   def create
-    @surgery = @patient.surgeries.new doctor: @doctor, **surgery_params
+    @surgery = @patient.surgeries.new surgery_params
 
     if @surgery.save
       redirect_to patient_surgery_path(@patient, @surgery)

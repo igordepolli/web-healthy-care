@@ -11,8 +11,7 @@ class SurgeryTest < ActiveSupport::TestCase
     blank = Surgery.new
 
     assert blank.invalid?
-    assert_equal 4, blank.errors.count
-    assert_equal ["obrigatório"], blank.errors[:source]
+    assert_equal 3, blank.errors.count
     assert_equal ["obrigatório"], blank.errors[:patient]
     assert_equal ["obrigatório"], blank.errors[:classification]
     assert_equal ["obrigatório"], blank.errors[:date]

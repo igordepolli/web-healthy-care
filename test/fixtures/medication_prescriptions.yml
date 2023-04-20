@@ -1,5 +1,5 @@
 paracetamol_for_flu:
-  prescription: for_flu_treatment
+  prescription: for_flu
   medication: paracetamol
   dosage: "100ml"
   schedule: "6 em 6 horas"

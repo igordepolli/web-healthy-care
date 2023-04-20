@@ -80,7 +80,11 @@ module Permission
           owner?(patient, user) || doctor&.allowed_by?(patient)
         end
 
-        allow "patients/diagnostics/treatments", [:new, :create, :update] do |(patient, doctor)|
+        allow "patients/diagnostics/treatments", [:new, :update] do |(patient, doctor)|
+          doctor&.allowed_by?(patient)
+        end
+
+        allow "patients/diagnostics/diets", [:new, :create] do |(patient, doctor)|
           doctor&.allowed_by?(patient)
         end
       end

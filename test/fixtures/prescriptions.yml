@@ -1,2 +1,3 @@
-for_flu_treatment:
-  treatment: for_flu
+for_flu:
+  patient: leo
+  date: <%= Time.current %>

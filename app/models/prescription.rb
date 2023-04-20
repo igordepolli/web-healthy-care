@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class Prescription < ApplicationRecord
-  belongs_to :treatment
+  belongs_to :patient
+
+  has_one :treatment, as: :treatable
 
   has_one_attached :file
+
+  validates :date, presence: true, date: true
 
   validate :check_file_presence
 

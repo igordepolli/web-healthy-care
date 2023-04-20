@@ -36,16 +36,13 @@ consultation.sick_note.attach io: File.open(Rails.root.join("test/fixtures/files
 Diagnostic.create! disease: Disease.all.sample, patient: leo_patient, diagnosed_at: Time.zone.now
 
 # Treatments
-treatment_1  = Treatment.create! started_at: Time.zone.now, ended_at: Time.zone.now + 1.day, diagnostic: Diagnostic.first
-prescription = Prescription.new treatment: treatment_1
+prescription = Prescription.new date: Time.zone.now, patient: leo_patient
 prescription.file.attach io: File.open(Rails.root.join("test/fixtures/files", "sick_note.pdf")), filename: "sick_note.pdf"
 prescription.save!
-treatment_1.update! treatable: prescription
+Treatment.create! started_at: Time.zone.now, ended_at: Time.zone.now + 1.day, diagnostic: Diagnostic.first, treatable: prescription
 
-treatment_2 = Treatment.create! started_at: Time.zone.now, diagnostic: Diagnostic.first
-diet        = Diet.create! source: treatment_2, lunch: "Arroz, feijão, carne, salada"
-treatment_2.update! treatable: diet
+diet = Diet.create! patient: leo_patient, lunch: "Arroz, feijão, carne, salada"
+Treatment.create! started_at: Time.zone.now, diagnostic: Diagnostic.first, treatable: diet
 
-treatment_3 = Treatment.create! started_at: Time.zone.now, diagnostic: Diagnostic.first
-surgery     = Surgery.create! source: treatment_3, classification: :urgency, date: Time.zone.now, discharged_at: Time.zone.now + 1.day
-treatment_3.update! treatable: surgery
+surgery = Surgery.create! patient: leo_patient, classification: :urgency, date: Time.zone.now, discharged_at: Time.zone.now + 1.day
+Treatment.create! started_at: Time.zone.now, diagnostic: Diagnostic.first, treatable: surgery

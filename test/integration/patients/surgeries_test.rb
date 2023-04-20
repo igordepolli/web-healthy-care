@@ -106,7 +106,6 @@ class Patients::SurgeriesTest < ActionDispatch::IntegrationTest
     assert_select "#content" do
       assert_select "a[href='#{patient_surgeries_path(patients(:leo))}']"
       assert_select "p", text: "Paciente: Leonardo Maralha"
-      assert_select "p", text: "Médico: Milena Regiani"
       assert_select "p", text: "Data da cirurgia: #{Date.current.strftime("%d/%m/%Y")}"
       assert_select "p", text: "Tipo da cirurgia: Eletiva"
     end
@@ -123,12 +122,12 @@ class Patients::SurgeriesTest < ActionDispatch::IntegrationTest
       assert_select "a[href='#{new_patient_surgery_path(patients(:leo))}']", text: "Nova cirurgia"
       assert_select "table" do
         assert_select "th", text: "Data"
-        assert_select "th", text: "Médico"
+        assert_select "th", text: "Tipo"
         assert_select "th", text: "Ação"
 
         assert_select "#surgery_#{surgeries(:septoplasty).id}" do
           assert_select "td", text: "#{Date.current.strftime("%d/%m/%Y")}"
-          assert_select "td", text: "Milena Regiani"
+          assert_select "td", text: "Eletiva"
           assert_select "td a[href='#{patient_surgery_path(patients(:leo), surgeries(:septoplasty))}']", text: "Visualizar"
         end
       end
@@ -147,7 +146,6 @@ class Patients::SurgeriesTest < ActionDispatch::IntegrationTest
       assert_redirected_to patient_surgery_path(patients(:leo), surgery)
 
       assert_equal patients(:leo), surgery.patient
-      assert_equal doctors(:milena), surgery.doctor
       assert_equal "2023-01-01", surgery.date.to_s
       assert surgery.urgency?
       assert_equal "Evangelico", surgery.hospital

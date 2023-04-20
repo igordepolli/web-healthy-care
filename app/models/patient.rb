@@ -8,6 +8,7 @@ class Patient < ApplicationRecord
   has_many :diagnostics
   has_many :surgeries
   has_many :diets
+  has_many :prescriptions
 
   validates :name, :last_name, presence: true
   validates :rg, uniqueness: { allow_blank: true }

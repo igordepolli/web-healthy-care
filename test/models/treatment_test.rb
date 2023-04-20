@@ -13,6 +13,6 @@ class TreatmentTest < ActiveSupport::TestCase
     assert blank.invalid?
     assert_equal 2, blank.errors.count
     assert_equal ["obrigatório"], blank.errors[:diagnostic]
-    assert_equal ["obrigatório"], blank.errors[:started_at]
+    assert_equal ["obrigatório"], blank.errors[:treatable]
   end
 end
