@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Patients::Diagnostics::TreatableController < Patients::AccessController
+class Patients::Diagnostics::TreatableController < Patients::DashboardsController
   before_action :set_diagnostic
 
   private

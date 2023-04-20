@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Patients::AccessControlsController < Patients::AccessController
+class Patients::AccessControlsController < Patients::DashboardsController
   before_action :set_access_control, only: [:update, :destroy]
 
   def index

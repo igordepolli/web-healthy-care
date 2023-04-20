@@ -17,7 +17,7 @@ class Patients::Diagnostics::TreatmentsController < Patients::Diagnostics::Treat
     @treatment.assign_attributes treatment_update_params
 
     if @treatment.save
-      render turbo_stream: turbo_stream.replace("content", partial: "patients/diagnostics/treatments/show/content", locals: { patient: @patient, diagnostic: @diagnostic, treatment: @treatment })
+      render turbo_stream: turbo_stream.replace("sub-content", template: "patients/diagnostics/treatments/show", locals: { patient: @patient, diagnostic: @diagnostic, treatment: @treatment })
     else
       flash[:error] = @treatment.errors[:ended_at]
       render :show, status: :unprocessable_entity

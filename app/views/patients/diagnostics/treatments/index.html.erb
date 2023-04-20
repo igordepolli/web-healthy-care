@@ -1,4 +1,4 @@
 <div class="container">
-  <%= render "patients/shared/aside_menu", patient: @patient, doctor: @doctor, access_control: @access_control %>
-  <%= render "patients/diagnostics/treatments/index/content", patient: @patient, diagnostic: @diagnostic, treatments: @treatments %>
+  <%= fudgeball_button "Novo tratamento", url: new_patient_diagnostic_treatment_path(@patient, @diagnostic) if current_user.doctor? %>
+  <%= render "patients/diagnostics/treatments/index/treatments", treatments: @treatments if @treatments.any? %>
 </div>

@@ -1,4 +1,18 @@
 <div class="container">
-  <%= render "patients/shared/aside_menu", patient: @patient, doctor: @doctor, access_control: @access_control %>
-  <%= render "patients/diagnostics/diets/new/content", patient: @patient, diagnostic: @diagnostic, diet: @diet %>
+  <%= fudgeball_return_button patient_diagnostic_treatments_path(@patient, @diagnostic) %>
+  <div class="w-6/12 mx-auto">
+    <h2>Cadastrar nova dieta</h2>
+
+    <%= fudgeball_form model: @diet, url: patient_diagnostic_diets_path(@patient, @diagnostic), method: :post, class: "mt-8" do |form| %>
+      <%= fudgeball_form_alert class: "my-4" %>
+
+      <%= form.text_area :breakfast, rows: 10, class: "w-full" %>
+      <%= form.text_area :lunch, rows: 10, class: "w-full" %>
+      <%= form.text_area :dinner, rows: 10, class: "w-full" %>
+      <%= form.text_area :morning_snack, rows: 10, class: "w-full" %>
+      <%= form.text_area :afternoon_snack, rows: 10, class: "w-full" %>
+
+      <%= form.submit "Cadastrar", class: "mt-8 w-full" %>
+    <% end %>
+  </div>
 </div>

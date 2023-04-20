@@ -32,16 +32,16 @@ module Permission
           user.doctor? && doctor.new_record?
         end
 
-        allow "patients", [:show] do |patient|
-          owner?(patient, user) || user.doctor?
-        end
-
         allow "patients", [:index] do |patient|
           user.doctor?
         end
 
         allow "doctors", [:show] do |doctor|
           owner?(doctor, user)
+        end
+
+        allow "patients/dashboards", [:show] do |(patient, doctor)|
+          owner?(patient, user) || user.doctor?
         end
 
         allow "patients/access_controls", [:create] do |(_, _)|

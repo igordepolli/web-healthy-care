@@ -113,7 +113,7 @@ class Users::RegistrationsTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to dispatches_path
     follow_redirect!
-    assert_redirected_to patient_path(patients(:leo))
+    assert_redirected_to patient_dashboard_path(patients(:leo))
 
     users(:leo).reload
     assert_equal "coco@gmail.com", users(:leo).email

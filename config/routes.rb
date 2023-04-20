@@ -16,9 +16,10 @@ Rails.application.routes.draw do
 
     resource :dispatches,             only: :show,                                   path: "ir-para"
     resources :doctors,               only: [:new, :show, :create],                  path: "medicos"
-    resources :patients,              only: [:new, :show, :create, :index],          path: "pacientes" do
+    resources :patients,              only: [:new, :create, :index],                 path: "pacientes" do
       scope module: :patients do
         resources :access_controls,   only: [:create, :update, :destroy, :index],    path: "autorizacoes"
+        resource  :dashboard,         only: :show
         resources :consultations,     only: [:new, :create, :show, :index],          path: "consultas"
         resources :surgeries,         only: [:new, :create, :show, :index],          path: "cirurgias"
         resources :diagnostics,       only: [:new, :create, :show, :index, :update], path: "diagnosticos" do

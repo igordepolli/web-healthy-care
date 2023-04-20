@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Patients::DiagnosticsController < Patients::AccessController
+class Patients::DiagnosticsController < Patients::DashboardsController
   before_action :set_diagnostic, only: [:show, :update]
 
   def new
@@ -19,7 +19,7 @@ class Patients::DiagnosticsController < Patients::AccessController
     @diagnostic.cured_at = @diagnostic.cured? ? Time.zone.now : nil
 
     if @diagnostic.save
-      render turbo_stream: turbo_stream.replace("content", partial: "patients/diagnostics/show/content", locals: { patient: @patient, diagnostic: @diagnostic })
+      render turbo_stream: turbo_stream.replace("sub-content", template: "patients/diagnostics/show", locals: { patient: @patient, diagnostic: @diagnostic })
     else
       flash[:error] = @diagnostic.errors.full_messages
       render :show, status: :unprocessable_entity

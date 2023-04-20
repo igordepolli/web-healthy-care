@@ -6,11 +6,6 @@ class PatientsController < ApplicationController
   def new
   end
 
-  def show
-    @doctor         = Doctor.find_by(user: current_user)
-    @access_control = @patient.access_controls.where(doctor: @doctor).order(:id).last
-  end
-
   def index
     @patients = Patient.where("last_name ~* ?", params[:last_name])
   end
@@ -19,7 +14,7 @@ class PatientsController < ApplicationController
     @patient.assign_attributes user: current_user, **patient_params
 
     if @patient.save
-      redirect_to patient_path(@patient)
+      redirect_to patient_dashboard_path(@patient)
     else
       flash[:error] = @patient.errors.full_messages
       render :new, status: :unprocessable_entity

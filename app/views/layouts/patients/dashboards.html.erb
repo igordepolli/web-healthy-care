@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Healthy Care</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <%= render "layouts/navbar" %>
+    <main class="container mx-auto mt-10 px-5 flex">
+      <%= render "patients/shared/aside_menu", patient: @patient, doctor: @doctor, access_control: @access_control %>
+      <div id="content" class="p-4 sm:ml-64 mb-5 container">
+        <%= yield %>
+      </div>
+    </main>
+  </body>
+</html>

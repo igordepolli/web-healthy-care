@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Patients::SurgeriesController < Patients::AccessController
+class Patients::SurgeriesController < Patients::DashboardsController
   before_action :set_surgery, only: :show
 
   def new

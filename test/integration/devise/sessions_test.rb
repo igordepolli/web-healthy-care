@@ -29,7 +29,7 @@ class Devise::SessionsTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to dispatches_path
     follow_redirect!
-    assert_redirected_to patient_path(patients(:leo))
+    assert_redirected_to patient_dashboard_path(patients(:leo))
   end
 
   test "create fail" do
@@ -44,12 +44,12 @@ class Devise::SessionsTest < ActionDispatch::IntegrationTest
   test "destroy" do
     sign_in users(:leo)
 
-    get patient_path(patients(:leo))
+    get patient_dashboard_path(patients(:leo))
     assert_response :ok
 
     delete destroy_user_session_path
 
-    get patient_path(patients(:leo))
+    get patient_dashboard_path(patients(:leo))
     assert_response :redirect
   end
 end

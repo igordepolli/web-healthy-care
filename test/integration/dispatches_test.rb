@@ -14,7 +14,7 @@ class HomeTest < ActionDispatch::IntegrationTest
 
     sign_in users(:leo)
     get dispatches_path
-    assert_redirected_to patient_path(patients(:leo))
+    assert_redirected_to patient_dashboard_path(patients(:leo))
 
     sign_in users(:milena)
     get dispatches_path

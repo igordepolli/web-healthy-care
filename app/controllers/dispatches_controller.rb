@@ -15,7 +15,7 @@ class DispatchesController < ApplicationController
     def redirect_for_patient
       patient = Patient.find_by(user: current_user)
 
-      patient.present? ? patient_path(patient) : new_patient_path
+      patient.present? ? patient_dashboard_path(patient) : new_patient_path
     end
 
     def redirect_for_doctor

@@ -1,4 +1,10 @@
 <div class="container">
-  <%= render "patients/shared/aside_menu", patient: @patient, doctor: @doctor, access_control: @access_control %>
-  <%= render "patients/diagnostics/treatments/new/content", patient: @patient, diagnostic: @diagnostic, treatment: @treatment %>
+  <%= fudgeball_return_button patient_diagnostic_treatments_path(@patient, @diagnostic) %>
+  <h2 class="mt-8">Cadastrar novo tratamento</h2>
+
+  <div class="mt-5 flex justify-around items-center">
+    <%= fudgeball_call_to_action "Cirurgia", { url: nil, icon: :treatments }, { class: "mt-5 w-80" } %>
+    <%= fudgeball_call_to_action "Dieta", { url: new_patient_diagnostic_diet_path(@patient, @diagnostic), icon: :treatments }, { class: "mt-5 w-80" } %>
+    <%= fudgeball_call_to_action "Receita", { url: nil, icon: :treatments }, { class: "mt-5 w-80" } %>
+  </div>
 </div>

@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
-class Patients::AccessController < ApplicationController
+class Patients::DashboardsController < ApplicationController
   include PatientDoctorScoped
 
   before_action :set_access_control
+
+  def show
+  end
 
   private
     def set_access_control

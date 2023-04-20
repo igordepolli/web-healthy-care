@@ -1,5 +1,0 @@
-<div id="content" class="p-4 sm:ml-64 mb-5">
-  <%= fudgeball_button "Nova cirurgia", url: new_patient_surgery_path(patient) if current_user.doctor? %>
-
-  <%= render "patients/surgeries/index/surgeries", surgeries: surgeries if surgeries.any? %>
-</div>
