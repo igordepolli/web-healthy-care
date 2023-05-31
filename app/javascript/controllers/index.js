@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import MaskController from "./mask_controller"
 application.register("mask", MaskController)
+
+import ModalsController from "./modals_controller"
+application.register("modals", ModalsController)

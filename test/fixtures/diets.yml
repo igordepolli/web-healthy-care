@@ -1,3 +1,4 @@
 for_treat_flu:
   patient: leo
   lunch: "300g de frango, arroz e feijão"
+  date: <%= Time.current %>

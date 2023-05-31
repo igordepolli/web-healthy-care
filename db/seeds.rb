@@ -36,12 +36,12 @@ consultation.sick_note.attach io: File.open(Rails.root.join("test/fixtures/files
 Diagnostic.create! disease: Disease.all.sample, patient: leo_patient, diagnosed_at: Time.zone.now
 
 # Treatments
-prescription = Prescription.new date: Time.zone.now, patient: leo_patient
+prescription = Prescription.new date: Time.zone.now, patient: leo_patient, medications_count: 2
 prescription.file.attach io: File.open(Rails.root.join("test/fixtures/files", "sick_note.pdf")), filename: "sick_note.pdf"
 prescription.save!
 Treatment.create! started_at: Time.zone.now, ended_at: Time.zone.now + 1.day, diagnostic: Diagnostic.first, treatable: prescription
 
-diet = Diet.create! patient: leo_patient, lunch: "Arroz, feijão, carne, salada"
+diet = Diet.create! patient: leo_patient, lunch: "Arroz, feijão, carne, salada", date: Time.zone.now
 Treatment.create! started_at: Time.zone.now, diagnostic: Diagnostic.first, treatable: diet
 
 surgery = Surgery.create! patient: leo_patient, classification: :urgency, date: Time.zone.now, discharged_at: Time.zone.now + 1.day

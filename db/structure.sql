@@ -273,6 +273,7 @@ ALTER SEQUENCE public.diagnostics_id_seq OWNED BY public.diagnostics.id;
 CREATE TABLE public.diets (
     id bigint NOT NULL,
     patient_id bigint NOT NULL,
+    date date NOT NULL,
     breakfast character varying,
     lunch character varying,
     dinner character varying,
@@ -513,6 +514,7 @@ ALTER SEQUENCE public.patients_id_seq OWNED BY public.patients.id;
 CREATE TABLE public.prescriptions (
     id bigint NOT NULL,
     patient_id bigint NOT NULL,
+    medications_count integer NOT NULL,
     date date NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL

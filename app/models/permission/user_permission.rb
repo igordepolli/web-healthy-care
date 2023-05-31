@@ -87,6 +87,18 @@ module Permission
         allow "patients/diagnostics/diets", [:new, :create] do |(patient, doctor)|
           doctor&.allowed_by?(patient)
         end
+
+        allow "patients/diagnostics/prescriptions", [:new, :create] do |(patient, doctor)|
+          doctor&.allowed_by?(patient)
+        end
+
+        allow "patients/diagnostics/surgeries", [:new, :create] do |(patient, doctor)|
+          doctor&.allowed_by?(patient)
+        end
+
+        allow "patients/diagnostics/prescriptions/medication_prescriptions", [:new, :create] do |(patient, doctor)|
+          doctor&.allowed_by?(patient)
+        end
       end
   end
 end

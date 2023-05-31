@@ -21,6 +21,7 @@ pt:
         remission: "Em remissão"
         terminal: "Terminal"
       diet:
+        date: "Data da dieta"
         breakfast: "Café da manhã"
         lunch: "Almoço"
         dinner: "Jantar"
@@ -32,12 +33,20 @@ pt:
         crm: "CRM"
         last_name: "Sobrenome"
         name: "Nome"
+      medication_prescription:
+        medication: "Medicamento"
+        dosage: "Dosagem"
+        schedule: "Frequência de uso"
       patient:
         email: "E-mail"
         cpf: "CPF"
         last_name: "Sobrenome"
         name: "Nome"
         rg: "RG"
+      prescription:
+        date: "Data da prescrição"
+        medications_count: "Quantidade de medicamentos"
+        file: "Arquivo"
       surgery:
         date: "Data da cirurgia"
         classification: "Tipo da cirurgia"
@@ -85,3 +94,4 @@ pt:
       taken: "já foi usado"
       too_short: "muito curto(a)"
       record_invalid: "Validação falhou: %{errors}"
+      not_a_number: "não é um número"

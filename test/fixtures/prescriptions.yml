@@ -1,3 +1,4 @@
 for_flu:
   patient: leo
   date: <%= Time.current %>
+  medications_count: 1

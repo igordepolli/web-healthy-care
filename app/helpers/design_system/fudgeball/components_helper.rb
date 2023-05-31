@@ -6,7 +6,11 @@ module DesignSystem::Fudgeball::ComponentsHelper
     color      = options.delete(:color) || :primary
     classes    = html_options.delete(:class)
 
-    link_to text, url, class: "btn-#{color} #{classes}", **html_options
+    if options[:type] == :button
+      tag.button text, class: "btn-#{color} #{classes}".squish, type: :button, **html_options
+    else
+      link_to text, url, class: "btn-#{color} #{classes}".squish, **html_options
+    end
   end
 
   def fudgeball_return_button(url, options = {})
@@ -24,7 +28,7 @@ module DesignSystem::Fudgeball::ComponentsHelper
     classes = html_options.delete(:class)
 
     link_to url, class: "max-w-sm p-6 bg-#{color}-200 border border-gray-200 rounded-lg shadow flex flex-col items-center hover:bg-#{color}-100 #{classes}" do
-      concat(fudgeball_icon icon, size: 80, color: :primary) if icon
+      concat(fudgeball_icon(icon[:name], size: 80, color: icon[:color], color_stroke: icon[:color_stroke])) if icon
       concat(tag.h5 text, class: "mt-2 text-2xl font-semibold tracking-tight text-gray-900")
     end
   end
@@ -73,6 +77,21 @@ module DesignSystem::Fudgeball::ComponentsHelper
     svg.gsub!(/fill=".*?"/, "fill=\"#{color_to_hex(color)}\"") if color
     svg.gsub!(/stroke=".*?"/, "stroke=\"#{color_to_hex(color_stroke)}\"") if color_stroke
     svg.html_safe
+  end
+
+  def fudgeball_icon_link(icon, options = {}, html_options = {})
+    url  = options.delete(:url)
+    type = options.delete(:type)
+
+    if type == :button
+      tag.button class: "btn-icon", type: :button, **html_options do
+        concat(fudgeball_icon(icon, **options))
+      end
+    else
+      link_to url, class: "btn-icon", **html_options do
+        concat(fudgeball_icon(icon, **options))
+      end
+    end
   end
 
   private

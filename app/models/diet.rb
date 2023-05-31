@@ -5,6 +5,8 @@ class Diet < ApplicationRecord
 
   has_one :treatment, as: :treatable
 
+  validates :date, presence: true, date: true
+
   validate :at_least_one_of_meals_not_nil
 
   private

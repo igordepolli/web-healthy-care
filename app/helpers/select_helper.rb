@@ -9,6 +9,10 @@ module SelectHelper
     Disease.all.map { [_1.name, _1.id] }.sort_by(&:first)
   end
 
+  def medications_options
+    Medication.all.map { [_1.name, _1.id] }.sort_by(&:first)
+  end
+
   private
     def choices_for_enum(klass, attribute)
       pluralized_attribute = attribute.to_s.pluralize

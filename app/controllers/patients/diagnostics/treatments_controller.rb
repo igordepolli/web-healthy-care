@@ -11,6 +11,7 @@ class Patients::Diagnostics::TreatmentsController < Patients::Diagnostics::Treat
   end
 
   def show
+    @treatable = @treatment.treatable
   end
 
   def update

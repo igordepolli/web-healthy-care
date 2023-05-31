@@ -1,1 +1,6 @@
 <p class="mt-2"><span class="font-bold">Tipo de tratamento:</span> <%= treatable.class.model_name.human %></p>
+
+<p class="font-bold mt-8">Medicamentos receitados</p>
+<% treatable.medications.each do |medication| %>
+  <p class="mt-2"><%= medication.name %></p>
+<% end %>
