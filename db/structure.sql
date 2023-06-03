@@ -593,8 +593,8 @@ CREATE TABLE public.treatments (
     diagnostic_id bigint NOT NULL,
     treatable_type character varying NOT NULL,
     treatable_id bigint NOT NULL,
-    started_at timestamp(6) without time zone,
-    ended_at timestamp(6) without time zone,
+    started_at date,
+    ended_at date,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
