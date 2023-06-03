@@ -16,4 +16,10 @@ class PrescriptionTest < ActiveSupport::TestCase
     assert_equal ["obrigatório", "não é um número"], blank.errors[:medications_count]
     assert_equal ["de prescrição obrigátorio!"], blank.errors[:file]
   end
+
+  test "medications count must be greather than zero" do
+    assert_raise ActiveRecord::RecordInvalid, "Quantidade de medicamentos deve ser maior que 0" do
+      prescriptions(:for_flu).update! medications_count: -1
+    end
+  end
 end
