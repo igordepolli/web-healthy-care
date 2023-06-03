@@ -1,0 +1,11 @@
+<% if treatment.ended_at.present? %>
+  <p class="mt-2"><span class="font-bold">Data do fim:</span> <%= treatment.ended_at.strftime("%d/%m/%Y") %></p>
+<% else %>
+  <%= fudgeball_form model: treatment, url: patient_diagnostic_treatment_path(patient, diagnostic, treatment), method: :patch, class: "mt-2" do |form| %>
+    <div class="flex items-center">
+      <p class="mr-3"><span class="font-bold">Data do fim:</span></p>
+      <%= form.input :ended_at, :date, label: false, required: true, class: "mr-3" %>
+      <%= form.submit "Salvar data do fim" %>
+    </div>
+  <% end %>
+<% end %>

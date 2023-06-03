@@ -15,4 +15,10 @@ class TreatmentTest < ActiveSupport::TestCase
     assert_equal ["obrigatório"], blank.errors[:diagnostic]
     assert_equal ["obrigatório"], blank.errors[:treatable]
   end
+
+  test "don't allow ended at before started at" do
+    assert_raise ActiveRecord::RecordInvalid, "Data do fim deve ser maior ou igual que #{Time.current.strftime("%Y-%m-%d")}" do
+      treatments(:diet_for_flu).update! ended_at: 1.day.ago
+    end
+  end
 end

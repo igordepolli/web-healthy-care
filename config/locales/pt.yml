@@ -95,3 +95,4 @@ pt:
       too_short: "muito curto(a)"
       record_invalid: "Validação falhou: %{errors}"
       not_a_number: "não é um número"
+      greater_than_or_equal_to: "deve ser maior ou igual que %{count}"

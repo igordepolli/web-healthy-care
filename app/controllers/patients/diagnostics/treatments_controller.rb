@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Patients::Diagnostics::TreatmentsController < Patients::Diagnostics::TreatableController
-  before_action :set_treatment, only: [:show, :update]
+  before_action :set_treatment, :set_treatable, only: [:show, :update]
 
   def new
   end
@@ -11,16 +11,16 @@ class Patients::Diagnostics::TreatmentsController < Patients::Diagnostics::Treat
   end
 
   def show
-    @treatable = @treatment.treatable
   end
 
   def update
-    @treatment.assign_attributes treatment_update_params
+    @treatment.assign_attributes treatment_params
 
     if @treatment.save
-      render turbo_stream: turbo_stream.replace("sub-content", template: "patients/diagnostics/treatments/show", locals: { patient: @patient, diagnostic: @diagnostic, treatment: @treatment })
+      render turbo_stream: turbo_stream.replace("sub-content", template: "patients/diagnostics/treatments/show")
     else
-      flash[:error] = @treatment.errors[:ended_at]
+      flash[:error] = @treatment.errors.full_messages
+      @treatment.reload
       render :show, status: :unprocessable_entity
     end
   end
@@ -32,5 +32,9 @@ class Patients::Diagnostics::TreatmentsController < Patients::Diagnostics::Treat
 
     def set_treatment
       @treatment = @diagnostic.treatments.find(params[:id])
+    end
+
+    def set_treatable
+      @treatable = @treatment.treatable
     end
 end
