@@ -9,5 +9,5 @@ class Surgery < ApplicationRecord
 
   validates :classification, presence: true
   validates :date, presence: true, date: true
-  validates :discharged_at, date: true
+  validates :discharged_at, date: true, comparison: { greater_than_or_equal_to: :date, allow_blank: true }
 end
