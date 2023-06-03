@@ -1,16 +1,22 @@
-<div class="mt-16 flex">
-  <%= fudgeball_form model: @prescription, url: patient_diagnostic_prescription_medication_prescriptions_path(@patient, @diagnostic, @prescription), method: :post, class: "flex flex-wrap justify-around" do |form| %>
-    <%= fudgeball_form_alert class: "my-4 mx-auto" %>
+<div id="sub-content" class="container">
+  <div class="flex justify-between items-center">
+    <%= fudgeball_return_button edit_patient_diagnostic_prescription_path(@patient, @diagnostic, @prescription) %>
+  </div>
+  <h2>Inserir medicamentos</h2>
+  <%= fudgeball_form model: @prescription, url: patient_diagnostic_prescription_medication_prescriptions_path(@patient, @diagnostic, @prescription), method: :post do |form| %>
+    <div class="flex flex-wrap justify-around">
+      <%= fudgeball_form_alert class: "my-4 mx-auto" %>
 
-    <% @prescription.medications_count.times do %>
-      <div class="medication shadow p-8 w-96 h-88">
-        <%= form.fields_for "medications[]", @prescription.medications.new do |fields| %>
-          <%= fields.select :medication, { choices: medications_options }, { required: true, class: "w-full" } %>
-          <%= fields.input :dosage, :text, required: true, class: "w-full" %>
-          <%= fields.input :schedule, :text, required: true, class: "w-full" %>
-        <% end %>
-      </div>
-    <% end %>
+      <% @prescription.medications_count.times do %>
+        <div class="medication shadow p-8 w-96 h-88">
+          <%= form.fields_for "medications[]", @prescription.medications.new do |fields| %>
+            <%= fields.select :medication, { choices: medications_options }, { required: true, class: "w-full" } %>
+            <%= fields.input :dosage, :text, required: true, class: "w-full" %>
+            <%= fields.input :schedule, :text, required: true, class: "w-full" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 
     <div class="mt-8 flex justify-center">
       <%= form.submit "Cadastrar", class: "w-80" %>

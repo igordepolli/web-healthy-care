@@ -26,7 +26,7 @@ Rails.application.routes.draw do
           scope module: :diagnostics do
             resources :treatments,                   only: [:new, :show, :index, :update],          path: "tratamentos"
             resources :diets,                        only: [:new, :create],                         path: "dietas"
-            resources :prescriptions,                only: [:new, :create],                         path: "receitas" do
+            resources :prescriptions,                only: [:new, :create, :edit, :update],         path: "receitas" do
               scope module: :prescriptions do
                 resources :medication_prescriptions, only: [:new, :create],                         path: "medicamentos"
               end

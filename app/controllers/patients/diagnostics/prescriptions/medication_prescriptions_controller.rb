@@ -9,7 +9,12 @@ class Patients::Diagnostics::Prescriptions::MedicationPrescriptionsController < 
   def create
     prescription_params[:medications].each do |med|
       medication = Medication.find(med.delete(:medication))
-      @prescription.medications.create! medication:, **med
+      medication = @prescription.medications.new medication:, **med
+
+      if !medication.save
+        flash[:error] = medication.errors.full_messages
+        render :new, status: :unprocessable_entity and return
+      end
     end
 
     treatment = @prescription.create_treatment! diagnostic: @diagnostic, started_at: @prescription.date
