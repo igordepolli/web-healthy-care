@@ -20,7 +20,7 @@
 
   <% else %>
     <%= link_to patient_access_controls_path(patient), class: "flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100", data: { turbo_method: :post } do %>
-      <%= image_tag "icons/authorizations.svg", class: "w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" %>
+      <%= image_tag "icons/eye.svg", class: "w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" %>
       <span class="ml-3">Solicitar informações</span>
     <% end %>
   <% end %>

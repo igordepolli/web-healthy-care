@@ -22,6 +22,7 @@ Rails.application.routes.draw do
         resource  :dashboard,                        only: :show
         resources :consultations,                    only: [:new, :create, :show, :index],          path: "consultas"
         resources :surgeries,                        only: [:new, :create, :show, :index],          path: "cirurgias"
+        resources :exams,                            only: [:new, :create, :show, :index],          path: "exames"
         resources :diagnostics,                      only: [:new, :create, :show, :index, :update], path: "diagnosticos" do
           scope module: :diagnostics do
             resources :treatments,                   only: [:new, :show, :index, :update],          path: "tratamentos"

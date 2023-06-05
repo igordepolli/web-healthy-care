@@ -1,0 +1,5 @@
+<tr id="<%= dom_id exam %>" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50">
+  <td class="px-6 py-4"><%= exam.date.strftime("%d/%m/%Y") %></td>
+  <td class="px-6 py-4"><%= t(exam.classification, scope: "activerecord.attributes.exam/classification") %></td>
+  <td class="px-6 py-4"><%= link_to "Visualizar", patient_exam_path(exam.patient, exam), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %></td>
+</tr>

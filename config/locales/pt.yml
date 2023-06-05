@@ -33,6 +33,19 @@ pt:
         crm: "CRM"
         last_name: "Sobrenome"
         name: "Nome"
+      exam:
+        date: "Data do exame"
+        classification: "Tipo do exame"
+        local: "Local do exame"
+        result: "Resultado"
+      exam/classification:
+        hemogram: "Hemograma"
+        cholesterol_and_triglycerides: "Colesterol e triglicerídeos"
+        urea_and_creatinine: "Ureia e creatinina"
+        urine: "Urina"
+        faeces: "Fezes"
+        eletrocardiogram: "Eletrocardiograma"
+        other: "Outro(a)"
       medication_prescription:
         medication: "Medicamento"
         dosage: "Dosagem"

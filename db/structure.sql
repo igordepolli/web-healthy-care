@@ -378,7 +378,6 @@ ALTER SEQUENCE public.doctors_id_seq OWNED BY public.doctors.id;
 CREATE TABLE public.exams (
     id bigint NOT NULL,
     patient_id bigint NOT NULL,
-    consultation_id bigint NOT NULL,
     classification integer NOT NULL,
     date timestamp(6) without time zone NOT NULL,
     local character varying NOT NULL,
@@ -1070,13 +1069,6 @@ CREATE UNIQUE INDEX index_doctors_on_user_id ON public.doctors USING btree (user
 
 
 --
--- Name: index_exams_on_consultation_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_exams_on_consultation_id ON public.exams USING btree (consultation_id);
-
-
---
 -- Name: index_exams_on_patient_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1284,14 +1276,6 @@ ALTER TABLE ONLY public.diagnostics
 
 ALTER TABLE ONLY public.consultations
     ADD CONSTRAINT fk_rails_b1f629cdac FOREIGN KEY (doctor_id) REFERENCES public.doctors(id);
-
-
---
--- Name: exams fk_rails_b7263b3b83; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.exams
-    ADD CONSTRAINT fk_rails_b7263b3b83 FOREIGN KEY (consultation_id) REFERENCES public.consultations(id);
 
 
 --

@@ -1,0 +1,5 @@
+<div class="container">
+  <%= fudgeball_button "Novo exame", url: new_patient_exam_path(@patient) if current_user.doctor? %>
+
+  <%= render "patients/exams/index/exams", exams: @exams if @exams.any? %>
+</div>

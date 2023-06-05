@@ -1,0 +1,9 @@
+<div class="container">
+  <%= fudgeball_return_button patient_exams_path(@patient) %>
+  <div class="mt-8">
+    <p class="mt-2"><span class="font-bold">Paciente:</span> <%= @exam.patient.full_name %></p>
+    <p class="mt-2"><span class="font-bold">Data do exame:</span> <%= @exam.date.strftime("%d/%m/%Y") %></p>
+    <p class="mt-2"><span class="font-bold">Tipo do exame:</span> <%= t(@exam.classification, scope: "activerecord.attributes.exam/classification") %></p>
+    <p class="mt-2"><span class="font-bold">Local do exame:</span> <%= @exam.local %></p>
+  </div>
+</div>

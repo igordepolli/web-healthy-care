@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="w-6/12 mx-auto">
+    <%= fudgeball_return_button patient_exams_path(@patient) %>
+    <h2>Cadastrar novo exame</h2>
+
+    <%= fudgeball_form model: @exam, url: patient_exams_path(@patient), class: "mt-8" do |form| %>
+      <%= fudgeball_form_alert class: "my-4" %>
+
+      <%= form.input :date, :date, autofocus: true, required: true, class: "w-full" %>
+      <%= form.select :classification, {}, { required: true, class: "w-full" } %>
+      <%= form.input :local, :text, class: "w-full" %>
+      <%= form.attach_input :result, accept: "image/png, image/jpeg, application/pdf", class: "w-full" %>
+
+      <%= form.submit "Cadastrar", class: "mt-8 w-full" %>
+    <% end %>
+  </div>
+</div>
