@@ -1,0 +1,14 @@
+<div class="relative mt-8 overflow-x-auto shadow-md sm:rounded-lg">
+  <table class="w-full text-sm text-left text-gray-500">
+    <thead class="text-xs text-gray-700 uppercase bg-blue-100">
+      <tr>
+        <th scope="col" class="px-6 py-3">Exame</th>
+        <th scope="col" class="px-6 py-3">Data do exame</th>
+        <th scope="col" class="px-6 py-3">Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "patients/biodata/index/biodatum", collection: biodata, as: :biodatum %>
+    </tbody>
+  </table>
+</div>

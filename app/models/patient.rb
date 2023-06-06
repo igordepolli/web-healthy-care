@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Patient < ApplicationRecord
+  include Biodata
+
   belongs_to :user
 
   has_many :access_controls

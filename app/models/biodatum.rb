@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-class Biodata < ApplicationRecord
-  belongs_to :source, polymorphic: true
+class Biodatum < ApplicationRecord
+  belongs_to :patient
+  belongs_to :exam
+
+  validates :systolic_pressure, :diastolic_pressure, :glycemia, :heart_rate, :cholesterol, :triglyceride, numericality: { only_integer: true, allow_blank: true }
 
   validate :at_least_one_of_biodatas_not_nil
 

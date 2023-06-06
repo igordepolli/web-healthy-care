@@ -2,6 +2,14 @@ pt:
   activerecord:
     # Model attributes
     attributes:
+      biodatum:
+        systolic_pressure: "Pressão sistólica"
+        diastolic_pressure: "Pressão diastólica"
+        glycemia: "Glicemia"
+        heart_rate: "Frequência cardíaca"
+        cholesterol: "Colesterol"
+        triglyceride: "Triglicerídeos"
+        creatinine: "Creatinina"
       consultation:
         date: "Data da consulta"
         reason: "Razão da consulta"
@@ -110,3 +118,4 @@ pt:
       not_a_number: "não é um número"
       greater_than_or_equal_to: "deve ser maior ou igual que %{count}"
       greater_than: "deve ser maior que %{count}"
+      not_an_integer: "não é um número inteiro"

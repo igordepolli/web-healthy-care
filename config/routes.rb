@@ -20,9 +20,14 @@ Rails.application.routes.draw do
       scope module: :patients do
         resources :access_controls,                  only: [:create, :update, :destroy, :index],    path: "autorizacoes"
         resource  :dashboard,                        only: :show
+        resources :biodata,                          only: [:show, :index],                         path: "biodados"
         resources :consultations,                    only: [:new, :create, :show, :index],          path: "consultas"
         resources :surgeries,                        only: [:new, :create, :show, :index],          path: "cirurgias"
-        resources :exams,                            only: [:new, :create, :show, :index],          path: "exames"
+        resources :exams,                            only: [:new, :create, :show, :index],          path: "exames" do
+          scope module: :exams do
+            resources :biodata,                      only: [:new, :create],                         path: "biodados"
+          end
+        end
         resources :diagnostics,                      only: [:new, :create, :show, :index, :update], path: "diagnosticos" do
           scope module: :diagnostics do
             resources :treatments,                   only: [:new, :show, :index, :update],          path: "tratamentos"

@@ -46,3 +46,7 @@ Treatment.create! started_at: Time.zone.now, diagnostic: Diagnostic.first, treat
 
 surgery = Surgery.create! patient: leo_patient, classification: :urgency, date: Time.zone.now, discharged_at: Time.zone.now + 1.day
 Treatment.create! started_at: Time.zone.now, diagnostic: Diagnostic.first, treatable: surgery
+
+exam = Exam.create! patient: leo_patient, classification: :hemogram, date: Time.zone.now, local: "Laboratório Exemplo"
+
+Biodatum.create! patient: leo_patient, exam:, systolic_pressure: 12, diastolic_pressure: 8

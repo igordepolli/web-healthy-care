@@ -36,4 +36,4 @@
 /node_modules
 
 # Ignore annoying OS generated files
-.DS_Store
+**/.DS_Store

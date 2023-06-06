@@ -163,8 +163,8 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.biodata (
     id bigint NOT NULL,
-    source_type character varying NOT NULL,
-    source_id bigint NOT NULL,
+    patient_id bigint NOT NULL,
+    exam_id bigint NOT NULL,
     systolic_pressure integer,
     diastolic_pressure integer,
     glycemia integer,
@@ -985,10 +985,17 @@ CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.ac
 
 
 --
--- Name: index_biodata_on_source; Type: INDEX; Schema: public; Owner: -
+-- Name: index_biodata_on_exam_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_biodata_on_source ON public.biodata USING btree (source_type, source_id);
+CREATE INDEX index_biodata_on_exam_id ON public.biodata USING btree (exam_id);
+
+
+--
+-- Name: index_biodata_on_patient_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_biodata_on_patient_id ON public.biodata USING btree (patient_id);
 
 
 --
@@ -1175,6 +1182,14 @@ ALTER TABLE ONLY public.treatments
 
 
 --
+-- Name: biodata fk_rails_2d11119ff7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.biodata
+    ADD CONSTRAINT fk_rails_2d11119ff7 FOREIGN KEY (exam_id) REFERENCES public.exams(id);
+
+
+--
 -- Name: consultations fk_rails_33c52f1c05; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1196,6 +1211,14 @@ ALTER TABLE ONLY public.diets
 
 ALTER TABLE ONLY public.medication_prescriptions
     ADD CONSTRAINT fk_rails_449d392c82 FOREIGN KEY (medication_id) REFERENCES public.medications(id);
+
+
+--
+-- Name: biodata fk_rails_48ae59c127; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.biodata
+    ADD CONSTRAINT fk_rails_48ae59c127 FOREIGN KEY (patient_id) REFERENCES public.patients(id);
 
 
 --

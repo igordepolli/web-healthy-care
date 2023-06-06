@@ -12,6 +12,7 @@ class Patients::ExamsController < Patients::DashboardsController
   end
 
   def show
+    @biodatum = @exam.biodatum
   end
 
   def create

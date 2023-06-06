@@ -1,4 +1,5 @@
 biodata_leo:
-  source: leo (Patient)
+  patient: leo
+  exam: hemogram
   systolic_pressure: 12
   diastolic_pressure: 8
