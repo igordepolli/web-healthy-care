@@ -4,79 +4,66 @@
 require "test_helper"
 
 class Patients::ExamsTest < ActionDispatch::IntegrationTest
+  setup do
+    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
+
+    sign_in users(:milena)
+  end
+
   test "authorization new" do
     get new_patient_exam_path(patients(:leo))
-    assert_response :redirect
+    assert_response :ok
 
     sign_in users(:leo)
     get new_patient_exam_path(patients(:leo))
     assert_response :redirect
 
-    sign_in users(:milena)
-    get new_patient_exam_path(patients(:leo))
-    assert_response :redirect
-
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
-
-    get new_patient_exam_path(patients(:leo))
-    assert_response :ok
-
     access_controls(:milena_leo).update_column :expires_at, Time.zone.now - 1.minute
 
+    sign_in users(:milena)
     get new_patient_exam_path(patients(:leo))
     assert_response :redirect
   end
 
   test "authorization show" do
     get patient_exam_path(patients(:leo), exams(:hemogram))
-    assert_response :redirect
+    assert_response :ok
 
     sign_in users(:leo)
     get patient_exam_path(patients(:leo), exams(:hemogram))
     assert_response :ok
 
-    sign_in users(:milena)
+    sign_in users(:pending)
     get patient_exam_path(patients(:leo), exams(:hemogram))
     assert_response :redirect
 
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
-
-    get patient_exam_path(patients(:leo), exams(:hemogram))
-    assert_response :ok
-
     access_controls(:milena_leo).update_column :expires_at, Time.zone.now - 1.minute
 
+    sign_in users(:milena)
     get patient_exam_path(patients(:leo), exams(:hemogram))
     assert_response :redirect
   end
 
   test "authorization index" do
     get patient_exams_path(patients(:leo))
-    assert_response :redirect
+    assert_response :ok
 
     sign_in users(:leo)
     get patient_exams_path(patients(:leo))
     assert_response :ok
 
-    sign_in users(:milena)
+    sign_in users(:pending)
     get patient_exams_path(patients(:leo))
     assert_response :redirect
 
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
-
-    get patient_exams_path(patients(:leo))
-    assert_response :ok
-
     access_controls(:milena_leo).update_column :expires_at, Time.zone.now - 1.minute
 
+    sign_in users(:milena)
     get patient_exams_path(patients(:leo))
     assert_response :redirect
   end
 
   test "layout new" do
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
-    sign_in users(:milena)
-
     get new_patient_exam_path(patients(:leo))
 
     assert_select "#aside-menu"
@@ -113,13 +100,13 @@ class Patients::ExamsTest < ActionDispatch::IntegrationTest
       assert_select "p", text: "Data do exame: #{Date.current.strftime("%d/%m/%Y")}"
       assert_select "p", text: "Tipo do exame: Hemograma"
       assert_select "p", text: "Local do exame: Hospital de Alegre"
+
+      assert_select "p", text: "Pressão sistólica: 12"
+      assert_select "p", text: "Pressão diastólica: 8"
     end
   end
 
   test "layout index" do
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
-    sign_in users(:milena)
-
     get patient_exams_path(patients(:leo))
 
     assert_select "#aside-menu"
@@ -140,9 +127,6 @@ class Patients::ExamsTest < ActionDispatch::IntegrationTest
   end
 
   test "create" do
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
-    sign_in users(:milena)
-
     assert_difference -> { Exam.count } => 1 do
       post patient_exams_path(patients(:leo)), params: { exam: { date: "2023-01-01", classification: :urine, local: "Evangelico", result: fixture_file_upload("test/fixtures/files/sick_note.pdf", "application/pdf") } }
 
@@ -155,6 +139,24 @@ class Patients::ExamsTest < ActionDispatch::IntegrationTest
       assert_equal "urine",         exam.classification
       assert_equal "Evangelico",    exam.local
       assert_equal "sick_note.pdf", exam.result.filename.to_s
+    end
+  end
+
+  test "that button to register results is shown if exam hasn't biodatum yet and current user is doctor" do
+    biodata(:biodata_leo).delete
+
+    get patient_exam_path(patients(:leo), exams(:hemogram))
+
+    assert_select "#content" do
+      assert_select "a[href='#{new_patient_exam_biodatum_path(patients(:leo), exams(:hemogram))}']", text: "Cadastrar resultados"
+    end
+
+    sign_in users(:leo)
+
+    get patient_exam_path(patients(:leo), exams(:hemogram))
+
+    assert_select "#content" do
+      assert_select "a[href='#{new_patient_exam_biodatum_path(patients(:leo), exams(:hemogram))}']", text: "Cadastrar resultados", count: 0
     end
   end
 end
