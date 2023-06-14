@@ -1,5 +1,9 @@
-<h1><%= @doctor.name %></h1>
+<div class="container">
+  <div class="flex flex-col items-center">
+    <h2 class="mt-48">Seja bem vindo(a), <%= @doctor.name %>!</h2>
 
-<div class="mt-5">
-  <%= link_to "Editar dados de usuário", edit_user_registration_path %>
+    <div class="mt-8 w-full flex justify-center">
+      <%= render "shared/presentation_card", photo: @doctor.user.profile_photo, name: @doctor.full_name, email: @doctor.email %>
+    </div>
+  </div>
 </div>
