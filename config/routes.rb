@@ -8,11 +8,13 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => "/sidekiq"
     end
 
-    root to: "home#show"
-
     devise_for :users, path: "usuarios",
                        path_names: { sign_in: "login", sign_up: "registrar", sign_out: "logout", password: "senha" },
                        controllers: { registrations: "users/registrations" }
+
+    devise_scope :user do
+      root to: "devise/sessions#new"
+    end
 
     resource :dispatches,                            only: :show,                                   path: "ir-para"
     resources :doctors,                              only: [:new, :show, :create],                  path: "medicos"
