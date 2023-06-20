@@ -9,7 +9,7 @@ module Patient::Biodata
     end
 
     def biodata
-      exams.order(date: :desc).map(&:biodatum)
+      exams.order(date: :desc).filter_map(&:biodatum)
     end
   end
 end
