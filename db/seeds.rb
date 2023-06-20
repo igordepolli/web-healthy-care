@@ -39,6 +39,8 @@ Diagnostic.create! disease: Disease.all.sample, patient: leo_patient, diagnosed_
 prescription = Prescription.new date: Time.zone.now, patient: leo_patient, medications_count: 2
 prescription.file.attach io: File.open(Rails.root.join("test/fixtures/files", "sick_note.pdf")), filename: "sick_note.pdf"
 prescription.save!
+prescription.medications.create! medication: Medication.first, dosage: "1 comprimido", schedule: "1 vez ao dia"
+prescription.medications.create! medication: Medication.last,  dosage: "1 comprimido", schedule: "1 vez ao dia"
 Treatment.create! started_at: Time.zone.now, ended_at: Time.zone.now + 1.day, diagnostic: Diagnostic.first, treatable: prescription
 
 diet = Diet.create! patient: leo_patient, lunch: "Arroz, feijão, carne, salada", date: Time.zone.now

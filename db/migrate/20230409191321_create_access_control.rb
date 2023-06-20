@@ -8,6 +8,6 @@ class CreateAccessControl < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_index :access_controls, [:doctor_id, :patient_id, :expires_at], unique: true
+    add_index :access_controls, [:doctor_id, :patient_id, :expires_at], unique: true, name: "idx_doctor_patient_expires_at_on_ac"
   end
 end

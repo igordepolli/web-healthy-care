@@ -943,6 +943,13 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: idx_doctor_patient_expires_at_on_ac; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX idx_doctor_patient_expires_at_on_ac ON public.access_controls USING btree (doctor_id, patient_id, expires_at);
+
+
+--
 -- Name: index_access_controls_on_doctor_id; Type: INDEX; Schema: public; Owner: -
 --
 
