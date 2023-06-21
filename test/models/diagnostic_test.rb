@@ -32,4 +32,10 @@ class DiagnosticTest < ActiveSupport::TestCase
 
     assert new_disease.valid?
   end
+
+  test "don't allow cured at before diagnosed at" do
+    assert_raise ActiveRecord::RecordInvalid, "Data da cura deve ser maior ou igual que #{diagnostics(:leo_flu).diagnosed_at.strftime("%Y-%m-%d")}" do
+      diagnostics(:leo_flu).update! cured_at: 1.day.ago
+    end
+  end
 end

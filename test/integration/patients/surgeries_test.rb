@@ -97,7 +97,7 @@ class Patients::SurgeriesTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "layout show" do
+  test "layout show for patient" do
     sign_in users(:leo)
 
     get patient_surgery_path(patients(:leo), surgeries(:septoplasty))
@@ -108,6 +108,29 @@ class Patients::SurgeriesTest < ActionDispatch::IntegrationTest
       assert_select "p", text: "Paciente: Leonardo Maralha"
       assert_select "p", text: "Data da cirurgia: #{Date.current.strftime("%d/%m/%Y")}"
       assert_select "p", text: "Tipo da cirurgia: Eletiva"
+
+      assert_select "form[action='#{patient_surgery_path(patients(:leo), surgeries(:septoplasty))}']", count: 0
+    end
+  end
+
+  test "layout show for doctor" do
+    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
+    sign_in users(:milena)
+
+    get patient_surgery_path(patients(:leo), surgeries(:septoplasty))
+
+    assert_select "#aside-menu"
+    assert_select "#content" do
+      assert_select "a[href='#{patient_surgeries_path(patients(:leo))}']"
+      assert_select "p", text: "Paciente: Leonardo Maralha"
+      assert_select "p", text: "Data da cirurgia: #{Date.current.strftime("%d/%m/%Y")}"
+      assert_select "p", text: "Tipo da cirurgia: Eletiva"
+
+      assert_select "form[action='#{patient_surgery_path(patients(:leo), surgeries(:septoplasty))}']" do
+        assert_select "p", text: "Data da alta:"
+        assert_select "input[name='surgery[discharged_at]']"
+        assert_select "input[type='submit'][value='Salvar data da alta']"
+      end
     end
   end
 
@@ -151,5 +174,18 @@ class Patients::SurgeriesTest < ActionDispatch::IntegrationTest
       assert_equal "Evangelico", surgery.hospital
       assert_equal "2023-01-10", surgery.discharged_at.to_s
     end
+  end
+
+  test "update" do
+    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
+    sign_in users(:milena)
+
+    patch patient_surgery_path(patients(:leo), surgeries(:septoplasty)), params: {
+      surgery: { discharged_at: Time.zone.now + 2.days }
+    }
+
+    assert_response :ok
+
+    assert_equal 2.days.from_now.to_date.to_s, surgeries(:septoplasty).reload.discharged_at.to_s
   end
 end
