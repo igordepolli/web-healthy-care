@@ -34,7 +34,7 @@ class PatientTest < ActiveSupport::TestCase
 
     assert patients(:leo).invalid?
     assert_equal 1, patients(:leo).errors.count
-    assert_equal ["CPF inválido"], patients(:leo).errors[:cpf]
+    assert_equal ["inválido"], patients(:leo).errors[:cpf]
 
     patients(:leo).cpf = "153.316.417-76"
 

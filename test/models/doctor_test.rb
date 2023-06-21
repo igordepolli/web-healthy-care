@@ -36,16 +36,28 @@ class DoctorTest < ActiveSupport::TestCase
 
     assert doctors(:milena).invalid?
     assert_equal 1, doctors(:milena).errors.count
-    assert_equal ["CPF inválido"], doctors(:milena).errors[:cpf]
+    assert_equal ["inválido"], doctors(:milena).errors[:cpf]
 
     doctors(:milena).cpf = "153.316.417-76"
 
     assert doctors(:milena).valid?
   end
 
+  test "crm validator" do
+    doctors(:milena).crm = "431234"
+
+    assert doctors(:milena).invalid?
+    assert_equal 1, doctors(:milena).errors.count
+    assert_equal ["inválido"], doctors(:milena).errors[:crm]
+
+    doctors(:milena).crm = "431234-ES"
+
+    assert doctors(:milena).valid?
+  end
+
   test "uniqueness cpf" do
     new_doctor = doctors(:milena).dup
-    new_doctor.crm = "CRM/ES 456789"
+    new_doctor.crm = "456789-ES"
 
     assert new_doctor.invalid?
     assert_equal 1, new_doctor.errors.count
@@ -66,7 +78,7 @@ class DoctorTest < ActiveSupport::TestCase
 
     new_doctor = doctors(:milena).dup
     new_doctor.cpf = "873.981.950-79"
-    new_doctor.crm = "CRM/ES 456789"
+    new_doctor.crm = "456789-ES"
 
     assert new_doctor.invalid?
     assert_equal 1, new_doctor.errors.count

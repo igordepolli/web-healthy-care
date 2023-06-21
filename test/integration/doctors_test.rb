@@ -58,7 +58,7 @@ class DoctorsTest < ActionDispatch::IntegrationTest
         doctor: {
           name: "Coco",
           last_name: "Depolli",
-          crm: "3.102.312",
+          crm: "31213-ES",
           cpf: "509.084.080-64",
           email: "coco@gmail.com"
         }
@@ -71,7 +71,7 @@ class DoctorsTest < ActionDispatch::IntegrationTest
       assert_equal users(:pending), doctor.user
       assert_equal "Coco", doctor.name
       assert_equal "Depolli", doctor.last_name
-      assert_equal "3.102.312", doctor.crm
+      assert_equal "31213-ES", doctor.crm
       assert_equal "509.084.080-64", doctor.cpf
       assert_equal "coco@gmail.com", doctor.email
     end
