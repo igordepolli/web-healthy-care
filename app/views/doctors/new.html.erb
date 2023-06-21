@@ -7,8 +7,9 @@
 
       <%= form.input :name, :text, autofocus: true, required: true, class: "w-full", value: current_user.name %>
       <%= form.input :last_name, :text, required: true, class: "w-full", value: current_user.last_name %>
-      <%= form.input :crm, :text, class: "w-full" %>
-      <%= form.input :cpf, :cpf, class: "w-full" %>
+      <%= form.input :crm, :text, required: true, class: "w-full" %>
+      <%= form.input :specialty, :text, required: true, class: "w-full" %>
+      <%= form.input :cpf, :cpf, required: true, class: "w-full" %>
       <%= form.input :email, :email, class: "w-full", value: current_user.email %>
 
       <%= form.submit "Registrar-se", class: "mt-5 w-full" %>

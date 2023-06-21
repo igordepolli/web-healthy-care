@@ -5,6 +5,7 @@ class CreateDoctors < ActiveRecord::Migration[7.0]
       t.string :last_name, null: false
       t.string :crm, null: false
       t.string :cpf, null: false
+      t.string :specialty, null: false
       t.string :email
       t.references :user, null: false, foreign_key: true
 

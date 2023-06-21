@@ -17,7 +17,7 @@ leo.profile_photo.attach    io: File.open(Rails.root.join("test/fixtures/files",
 milena.profile_photo.attach io: File.open(Rails.root.join("test/fixtures/files", "cj.jpeg")), filename: "cj"
 
 leo_patient   = Patient.create! user: leo,    name: "Leonardo", last_name: "Maralha", email: "leo@gmail.com"
-milena_doctor = Doctor.create!  user: milena, name: "Milena",   last_name: "Regiani", email: "milena@gmail.com", cpf: "153.316.417-76", crm: "123456-SP"
+milena_doctor = Doctor.create!  user: milena, name: "Milena",   last_name: "Regiani", email: "milena@gmail.com", cpf: "153.316.417-76", crm: "123456-SP", specialty: "Cardiologista"
 
 # Authorizations
 AccessControl.create! doctor: milena_doctor, patient: leo_patient, expires_at: Time.zone.now + 2.hours

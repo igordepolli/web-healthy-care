@@ -11,12 +11,13 @@ class DoctorTest < ActiveSupport::TestCase
     blank = Doctor.new
 
     assert blank.invalid?
-    assert_equal 5, blank.errors.count
+    assert_equal 6, blank.errors.count
     assert_equal ["obrigatório"], blank.errors[:name]
     assert_equal ["obrigatório"], blank.errors[:last_name]
     assert_equal ["obrigatório"], blank.errors[:crm]
     assert_equal ["obrigatório"], blank.errors[:cpf]
     assert_equal ["obrigatório"], blank.errors[:user]
+    assert_equal ["obrigatório"], blank.errors[:specialty]
   end
 
   test "email validation" do

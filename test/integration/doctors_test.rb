@@ -44,6 +44,7 @@ class DoctorsTest < ActionDispatch::IntegrationTest
       assert_select "input[name='doctor[crm]']"
       assert_select "input[name='doctor[cpf]']"
       assert_select "input[name='doctor[email]']"
+      assert_select "input[name='doctor[specialty]']"
       assert_select "input[type='submit'][value='Registrar-se']"
     end
 
@@ -60,7 +61,8 @@ class DoctorsTest < ActionDispatch::IntegrationTest
           last_name: "Depolli",
           crm: "31213-ES",
           cpf: "509.084.080-64",
-          email: "coco@gmail.com"
+          email: "coco@gmail.com",
+          specialty: "Neurologista"
         }
       }
 
@@ -74,6 +76,7 @@ class DoctorsTest < ActionDispatch::IntegrationTest
       assert_equal "31213-ES", doctor.crm
       assert_equal "509.084.080-64", doctor.cpf
       assert_equal "coco@gmail.com", doctor.email
+      assert_equal "Neurologista", doctor.specialty
     end
   end
 

@@ -345,6 +345,7 @@ CREATE TABLE public.doctors (
     last_name character varying NOT NULL,
     crm character varying NOT NULL,
     cpf character varying NOT NULL,
+    specialty character varying NOT NULL,
     email character varying,
     user_id bigint NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,

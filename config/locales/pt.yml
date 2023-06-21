@@ -41,6 +41,7 @@ pt:
         crm: "CRM"
         last_name: "Sobrenome"
         name: "Nome"
+        specialty: "Especialidade"
       exam:
         date: "Data do exame"
         classification: "Tipo do exame"
