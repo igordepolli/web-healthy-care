@@ -126,7 +126,7 @@ class Patients::SurgeriesTest < ActionDispatch::IntegrationTest
       assert_select "p", text: "Data da cirurgia: #{Date.current.strftime("%d/%m/%Y")}"
       assert_select "p", text: "Tipo da cirurgia: Eletiva"
 
-      assert_select "form[action='#{patient_surgery_path(patients(:leo), surgeries(:septoplasty))}']" do
+      assert_select "form[action='#{patient_surgery_path(patients(:leo), surgeries(:septoplasty), mode: :update_discharged_at)}']" do
         assert_select "p", text: "Data da alta:"
         assert_select "input[name='surgery[discharged_at]']"
         assert_select "input[type='submit'][value='Salvar data da alta']"
@@ -162,17 +162,18 @@ class Patients::SurgeriesTest < ActionDispatch::IntegrationTest
     sign_in users(:milena)
 
     assert_difference -> { Surgery.count } => 1 do
-      post patient_surgeries_path(patients(:leo)), params: { surgery: { date: "2023-01-01", classification: :urgency, hospital: "Evangelico", discharged_at: "2023-01-10" } }
+      post patient_surgeries_path(patients(:leo)), params: { surgery: { date: "2023-01-01", classification: :urgency, hospital: "Evangelico", discharged_at: "2023-01-10", medications_count: 1 } }
 
       surgery = Surgery.last
 
-      assert_redirected_to patient_surgery_path(patients(:leo), surgery)
+      assert_redirected_to new_patient_surgery_medication_surgery_path(patients(:leo), surgery)
 
       assert_equal patients(:leo), surgery.patient
       assert_equal "2023-01-01", surgery.date.to_s
       assert surgery.urgency?
       assert_equal "Evangelico", surgery.hospital
       assert_equal "2023-01-10", surgery.discharged_at.to_s
+      assert_equal 1,            surgery.medications_count
     end
   end
 
@@ -180,7 +181,7 @@ class Patients::SurgeriesTest < ActionDispatch::IntegrationTest
     access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
     sign_in users(:milena)
 
-    patch patient_surgery_path(patients(:leo), surgeries(:septoplasty)), params: {
+    patch patient_surgery_path(patients(:leo), surgeries(:septoplasty), mode: :update_discharged_at), params: {
       surgery: { discharged_at: Time.zone.now + 2.days }
     }
 

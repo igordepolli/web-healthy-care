@@ -55,6 +55,9 @@ pt:
         faeces: "Fezes"
         eletrocardiogram: "Eletrocardiograma"
         other: "Outro(a)"
+      medication_surgery:
+        medication: "Medicamento"
+        dosage: "Dosagem"
       medication_prescription:
         medication: "Medicamento"
         dosage: "Dosagem"
@@ -76,6 +79,7 @@ pt:
         classification: "Tipo da cirurgia"
         hospital: "Hospital"
         discharged_at: "Data da alta"
+        medications_count: "Quantidade de medicamentos"
       surgery/classification:
         elective: "Eletiva"
         urgency: "Urgente"

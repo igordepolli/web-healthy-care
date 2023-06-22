@@ -1,9 +1,5 @@
-<% if current_user.doctor? %>
-  <% doctor = @doctor || Doctor.find_by(user: current_user) %>
-
+<% if current_user.doctor? && (doctor = Doctor.find_by(user: current_user)) %>
   <li><%= link_to "Editar dados de médico", edit_doctor_path(doctor) %></li>
-<% elsif current_user.patient? %>
-  <% patient = @patient || Patient.find_by(user: current_user) %>
-
+<% elsif current_user.patient? && (patient = Patient.find_by(user: current_user)) %>
   <li><%= link_to "Editar dados de paciente", edit_patient_path(patient) %></li>
 <% end %>

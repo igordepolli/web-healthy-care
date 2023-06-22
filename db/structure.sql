@@ -441,6 +441,39 @@ ALTER SEQUENCE public.medication_prescriptions_id_seq OWNED BY public.medication
 
 
 --
+-- Name: medication_surgeries; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.medication_surgeries (
+    id bigint NOT NULL,
+    surgery_id bigint NOT NULL,
+    medication_id bigint NOT NULL,
+    dosage character varying NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: medication_surgeries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.medication_surgeries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: medication_surgeries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.medication_surgeries_id_seq OWNED BY public.medication_surgeries.id;
+
+
+--
 -- Name: medications; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -559,6 +592,7 @@ CREATE TABLE public.surgeries (
     id bigint NOT NULL,
     patient_id bigint NOT NULL,
     classification integer NOT NULL,
+    medications_count integer NOT NULL,
     date date NOT NULL,
     hospital character varying,
     discharged_at date,
@@ -744,6 +778,13 @@ ALTER TABLE ONLY public.medication_prescriptions ALTER COLUMN id SET DEFAULT nex
 
 
 --
+-- Name: medication_surgeries id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.medication_surgeries ALTER COLUMN id SET DEFAULT nextval('public.medication_surgeries_id_seq'::regclass);
+
+
+--
 -- Name: medications id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -887,6 +928,14 @@ ALTER TABLE ONLY public.exams
 
 ALTER TABLE ONLY public.medication_prescriptions
     ADD CONSTRAINT medication_prescriptions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: medication_surgeries medication_surgeries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.medication_surgeries
+    ADD CONSTRAINT medication_surgeries_pkey PRIMARY KEY (id);
 
 
 --
@@ -1107,6 +1156,20 @@ CREATE INDEX index_medication_prescriptions_on_prescription_id ON public.medicat
 
 
 --
+-- Name: index_medication_surgeries_on_medication_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_medication_surgeries_on_medication_id ON public.medication_surgeries USING btree (medication_id);
+
+
+--
+-- Name: index_medication_surgeries_on_surgery_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_medication_surgeries_on_surgery_id ON public.medication_surgeries USING btree (surgery_id);
+
+
+--
 -- Name: index_medications_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1189,6 +1252,14 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 ALTER TABLE ONLY public.treatments
     ADD CONSTRAINT fk_rails_259bed4182 FOREIGN KEY (diagnostic_id) REFERENCES public.diagnostics(id);
+
+
+--
+-- Name: medication_surgeries fk_rails_2b54c177d5; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.medication_surgeries
+    ADD CONSTRAINT fk_rails_2b54c177d5 FOREIGN KEY (medication_id) REFERENCES public.medications(id);
 
 
 --
@@ -1280,6 +1351,14 @@ ALTER TABLE ONLY public.doctors
 
 
 --
+-- Name: medication_surgeries fk_rails_90bec0496e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.medication_surgeries
+    ADD CONSTRAINT fk_rails_90bec0496e FOREIGN KEY (surgery_id) REFERENCES public.surgeries(id);
+
+
+--
 -- Name: medication_prescriptions fk_rails_96c6b20244; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1357,6 +1436,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230405184217'),
 ('20230405185444'),
 ('20230405192424'),
-('20230409191321');
+('20230409191321'),
+('20230622021649');
 
 

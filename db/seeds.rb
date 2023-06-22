@@ -27,7 +27,7 @@ consultation = Consultation.create! doctor: milena_doctor, patient: leo_patient,
 consultation.sick_note.attach io: File.open(Rails.root.join("test/fixtures/files", "sick_note.pdf")), filename: "sick_note.pdf"
 
 # Medications
-%w[Paracetamol Dipirona Ibuprofeno Dorflex].each { Medication.create! name: _1 }
+%w[Paracetamol Dipirona Ibuprofeno Dorflex Anestesia].each { Medication.create! name: _1 }
 
 # Diseases
 %w[Gripe Cancer Gonorreia Hepatite].each { Disease.create! name: _1 }
@@ -46,7 +46,7 @@ Treatment.create! started_at: Time.zone.now, ended_at: Time.zone.now + 1.day, di
 diet = Diet.create! patient: leo_patient, lunch: "Arroz, feijão, carne, salada", date: Time.zone.now
 Treatment.create! started_at: Time.zone.now, diagnostic: Diagnostic.first, treatable: diet
 
-surgery = Surgery.create! patient: leo_patient, classification: :urgency, date: Time.zone.now, discharged_at: Time.zone.now + 1.day
+surgery = Surgery.create! patient: leo_patient, classification: :urgency, date: Time.zone.now, discharged_at: Time.zone.now + 1.day, medications_count: 1
 Treatment.create! started_at: Time.zone.now, diagnostic: Diagnostic.first, treatable: surgery
 
 exam = Exam.create! patient: leo_patient, classification: :hemogram, date: Time.zone.now, local: "Laboratório Exemplo"

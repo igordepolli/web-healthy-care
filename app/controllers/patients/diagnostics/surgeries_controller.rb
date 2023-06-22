@@ -19,6 +19,6 @@ class Patients::Diagnostics::SurgeriesController < Patients::Diagnostics::Treata
 
   private
     def surgery_params
-      params.require(:surgery).permit(:date, :classification, :hospital, :discharged_at)
+      params.require(:surgery).permit(:date, :classification, :hospital, :discharged_at, :medications_count)
     end
 end

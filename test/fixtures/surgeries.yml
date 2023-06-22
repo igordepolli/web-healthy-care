@@ -1,4 +1,5 @@
 septoplasty:
   patient: leo
   classification: :elective
+  medications_count: 1
   date: <%= Time.current %>

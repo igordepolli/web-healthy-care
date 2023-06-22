@@ -11,10 +11,11 @@ class SurgeryTest < ActiveSupport::TestCase
     blank = Surgery.new
 
     assert blank.invalid?
-    assert_equal 3, blank.errors.count
+    assert_equal 5, blank.errors.count
     assert_equal ["obrigatório"], blank.errors[:patient]
     assert_equal ["obrigatório"], blank.errors[:classification]
     assert_equal ["obrigatório"], blank.errors[:date]
+    assert_equal ["obrigatório", "não é um número"], blank.errors[:medications_count]
   end
 
   test "don't allow discharged at before date" do

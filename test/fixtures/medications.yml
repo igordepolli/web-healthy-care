@@ -1,2 +1,5 @@
 paracetamol:
   name: "Paracetamol"
+
+anesthesia:
+  name: "Anestesia"

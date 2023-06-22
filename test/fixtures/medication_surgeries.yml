@@ -1,0 +1,4 @@
+anesthesia_for_septoplasty:
+  surgery: septoplasty
+  medication: anesthesia
+  dosage: "1l"

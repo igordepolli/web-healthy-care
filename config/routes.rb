@@ -16,30 +16,34 @@ Rails.application.routes.draw do
       root to: "devise/sessions#new"
     end
 
-    resource :dispatches,                            only: :show,                                   path: "ir-para"
-    resources :doctors,                              only: [:new, :show, :create, :edit, :update],  path: "medicos"
-    resources :patients,                             only: [:new, :create, :index, :edit, :update], path: "pacientes" do
+    resource :dispatches,                            only: :show,                                          path: "ir-para"
+    resources :doctors,                              only: [:new, :show, :create, :edit, :update],         path: "medicos"
+    resources :patients,                             only: [:new, :create, :index, :edit, :update],        path: "pacientes" do
       scope module: :patients do
-        resources :access_controls,                  only: [:create, :update, :destroy, :index],    path: "autorizacoes"
+        resources :access_controls,                  only: [:create, :update, :destroy, :index],           path: "autorizacoes"
         resource  :dashboard,                        only: :show
-        resources :biodata,                          only: [:show, :index],                         path: "biodados"
-        resources :consultations,                    only: [:new, :create, :show, :index],          path: "consultas"
-        resources :surgeries,                        only: [:new, :create, :update, :show, :index], path: "cirurgias"
-        resources :exams,                            only: [:new, :create, :show, :index],          path: "exames" do
-          scope module: :exams do
-            resources :biodata,                      only: [:new, :create],                         path: "biodados"
+        resources :biodata,                          only: [:show, :index],                                path: "biodados"
+        resources :consultations,                    only: [:new, :create, :show, :index],                 path: "consultas"
+        resources :surgeries,                        only: [:new, :edit, :create, :update, :show, :index], path: "cirurgias" do
+          scope module: :surgeries do
+            resources :medication_surgeries,         only: [:new, :create],                                path: "medicamentos"
           end
         end
-        resources :diagnostics,                      only: [:new, :create, :show, :index, :update], path: "diagnosticos" do
+        resources :exams,                            only: [:new, :create, :show, :index],                 path: "exames" do
+          scope module: :exams do
+            resources :biodata,                      only: [:new, :create],                                path: "biodados"
+          end
+        end
+        resources :diagnostics,                      only: [:new, :create, :show, :index, :update],        path: "diagnosticos" do
           scope module: :diagnostics do
-            resources :treatments,                   only: [:new, :show, :index, :update],          path: "tratamentos"
-            resources :diets,                        only: [:new, :create],                         path: "dietas"
-            resources :prescriptions,                only: [:new, :create, :edit, :update],         path: "receitas" do
+            resources :treatments,                   only: [:new, :show, :index, :update],                 path: "tratamentos"
+            resources :diets,                        only: [:new, :create],                                path: "dietas"
+            resources :prescriptions,                only: [:new, :create, :edit, :update],                path: "receitas" do
               scope module: :prescriptions do
-                resources :medication_prescriptions, only: [:new, :create],                         path: "medicamentos"
+                resources :medication_prescriptions, only: [:new, :create],                                path: "medicamentos"
               end
             end
-            resources :surgeries,                    only: [:new, :create],                         path: "cirurgias"
+            resources :surgeries,                    only: [:new, :create],                                path: "cirurgias"
           end
         end
       end
