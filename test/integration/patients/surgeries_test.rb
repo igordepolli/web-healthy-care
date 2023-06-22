@@ -112,6 +112,8 @@ class Patients::SurgeriesTest < ActionDispatch::IntegrationTest
 
       assert_select "form[action='#{patient_surgery_path(patients(:leo), surgeries(:septoplasty))}']", count: 0
     end
+
+    assert_select "a[href='#{edit_patient_surgery_path(patients(:leo), surgeries(:septoplasty), mode: "add_medication")}']", count: 0
   end
 
   test "layout show for doctor" do
@@ -132,6 +134,8 @@ class Patients::SurgeriesTest < ActionDispatch::IntegrationTest
         assert_select "input[name='surgery[discharged_at]']"
         assert_select "input[type='submit'][value='Salvar data da alta']"
       end
+
+      assert_select "a[href='#{edit_patient_surgery_path(patients(:leo), surgeries(:septoplasty), mode: "add_medication")}']"
     end
   end
 

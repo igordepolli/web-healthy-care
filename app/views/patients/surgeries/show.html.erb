@@ -19,9 +19,9 @@
       <% end %>
     <% end %>
 
-    <p class="font-bold mt-8">Medicamentos usados</p>
-    <% @surgery.medications.each do |medication| %>
-      <p class="mt-2"><%= medication.name %> | Dosagem: <%= medication.dosage %></p>
-    <% end %>
+    <%= render "patients/surgeries/show/medications", medications: @surgery.medications if @surgery.medications.any? %>
+    <%= tag.div class: "mt-8 flex justify-center" do %>
+      <%= fudgeball_button "Adicionar medicamentos", url: edit_patient_surgery_path(@patient, @surgery, mode: "add_medication") %>
+    <% end if current_user.doctor? %>
   </div>
 </div>

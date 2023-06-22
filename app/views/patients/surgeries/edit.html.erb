@@ -1,17 +1,21 @@
 <div class="container">
   <div class="w-6/12 mx-auto">
-    <%= fudgeball_return_button patient_surgeries_path(@patient) %>
-    <h2>Editar cirurgia</h2>
+    <%= fudgeball_return_button @return_url %>
+    <h2><%= params[:mode] == "add_medication" ? "Adicionar medicamentos" : "Editar cirurgia" %></h2>
 
-    <%= fudgeball_form model: @surgery, url: patient_surgery_path(@patient, @surgery), method: :patch, class: "mt-8" do |form| %>
+    <%= fudgeball_form model: @surgery, url: patient_surgery_path(@patient, @surgery, mode: params[:mode]), method: :patch, class: "mt-8" do |form| %>
       <%= fudgeball_form_alert class: "my-4" %>
 
-      <%= form.input :date, :date, autofocus: true, required: true, class: "w-full" %>
-      <%= form.select :classification, {}, { required: true, class: "w-full" } %>
-      <%= form.input :hospital, :text, class: "w-full" %>
-      <%= form.input :discharged_at, :date, class: "w-full" %>
-      <%= form.input :medications_count, :number, required: true, class: "w-full" %>
-      <%= form.text_area :description, rows: 10, class: "w-full" %>
+      <% if params[:mode] == "add_medication" %>
+        <%= form.input :medications_count, :number, required: true, class: "w-full" %>
+      <% else %>
+        <%= form.input :date, :date, autofocus: true, required: true, class: "w-full" %>
+        <%= form.select :classification, {}, { required: true, class: "w-full" } %>
+        <%= form.input :hospital, :text, class: "w-full" %>
+        <%= form.input :discharged_at, :date, class: "w-full" %>
+        <%= form.input :medications_count, :number, required: true, class: "w-full" %>
+        <%= form.text_area :description, rows: 10, class: "w-full" %>
+      <% end %>
 
       <%= form.submit "Cadastrar", class: "mt-8 w-full" %>
     <% end %>

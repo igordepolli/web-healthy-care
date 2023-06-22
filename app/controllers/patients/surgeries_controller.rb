@@ -8,6 +8,7 @@ class Patients::SurgeriesController < Patients::DashboardsController
   end
 
   def edit
+    @return_url = params[:mode] == "add_medication" ? patient_surgery_path(@patient, @surgery) : patient_surgeries_path(@patient)
   end
 
   def index
@@ -53,7 +54,7 @@ class Patients::SurgeriesController < Patients::DashboardsController
       if params[:mode] == "update_discharged_at"
         render turbo_stream: turbo_stream.replace("sub-content", template: "patients/surgeries/show")
       else
-        redirect_to new_patient_surgery_medication_surgery_path(@patient, @surgery)
+        redirect_to new_patient_surgery_medication_surgery_path(@patient, @surgery, mode: params[:mode])
       end
     end
 end
