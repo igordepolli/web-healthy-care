@@ -43,7 +43,11 @@ Rails.application.routes.draw do
                 resources :medication_prescriptions, only: [:new, :create],                                path: "medicamentos"
               end
             end
-            resources :surgeries,                    only: [:new, :create],                                path: "cirurgias"
+            resources :surgeries,                    only: [:new, :edit, :create, :update],                path: "cirurgias" do
+              scope module: :surgeries do
+                resources :medication_surgeries,     only: [:new, :create],                                path: "medicamentos"
+              end
+            end
           end
         end
       end

@@ -23,7 +23,7 @@ class Patients::Diagnostics::Prescriptions::MedicationPrescriptionsController < 
 
   private
     def set_prescription
-      @prescription = Prescription.find(params[:prescription_id])
+      @prescription = @patient.prescriptions.find(params[:prescription_id])
     end
 
     def prescription_params

@@ -46,28 +46,21 @@ class Patients::Diagnostics::SurgeriesTest < ActionDispatch::IntegrationTest
   end
 
   test "create" do
-    assert_difference -> { Surgery.count } => 1, -> { Treatment.count } => 1 do
+    assert_difference -> { Surgery.count } => 1 do
       post patient_diagnostic_surgeries_path(patients(:leo), diagnostics(:leo_flu)), params: {
         surgery: { date: "2023-01-01", classification: "elective", hospital: "Hospital Santa Casa", discharged_at: "2023-01-03", medications_count: 1 }
       }
 
-      surgery   = Surgery.last
-      treatment = Treatment.last
+      surgery = Surgery.last
 
-      assert_redirected_to patient_diagnostic_treatment_path(patients(:leo), diagnostics(:leo_flu), treatment)
+      assert_redirected_to new_patient_diagnostic_surgery_medication_surgery_path(patients(:leo), diagnostics(:leo_flu), surgery)
 
       assert_equal patients(:leo),        surgery.patient
-      assert_equal treatment,             surgery.treatment
       assert_equal "2023-01-01",          surgery.date.to_s
       assert_equal "elective",            surgery.classification
       assert_equal "Hospital Santa Casa", surgery.hospital
       assert_equal "2023-01-03",          surgery.discharged_at.to_s
       assert_equal 1,                     surgery.medications_count
-
-      assert_equal diagnostics(:leo_flu), treatment.diagnostic
-      assert_equal patients(:leo),        treatment.patient
-      assert_equal surgery,               treatment.treatable
-      assert_equal "2023-01-01",          treatment.started_at.to_s
     end
   end
 

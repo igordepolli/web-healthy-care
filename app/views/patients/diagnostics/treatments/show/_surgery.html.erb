@@ -3,3 +3,8 @@
 <p class="mt-2"><span class="font-bold">Data:</span> <%= treatable.date.strftime("%d/%m/%Y") %></p>
 <p class="mt-2"><span class="font-bold">Data da alta:</span> <%= treatable.discharged_at&.strftime("%d/%m/%Y") %></p>
 <p class="mt-2"><span class="font-bold">Hospital:</span> <%= treatable.hospital %></p>
+
+<p class="font-bold mt-8">Medicamentos usados</p>
+<% treatable.medications.each do |medication| %>
+  <p class="mt-2"><%= medication.name %> | Dosagem: <%= medication.dosage %></p>
+<% end %>
