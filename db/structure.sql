@@ -596,6 +596,7 @@ CREATE TABLE public.surgeries (
     date date NOT NULL,
     hospital character varying,
     discharged_at date,
+    description text,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );

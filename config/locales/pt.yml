@@ -17,7 +17,7 @@ pt:
       diagnostic:
         disease: Doença
         diagnosed_at: "Data do diagnóstico"
-        cured_at: "Data da cura"
+        cured_at: "Diagnóstico negativo"
         related_symptoms: "Sintomas relatados"
         status: "Status"
       diagnostic/status:
@@ -80,6 +80,7 @@ pt:
         hospital: "Hospital"
         discharged_at: "Data da alta"
         medications_count: "Quantidade de medicamentos"
+        description: "Descrição"
       surgery/classification:
         elective: "Eletiva"
         urgency: "Urgente"

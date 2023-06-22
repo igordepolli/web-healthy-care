@@ -41,6 +41,7 @@ class Patients::Diagnostics::SurgeriesTest < ActionDispatch::IntegrationTest
       assert_select "select[name='surgery[classification]']"
       assert_select "input[name='surgery[hospital]']"
       assert_select "input[name='surgery[discharged_at]']"
+      assert_select "textarea[name='surgery[description]']"
       assert_select "input[type='submit'][value='Cadastrar']"
     end
   end
@@ -48,7 +49,7 @@ class Patients::Diagnostics::SurgeriesTest < ActionDispatch::IntegrationTest
   test "create" do
     assert_difference -> { Surgery.count } => 1 do
       post patient_diagnostic_surgeries_path(patients(:leo), diagnostics(:leo_flu)), params: {
-        surgery: { date: "2023-01-01", classification: "elective", hospital: "Hospital Santa Casa", discharged_at: "2023-01-03", medications_count: 1 }
+        surgery: { date: "2023-01-01", classification: "elective", hospital: "Hospital Santa Casa", discharged_at: "2023-01-03", medications_count: 1, description: "Deu tudo errado" }
       }
 
       surgery = Surgery.last
@@ -61,6 +62,7 @@ class Patients::Diagnostics::SurgeriesTest < ActionDispatch::IntegrationTest
       assert_equal "Hospital Santa Casa", surgery.hospital
       assert_equal "2023-01-03",          surgery.discharged_at.to_s
       assert_equal 1,                     surgery.medications_count
+      assert_equal "Deu tudo errado",     surgery.description
     end
   end
 

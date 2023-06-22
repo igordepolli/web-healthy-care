@@ -7,6 +7,7 @@ class CreateSurgeries < ActiveRecord::Migration[7.0]
       t.date :date, null: false
       t.string :hospital
       t.date :discharged_at
+      t.text :description
 
       t.timestamps
     end

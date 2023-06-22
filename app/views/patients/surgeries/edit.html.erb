@@ -11,6 +11,7 @@
       <%= form.input :hospital, :text, class: "w-full" %>
       <%= form.input :discharged_at, :date, class: "w-full" %>
       <%= form.input :medications_count, :number, required: true, class: "w-full" %>
+      <%= form.text_area :description, rows: 10, class: "w-full" %>
 
       <%= form.submit "Cadastrar", class: "mt-8 w-full" %>
     <% end %>
