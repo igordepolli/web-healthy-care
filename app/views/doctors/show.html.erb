@@ -3,7 +3,7 @@
     <h2 class="mt-48">Seja bem vindo(a), <%= @doctor.name %>!</h2>
 
     <div class="mt-8 w-full flex justify-center">
-      <%= render "shared/presentation_card", photo: @doctor.user.profile_photo, name: @doctor.full_name, email: @doctor.email %>
+      <%= render "shared/presentation_card", record: @doctor %>
     </div>
   </div>
 </div>

@@ -2,3 +2,5 @@ leo:
   user: leo
   name: "Leonardo"
   last_name: "Maralha"
+  city: "Alegre"
+  state: "ES"

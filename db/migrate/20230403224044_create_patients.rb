@@ -6,6 +6,8 @@ class CreatePatients < ActiveRecord::Migration[7.0]
       t.string :rg
       t.string :cpf
       t.string :email
+      t.string :state, null: false
+      t.string :city, null: false
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

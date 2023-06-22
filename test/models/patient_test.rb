@@ -11,10 +11,12 @@ class PatientTest < ActiveSupport::TestCase
     blank = Patient.new
 
     assert blank.invalid?
-    assert_equal 3, blank.errors.count
+    assert_equal 6, blank.errors.count
     assert_equal ["obrigatório"], blank.errors[:name]
     assert_equal ["obrigatório"], blank.errors[:last_name]
     assert_equal ["obrigatório"], blank.errors[:user]
+    assert_equal ["obrigatório"], blank.errors[:city]
+    assert_equal ["obrigatório", "não é uma opção válida"], blank.errors[:state]
   end
 
   test "email validator" do
@@ -59,6 +61,18 @@ class PatientTest < ActiveSupport::TestCase
     assert new_patient.invalid?
     assert_equal 1, new_patient.errors.count
     assert_equal ["já foi usado"], new_patient.errors[:email]
+  end
+
+  test "state validate" do
+    patients(:leo).state = "SJ"
+
+    assert patients(:leo).invalid?
+    assert_equal 1, patients(:leo).errors.count
+    assert_equal ["não é uma opção válida"], patients(:leo).errors[:state]
+
+    patients(:leo).state = "SP"
+
+    assert patients(:leo).valid?
   end
 
   test "full name" do

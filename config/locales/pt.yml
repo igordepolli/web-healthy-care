@@ -65,6 +65,8 @@ pt:
         last_name: "Sobrenome"
         name: "Nome"
         rg: "RG"
+        city: "Cidade"
+        state: "Estado"
       prescription:
         date: "Data da prescrição"
         medications_count: "Quantidade de medicamentos"

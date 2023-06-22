@@ -25,6 +25,8 @@ class PatientsTest < ActionDispatch::IntegrationTest
       assert_select "input[name='patient[rg]']"
       assert_select "input[name='patient[cpf]']"
       assert_select "input[name='patient[email]']"
+      assert_select "input[name='patient[city]']"
+      assert_select "input[name='patient[state]']"
       assert_select "input[type='submit'][value='Registrar-se']"
     end
 
@@ -72,7 +74,9 @@ class PatientsTest < ActionDispatch::IntegrationTest
           last_name: "Depolli",
           rg: "3.102.312",
           cpf: "509.084.080-64",
-          email: "coco@gmail.com"
+          email: "coco@gmail.com",
+          city: "Alegre",
+          state: "ES"
         }
       }
 
@@ -86,6 +90,8 @@ class PatientsTest < ActionDispatch::IntegrationTest
       assert_equal "3.102.312", patient.rg
       assert_equal "509.084.080-64", patient.cpf
       assert_equal "coco@gmail.com", patient.email
+      assert_equal "Alegre", patient.city
+      assert_equal "ES", patient.state
     end
   end
 

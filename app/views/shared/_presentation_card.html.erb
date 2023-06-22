@@ -1,7 +1,10 @@
 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
   <div class="mt-5 flex flex-col items-center pb-5">
-    <%= image_tag photo, class: "w-24 h-24 mb-3 rounded-full shadow-lg" if photo.attached? %>
-    <h5 class="text-xl font-medium text-gray-900"><%= name %></h5>
-    <span class="mt-2 text-sm text-gray-500"><%= email %></span>
+    <%= image_tag record.user.profile_photo, class: "w-24 h-24 mb-3 rounded-full shadow-lg" if record.user.profile_photo.attached? %>
+    <h5 class="text-xl font-medium text-gray-900"><%= record.full_name %></h5>
+    <span class="mt-2 text-sm text-gray-500"><%= record.email %></span>
+
+    <%= tag.span "#{record.city} - #{record.state}", class: "mt-2 text-sm text-gray-500" if record.respond_to?(:city) %>
+    <%= tag.span record.crm, class: "mt-2 text-sm text-gray-500" if record.respond_to?(:crm) %>
   </div>
 </div>

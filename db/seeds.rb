@@ -16,7 +16,7 @@ milena = User.create! email: "milena@gmail.com", name: "Milena",   last_name: "R
 leo.profile_photo.attach    io: File.open(Rails.root.join("test/fixtures/files", "cj.jpeg")), filename: "cj"
 milena.profile_photo.attach io: File.open(Rails.root.join("test/fixtures/files", "cj.jpeg")), filename: "cj"
 
-leo_patient   = Patient.create! user: leo,    name: "Leonardo", last_name: "Maralha", email: "leo@gmail.com"
+leo_patient   = Patient.create! user: leo,    name: "Leonardo", last_name: "Maralha", email: "leo@gmail.com", city: "Alegre", state: "ES"
 milena_doctor = Doctor.create!  user: milena, name: "Milena",   last_name: "Regiani", email: "milena@gmail.com", cpf: "153.316.417-76", crm: "123456-SP", specialty: "Cardiologista"
 
 # Authorizations

@@ -9,6 +9,8 @@
       <%= form.input :last_name, :text, required: true, class: "w-full", value: current_user.last_name %>
       <%= form.input :rg, :text, class: "w-full" %>
       <%= form.input :cpf, :cpf, class: "w-full" %>
+      <%= form.input :city, :text, required: true, class: "w-full" %>
+      <%= form.input :state, :text, required: true, size: 2, class: "w-full" %>
       <%= form.input :email, :email, class: "w-full", value: current_user.email %>
 
       <%= form.submit "Registrar-se", class: "mt-5 w-full" %>
