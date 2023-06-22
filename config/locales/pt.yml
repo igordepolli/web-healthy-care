@@ -111,6 +111,7 @@ pt:
   # Model errors
   errors:
     messages:
+      confirmation: "não é igual a %{attribute}"
       blank: "obrigatório"
       inclusion: "não é uma opção válida"
       invalid: "inválido"

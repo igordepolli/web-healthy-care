@@ -28,8 +28,16 @@ module Permission
           user.patient? && patient.new_record?
         end
 
+        allow "patients", [:edit, :update] do |patient|
+          owner?(patient, user)
+        end
+
         allow "doctors", [:new, :create] do |doctor|
           user.doctor? && doctor.new_record?
+        end
+
+        allow "doctors", [:edit, :update] do |doctor|
+          owner?(doctor, user)
         end
 
         allow "patients", [:index] do |patient|

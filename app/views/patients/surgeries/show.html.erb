@@ -8,6 +8,7 @@
 
     <% if @surgery.discharged_at.present? %>
       <p class="mt-2"><span class="font-bold">Data da alta:</span> <%= @surgery.discharged_at.strftime("%d/%m/%Y") %></p>
+      <p class="mt-2"><span class="font-bold">Tempo de internação:</span> <%= (@surgery.discharged_at - @surgery.date).to_i %> dia(s)</p>
     <% elsif current_user.doctor? %>
       <%= fudgeball_form model: @surgery, url: patient_surgery_path(@patient, @surgery), method: :patch, class: "mt-2" do |form| %>
         <div class="flex items-center">

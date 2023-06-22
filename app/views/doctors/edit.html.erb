@@ -1,0 +1,21 @@
+<div class="container flex items-center justify-center">
+  <div class="w-3/12">
+    <h2>Editar dados de médico</h2>
+
+    <%= fudgeball_form model: @doctor, url: doctor_path(@doctor), class: "mt-8" do |form| %>
+      <%= fudgeball_form_alert class: "my-4" %>
+
+      <%= form.input :name, :text, autofocus: true, required: true, class: "w-full" %>
+      <%= form.input :last_name, :text, required: true, class: "w-full" %>
+      <%= form.input :crm, :text, required: true, class: "w-full" %>
+      <%= form.input :specialty, :text, required: true, class: "w-full" %>
+      <%= form.input :email, :email, class: "w-full" %>
+
+      <%= form.submit "Atualizar", class: "mt-5 w-full" %>
+    <% end %>
+
+    <div class="mt-5">
+      <%= link_to "Editar dados de usuário", edit_user_registration_path %>
+    </div>
+  </div>
+</div>
