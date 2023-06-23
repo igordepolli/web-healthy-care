@@ -7,7 +7,7 @@
       <%= fudgeball_form_alert class: "my-4" %>
 
       <% if params[:mode] == "add_medication" %>
-        <%= form.input :medications_count, :number, required: true, class: "w-full" %>
+        <%= form.input :medications_count, :number, autofocus: true, required: true, class: "w-full" %>
       <% else %>
         <%= form.input :date, :date, autofocus: true, required: true, class: "w-full" %>
         <%= form.select :classification, {}, { required: true, class: "w-full" } %>

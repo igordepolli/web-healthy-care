@@ -1,10 +1,11 @@
 <p class="mt-2"><span class="font-bold">Tipo de tratamento:</span> <%= treatable.class.model_name.human %></p>
-<p class="mt-2"><span class="font-bold">Tipo de cirurgia:</span> <%= t(treatable.classification, scope: "activerecord.attributes.surgery/classification") %></p>
-<p class="mt-2"><span class="font-bold">Data:</span> <%= treatable.date.strftime("%d/%m/%Y") %></p>
-<p class="mt-2"><span class="font-bold">Data da alta:</span> <%= treatable.discharged_at&.strftime("%d/%m/%Y") %></p>
-<p class="mt-2"><span class="font-bold">Hospital:</span> <%= treatable.hospital %></p>
 
-<p class="font-bold mt-8">Medicamentos usados</p>
-<% treatable.medications.each do |medication| %>
-  <p class="mt-2"><%= medication.name %> | Dosagem: <%= medication.dosage %></p>
-<% end %>
+<%= render "patients/shared/surgeries/info",
+  patient: treatable.patient,
+  surgery: treatable,
+  url: patient_diagnostic_surgery_path(treatable.patient, treatable.treatment.diagnostic, treatable, mode: :update_discharged_at) %>
+
+<%= render "patients/shared/surgeries/medications",
+  patient: treatable.patient,
+  surgery: treatable,
+  url: edit_patient_diagnostic_surgery_path(treatable.patient, treatable.treatment.diagnostic, treatable, mode: :add_medication) %>

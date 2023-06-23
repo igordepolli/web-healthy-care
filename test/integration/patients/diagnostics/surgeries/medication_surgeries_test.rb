@@ -47,9 +47,7 @@ class Patients::Diagnostics::Surgeries::MedicationSurgeriesTest < ActionDispatch
   end
 
   test "create" do
-    treatments(:septoplasty_for_flu).delete
-
-    assert_difference -> { MedicationSurgery.count } => 1, -> { Treatment.count } => 1 do
+    assert_difference -> { MedicationSurgery.count } => 1 do
       post patient_diagnostic_surgery_medication_surgeries_path(@patient, @diagnostic, @surgery), params: {
         surgery: {
           medications: [
@@ -59,19 +57,11 @@ class Patients::Diagnostics::Surgeries::MedicationSurgeriesTest < ActionDispatch
       }
 
       medication_surgery = MedicationSurgery.last
-      treatment          = Treatment.last
 
-      assert_redirected_to patient_diagnostic_treatment_path(@patient, @diagnostic, treatment)
+      assert_redirected_to patient_diagnostic_treatment_path(@patient, @diagnostic, @surgery.treatment)
 
       assert_equal medications(:paracetamol), medication_surgery.medication
       assert_equal "20ml",                    medication_surgery.dosage
-
-      assert_equal treatment,                 @surgery.treatment
-
-      assert_equal @diagnostic,               treatment.diagnostic
-      assert_equal @patient,                  treatment.patient
-      assert_equal @surgery,                  treatment.treatable
-      assert_equal @surgery.date,             treatment.started_at
     end
   end
 
