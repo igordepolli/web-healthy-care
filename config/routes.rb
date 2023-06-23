@@ -16,6 +16,10 @@ Rails.application.routes.draw do
       root to: "devise/sessions#new"
     end
 
+    resource :admin,                                 only: :show do
+      # TODO
+    end
+
     resource :dispatches,                            only: :show,                                          path: "ir-para"
     resources :doctors,                              only: [:new, :show, :create, :edit, :update],         path: "medicos"
     resources :patients,                             only: [:new, :create, :index, :edit, :update],        path: "pacientes" do

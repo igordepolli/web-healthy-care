@@ -6,8 +6,10 @@ class DispatchesController < ApplicationController
       redirect_to redirect_for_patient
     elsif current_user.doctor?
       redirect_to redirect_for_doctor
+    elsif current_user.admin?
+      redirect_to admin_path
     else
-      redirect_to root_path
+      raise "I don't know what to do with this user."
     end
   end
 

@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="flex flex-col items-center">
+    <h2 class="mt-48">Administrador - <%= current_user.name %></h2>
+
+    <div class="mt-8 w-full flex justify-center">
+      <%= render "shared/presentation_card", record: current_user %>
+    </div>
+  </div>
+</div>
