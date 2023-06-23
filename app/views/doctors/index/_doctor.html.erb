@@ -1,0 +1,12 @@
+<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50">
+  <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
+    <%= image_tag doctor.user.profile_photo, class: "w-10 h-10 rounded-full", alt: "Foto do usuário" if doctor.user.profile_photo.attached? %>
+    <div class="pl-3">
+      <div class="text-base font-semibold"><%= doctor.full_name %></div>
+      <div class="font-normal text-gray-500"><%= doctor.email %></div>
+    </div>
+  </th>
+  <td class="px-6 py-4"><%= doctor.crm %></td>
+  <td class="px-6 py-4"><%= doctor.specialty %></td>
+  <td class="px-6 py-4"><%= link_to "Visualizar", doctor_path(doctor), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %></td>
+</tr>

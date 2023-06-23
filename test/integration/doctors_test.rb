@@ -18,7 +18,7 @@ class DoctorsTest < ActionDispatch::IntegrationTest
 
     sign_in users(:leo)
     get doctor_path(doctors(:milena))
-    assert_response :redirect
+    assert_response :ok
 
     sign_in users(:milena)
     get doctor_path(doctors(:milena))

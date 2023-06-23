@@ -10,7 +10,7 @@ class HomeTest < ActionDispatch::IntegrationTest
 
     sign_in users(:igor)
     get dispatches_path
-    assert_redirected_to root_path
+    assert_redirected_to admin_path
 
     sign_in users(:leo)
     get dispatches_path

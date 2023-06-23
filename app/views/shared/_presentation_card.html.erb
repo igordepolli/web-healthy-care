@@ -8,5 +8,6 @@
 
     <%= tag.span "#{record.city} - #{record.state}", class: "mt-2 text-sm text-gray-500" if record.respond_to?(:city) %>
     <%= tag.span record.crm, class: "mt-2 text-sm text-gray-500" if record.respond_to?(:crm) %>
+    <%= tag.span record.specialty, class: "mt-2 text-sm text-gray-500" if record.respond_to?(:specialty) %>
   </div>
 </div>

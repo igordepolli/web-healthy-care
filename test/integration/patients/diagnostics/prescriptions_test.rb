@@ -109,7 +109,7 @@ class Patients::Diagnostics::PrescriptionsTest < ActionDispatch::IntegrationTest
       }
 
       assert_response :unprocessable_entity
-      assert_select ".alert", text: "Quantidade de medicamentos deve ser maior que 0"
+      assert_select ".alert", text: "Quantidade de medicamentos a ser cadastrados deve ser maior que 0"
     end
   end
 
@@ -133,7 +133,7 @@ class Patients::Diagnostics::PrescriptionsTest < ActionDispatch::IntegrationTest
     }
 
     assert_response :unprocessable_entity
-    assert_select ".alert", text: "Quantidade de medicamentos deve ser maior que 0"
+    assert_select ".alert", text: "Quantidade de medicamentos a ser cadastrados deve ser maior que 0"
 
     assert_equal 1, prescriptions(:for_flu).reload.medications_count
   end

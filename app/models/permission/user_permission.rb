@@ -21,6 +21,7 @@ module Permission
         allow "dispatches", [:show]
         allow "users/registrations", [:edit, :update, :destroy]
         allow "devise/sessions", [:destroy]
+        allow "doctors", [:show, :index]
       end
 
       def user_custom_permission(user)
@@ -42,10 +43,6 @@ module Permission
 
         allow "patients", [:index] do |patient|
           user.doctor?
-        end
-
-        allow "doctors", [:show] do |doctor|
-          owner?(doctor, user)
         end
 
         allow "patients/dashboards", [:show] do |(patient, doctor)|

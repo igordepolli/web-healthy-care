@@ -6,6 +6,10 @@ class DoctorsController < ApplicationController
   def new
   end
 
+  def index
+    @doctors = Doctor.where("last_name ~* :query OR crm ~* :query", query: params[:query])
+  end
+
   def edit
   end
 

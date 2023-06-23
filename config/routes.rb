@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
 
     resource :dispatches,                            only: :show,                                          path: "ir-para"
-    resources :doctors,                              only: [:new, :show, :create, :edit, :update],         path: "medicos"
+    resources :doctors,                              only: [:new, :show, :index, :create, :edit, :update], path: "medicos"
     resources :patients,                             only: [:new, :create, :index, :edit, :update],        path: "pacientes" do
       scope module: :patients do
         resources :access_controls,                  only: [:create, :update, :destroy, :index],           path: "autorizacoes"

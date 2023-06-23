@@ -3,5 +3,6 @@
     <%= tag.li do %>
       <%= link_to "Buscar pacientes", patients_path %>
     <% end if current_user&.classification.in?(%w[doctor admin]) %>
+    <li><%= link_to "Buscar médicos", doctors_path %></li>
   </ul>
 </div>
