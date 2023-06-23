@@ -14,6 +14,7 @@ class Patients::Diagnostics::PrescriptionsController < Patients::Diagnostics::Tr
     @prescription = @patient.prescriptions.new prescription_params
 
     if @prescription.save
+      @prescription.create_treatment! diagnostic: @diagnostic, started_at: @prescription.date
       redirect_to new_patient_diagnostic_prescription_medication_prescription_path(@patient, @diagnostic, @prescription)
     else
       flash[:error] = @prescription.errors.full_messages

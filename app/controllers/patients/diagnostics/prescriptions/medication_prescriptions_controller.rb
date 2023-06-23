@@ -17,8 +17,7 @@ class Patients::Diagnostics::Prescriptions::MedicationPrescriptionsController < 
       end
     end
 
-    treatment = @prescription.create_treatment! diagnostic: @diagnostic, started_at: @prescription.date
-    redirect_to patient_diagnostic_treatment_path(@patient, @diagnostic, treatment)
+    redirect_to patient_diagnostic_treatment_path(@patient, @diagnostic, @prescription.treatment)
   end
 
   private

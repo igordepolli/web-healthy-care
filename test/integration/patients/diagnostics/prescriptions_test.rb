@@ -79,19 +79,26 @@ class Patients::Diagnostics::PrescriptionsTest < ActionDispatch::IntegrationTest
   end
 
   test "create" do
-    assert_difference -> { Prescription.count } => 1 do
+    assert_difference -> { Prescription.count } => 1, -> { Treatment.count } => 1 do
       post patient_diagnostic_prescriptions_path(patients(:leo), diagnostics(:leo_flu)), params: {
         prescription: { date: "2023-01-01", medications_count: 2, file: fixture_file_upload("test/fixtures/files/sick_note.pdf", "application/pdf") }
       }
 
       prescription = Prescription.last
+      treatment    = Treatment.last
 
       assert_redirected_to new_patient_diagnostic_prescription_medication_prescription_path(patients(:leo), diagnostics(:leo_flu), prescription)
 
-      assert_equal patients(:leo),  prescription.patient
-      assert_equal "2023-01-01",    prescription.date.to_s
-      assert_equal 2,               prescription.medications_count
-      assert_equal "sick_note.pdf", prescription.file.filename.to_s
+      assert_equal patients(:leo),        prescription.patient
+      assert_equal "2023-01-01",          prescription.date.to_s
+      assert_equal 2,                     prescription.medications_count
+      assert_equal "sick_note.pdf",       prescription.file.filename.to_s
+      assert_equal treatment,             prescription.treatment
+
+      assert_equal diagnostics(:leo_flu), treatment.diagnostic
+      assert_equal patients(:leo),        treatment.patient
+      assert_equal prescription,          treatment.treatable
+      assert_equal prescription.date,     treatment.started_at
     end
   end
 

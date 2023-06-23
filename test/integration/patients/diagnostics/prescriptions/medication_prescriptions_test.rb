@@ -48,9 +48,7 @@ class Patients::Diagnostics::Prescriptions::MedicationPrescriptionsTest < Action
   end
 
   test "create" do
-    treatments(:prescription_for_flu).delete
-
-    assert_difference -> { MedicationPrescription.count } => 1, -> { Treatment.count } => 1 do
+    assert_difference -> { MedicationPrescription.count } => 1 do
       post patient_diagnostic_prescription_medication_prescriptions_path(@patient, @diagnostic, @prescription), params: {
         prescription: {
           medications: [
@@ -60,20 +58,12 @@ class Patients::Diagnostics::Prescriptions::MedicationPrescriptionsTest < Action
       }
 
       medication_prescription = MedicationPrescription.last
-      treatment               = Treatment.last
 
-      assert_redirected_to patient_diagnostic_treatment_path(@patient, @diagnostic, treatment)
+      assert_redirected_to patient_diagnostic_treatment_path(@patient, @diagnostic, @prescription.treatment)
 
       assert_equal medications(:paracetamol), medication_prescription.medication
       assert_equal "20ml",                    medication_prescription.dosage
       assert_equal "3x ao dia",               medication_prescription.schedule
-
-      assert_equal treatment,                 @prescription.treatment
-
-      assert_equal @diagnostic,               treatment.diagnostic
-      assert_equal @patient,                  treatment.patient
-      assert_equal @prescription,             treatment.treatable
-      assert_equal @prescription.date,        treatment.started_at
     end
   end
 
