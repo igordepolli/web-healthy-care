@@ -72,14 +72,14 @@ pt:
         state: "Estado"
       prescription:
         date: "Data da prescrição"
-        medications_count: "Quantidade de medicamentos"
+        medications_count: "Quantidade de medicamentos a ser cadastrados"
         file: "Arquivo"
       surgery:
         date: "Data da cirurgia"
         classification: "Tipo da cirurgia"
         hospital: "Hospital"
         discharged_at: "Data da alta"
-        medications_count: "Quantidade de medicamentos"
+        medications_count: "Quantidade de medicamentos a ser cadastrados"
         description: "Descrição"
       surgery/classification:
         elective: "Eletiva"
