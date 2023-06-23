@@ -7,7 +7,7 @@
     <%= render "patients/diagnostics/treatments/show/treatment_end", patient: @patient, diagnostic: @diagnostic, treatment: @treatment %>
     <hr class="h-px my-8 bg-gray-200 border-0">
     <div id="<%= dom_id @treatable %>">
-      <%= render "patients/diagnostics/treatments/show/#{@treatment.treatable_type.parameterize}", treatable: @treatable %>
+      <%= render "patients/diagnostics/treatments/show/#{@treatment.treatable_type.parameterize}", patient: @patient, diagnostic: @diagnostic, treatable: @treatable %>
     </div>
   </div>
 </div>

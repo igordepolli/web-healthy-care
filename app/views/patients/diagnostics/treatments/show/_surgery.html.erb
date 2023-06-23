@@ -1,11 +1,11 @@
 <p class="mt-2"><span class="font-bold">Tipo de tratamento:</span> <%= treatable.class.model_name.human %></p>
 
 <%= render "patients/shared/surgeries/info",
-  patient: treatable.patient,
+  patient:,
   surgery: treatable,
-  url: patient_diagnostic_surgery_path(treatable.patient, treatable.treatment.diagnostic, treatable, mode: :update_discharged_at) %>
+  url: patient_diagnostic_surgery_path(patient, diagnostic, treatable, mode: :update_discharged_at) %>
 
 <%= render "patients/shared/surgeries/medications",
-  patient: treatable.patient,
+  patient:,
   surgery: treatable,
-  url: edit_patient_diagnostic_surgery_path(treatable.patient, treatable.treatment.diagnostic, treatable, mode: :add_medication) %>
+  url: edit_patient_diagnostic_surgery_path(patient, diagnostic, treatable, mode: :add_medication) %>

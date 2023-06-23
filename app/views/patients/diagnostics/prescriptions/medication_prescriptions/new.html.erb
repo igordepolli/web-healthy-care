@@ -1,6 +1,6 @@
 <div id="sub-content" class="container">
   <div class="flex justify-between items-center">
-    <%= fudgeball_return_button edit_patient_diagnostic_prescription_path(@patient, @diagnostic, @prescription) %>
+    <%= fudgeball_return_button edit_patient_diagnostic_prescription_path(@patient, @diagnostic, @prescription, mode: params[:mode]) %>
   </div>
   <h2>Inserir medicamentos</h2>
   <%= fudgeball_form model: @prescription, url: patient_diagnostic_prescription_medication_prescriptions_path(@patient, @diagnostic, @prescription), method: :post do |form| %>

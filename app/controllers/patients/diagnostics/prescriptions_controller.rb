@@ -8,6 +8,7 @@ class Patients::Diagnostics::PrescriptionsController < Patients::Diagnostics::Tr
   end
 
   def edit
+    @return_url = params[:mode] == "add_medication" ? patient_diagnostic_treatment_path(@patient, @diagnostic, @prescription.treatment) : patient_diagnostic_treatments_path(@patient, @diagnostic)
   end
 
   def create
@@ -26,7 +27,7 @@ class Patients::Diagnostics::PrescriptionsController < Patients::Diagnostics::Tr
     @prescription.assign_attributes prescription_params
 
     if @prescription.save
-      redirect_to new_patient_diagnostic_prescription_medication_prescription_path(@patient, @diagnostic, @prescription)
+      redirect_to new_patient_diagnostic_prescription_medication_prescription_path(@patient, @diagnostic, @prescription, mode: params[:mode])
     else
       flash[:error] = @prescription.errors.full_messages
       render :edit, status: :unprocessable_entity
