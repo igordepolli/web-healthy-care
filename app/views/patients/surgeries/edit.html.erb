@@ -1,7 +1,7 @@
-<div class="container">
-  <div class="w-6/12 mx-auto">
+<div class="container mt-16 md:mt-0">
+  <div class="md:w-6/12 mx-auto">
     <%= fudgeball_return_button @return_url %>
-    <h2><%= params[:mode] == "add_medication" ? "Adicionar medicamentos" : "Editar cirurgia" %></h2>
+    <h2 class="mt-5 md:mt-0"><%= params[:mode] == "add_medication" ? "Adicionar medicamentos" : "Editar cirurgia" %></h2>
 
     <%= fudgeball_form model: @surgery, url: patient_surgery_path(@patient, @surgery, mode: params[:mode]), method: :patch, class: "mt-8" do |form| %>
       <%= fudgeball_form_alert class: "my-4" %>

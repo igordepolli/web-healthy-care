@@ -1,14 +1,14 @@
-<div class="container">
-  <div class="w-6/12 mx-auto">
+<div class="container mt-16 md:mt-0">
+  <div class="md:w-6/12 mx-auto">
     <%= fudgeball_return_button patient_consultations_path(@patient) %>
-    <h2>Cadastrar nova consulta</h2>
+    <h2 class="mt-6">Cadastrar nova consulta</h2>
 
     <%= fudgeball_form model: @consultation, url: patient_consultations_path(@patient), class: "mt-8" do |form| %>
       <%= fudgeball_form_alert class: "my-4" %>
 
       <%= form.input :date, :date, autofocus: true, required: true, class: "w-full" %>
       <%= form.text_area :reason, rows: 10, class: "w-full" %>
-      <%= form.attach_input :sick_note, accept: "image/png, image/jpeg, application/pdf" %>
+      <%= form.attach_input :sick_note, accept: "image/png, image/jpeg, application/pdf", class: "w-full" %>
 
       <%= form.submit "Cadastrar", class: "mt-8 w-full" %>
     <% end %>

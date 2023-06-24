@@ -1,22 +1,27 @@
 <p class="font-bold mt-8 text-center">Medicamentos usados</p>
-<div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
-  <table class="w-full text-base text-left text-gray-500">
-    <thead class="text-xs text-gray-700 uppercase bg-blue-100">
-      <tr>
-        <th scope="col" class="px-6 py-3">Medicamento</th>
-        <th scope="col" class="px-6 py-3">Dosagem</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% surgery.medications.each do |medication| %>
-        <tr id="<%= dom_id medication %>" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50">
-          <td class="px-6 py-4"><%= medication.name %></td>
-          <td class="px-6 py-4"><%= medication.dosage %></td>
+
+<% if surgery.medications.any? %>
+  <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-base text-left text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-blue-100">
+        <tr>
+          <th scope="col" class="px-6 py-3">Medicamento</th>
+          <th scope="col" class="px-6 py-3">Dosagem</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        <% surgery.medications.each do |medication| %>
+          <tr id="<%= dom_id medication %>" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50">
+            <td class="px-6 py-4"><%= medication.name %></td>
+            <td class="px-6 py-4"><%= medication.dosage %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p class="mt-4 text-center">Nenhum medicamento cadastrado para esta cirurgia</p>
+<% end %>
 
 <%= tag.div class: "mt-8 flex justify-center" do %>
   <%= fudgeball_button "Adicionar medicamentos", url: %>
