@@ -32,7 +32,8 @@ class Patients::DiagnosticsController < Patients::DashboardsController
     @diagnostic    = @patient.diagnostics.new disease:, **treated_params
 
     if @diagnostic.save
-      redirect_to patient_diagnostic_path(@patient, @diagnostic)
+      # redirect_to patient_diagnostic_path(@patient, @diagnostic)
+      redirect_to new_patient_diagnostic_treatment_path(@patient, @diagnostic)
     else
       flash[:error] = @diagnostic.errors.full_messages
       render :new, status: :unprocessable_entity

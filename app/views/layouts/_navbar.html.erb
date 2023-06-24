@@ -8,7 +8,7 @@
     <% else %>
       <%= fudgeball_button "Entrar", url: new_user_session_path %>
     <% end %>
-    <%= render "layouts/navbar/menu_trigger" %>
+    <%= render "layouts/navbar/menu_trigger" if current_user.present? %>
   </div>
-  <%= render "layouts/navbar/menu_items" %>
+  <%= render "layouts/navbar/menu_items" if current_user.present? %>
 </nav>

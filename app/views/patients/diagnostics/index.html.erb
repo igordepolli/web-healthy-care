@@ -1,5 +1,13 @@
 <div class="container">
-  <%= fudgeball_button "Novo diagnóstico", url: new_patient_diagnostic_path(@patient) if current_user.doctor? %>
-
-  <%= render "patients/diagnostics/index/diagnostics", diagnostics: @diagnostics if @diagnostics.any? %>
+  <% if @diagnostics.any? %>
+    <%= fudgeball_button "Novo diagnóstico", url: new_patient_diagnostic_path(@patient) if current_user.doctor? %>
+    <%= render "patients/diagnostics/index/diagnostics", diagnostics: @diagnostics %>
+  <% else %>
+    <div class="mt-10">
+      <h2>Ainda não há diagnósticos cadastrados para este paciente</h2>
+      <div class="mt-5 flex justify-center">
+        <%= fudgeball_button "Novo diagnóstico", url: new_patient_diagnostic_path(@patient) if current_user.doctor? %>
+      </div>
+    </div>
+  <% end %>
 </div>

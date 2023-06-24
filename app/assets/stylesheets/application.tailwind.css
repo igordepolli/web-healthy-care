@@ -4,32 +4,32 @@
 
 /* Buttons */
 .btn-primary {
-  @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none;
+  @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 focus:outline-none;
 }
 
 .btn-secondary {
-  @apply py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200;
+  @apply py-2.5 px-5 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200;
 }
 
 .btn-transparent {
-  @apply text-gray-900 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5;
+  @apply text-gray-900 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-base px-5 py-2.5;
 }
 
 .btn-success {
-  @apply focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5;
+  @apply focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-base px-5 py-2.5;
 }
 
 .btn-error {
-  @apply focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5;
+  @apply focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base px-5 py-2.5;
 }
 
 .btn-icon {
-  @apply absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center;
+  @apply absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-base p-1.5 ml-auto inline-flex items-center;
 }
 
 /* Inputs */
 .field label {
-  @apply block text-gray-700 text-sm font-bold mb-2;
+  @apply block text-gray-700 text-base font-bold mb-2;
 }
 
 .field input, select, textarea {
@@ -42,7 +42,7 @@
 
 /* Menus */
 #user-menu a {
-  @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100;
+  @apply block px-4 py-2 text-base text-gray-700 hover:bg-gray-100;
 }
 
 #mobile-menu-2 a {
@@ -51,5 +51,9 @@
 
 /* Typography */
 h2 {
-  @apply text-center text-4xl font-semibold text-xl tracking-tight;
+  @apply text-center text-2xl font-semibold tracking-tight;
+}
+
+p {
+  @apply text-lg;
 }

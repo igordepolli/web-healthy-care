@@ -1,8 +1,13 @@
 <div class="container">
   <%= fudgeball_return_button patient_diagnostic_treatments_path(@patient, @diagnostic) %>
   <h2 class="mt-8">Cadastrar novo tratamento</h2>
+  <p class="mt-4">
+    Registre tratamentos para o diagnóstico que cadastrou anteriormente. Adicione cirurgias, dietas ou prescrições médicas,
+    mantendo um histórico completo. A plataforma é fácil de usar e segura, Mantenha o histórico de saúde do paciente atualizado para
+    facilitar seu trabalho futuramente e o trabalho de outros médicos.
+  </p>
 
-  <div class="mt-5 flex justify-around items-center">
+  <div class="mt-10 flex justify-around items-center">
     <%= fudgeball_call_to_action "Cirurgia", { url: new_patient_diagnostic_surgery_path(@patient, @diagnostic), icon: { name: :surgeries, color: :primary } }, { class: "mt-5 w-80" } %>
     <%= fudgeball_call_to_action "Dieta", { url: new_patient_diagnostic_diet_path(@patient, @diagnostic), icon: { name: :diets, color: :primary } }, { class: "mt-5 w-80" } %>
     <%= fudgeball_call_to_action "Receita", { url: new_patient_diagnostic_prescription_path(@patient, @diagnostic), icon: { name: :prescriptions, color: :primary } }, { class: "mt-5 w-80" } %>

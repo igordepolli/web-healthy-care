@@ -2,7 +2,7 @@
   <div class="w-full">
     <h2>Pacientes</h2>
     <%= fudgeball_form url: patients_path, method: :get, class: "mt-8 flex justify-center items-center" do |form| %>
-      <%= form.input :last_name, :text, autofocus: true, required: true, label: false, placeholder: "Buscar por sobrenome", class: "w-96 mr-4" %>
+      <%= form.input :last_name, :text, autofocus: true, required: true, label: false, placeholder: "Buscar por sobrenome", class: "md:w-96 mr-4" %>
       <%= form.submit "Buscar" %>
     <% end %>
 
