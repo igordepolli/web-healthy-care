@@ -1,5 +1,15 @@
 <div class="container mt-16 md:mt-0">
-  <%= fudgeball_button "Nova consulta", url: new_patient_consultation_path(@patient) if current_user.doctor? %>
+  <h2>Consultas</h2>
 
-  <%= render "patients/consultations/index/consultations", consultations: @consultations if @consultations.any? %>
+  <div class="mt-10">
+    <% if @consultations.any? %>
+      <%= fudgeball_button "Nova consulta", url: new_patient_consultation_path(@patient) if current_user.doctor? %>
+      <%= render "patients/consultations/index/consultations", consultations: @consultations %>
+    <% else %>
+      <p class="text-center mt-5">Não há consultas para mostrar</p>
+      <div class="mt-5 flex justify-center">
+        <%= fudgeball_button "Nova consulta", url: new_patient_consultation_path(@patient) if current_user.doctor? %>
+      </div>
+    <% end %>
+  </div>
 </div>

@@ -2,6 +2,7 @@
   <%= fudgeball_return_button patient_diagnostic_treatments_path(@patient, @diagnostic) %>
   <div class="mt-8">
     <%= fudgeball_form_alert class: "my-4" %>
+    <p class="mt-2"><span class="font-bold">Paciente:</span> <%= @patient.full_name %></p>
     <p class="mt-2"><span class="font-bold">Doença:</span> <%= @diagnostic.disease.name %></p>
     <p class="mt-2"><span class="font-bold">Data de início:</span> <%= @treatment.started_at&.strftime("%d/%m/%Y") %></p>
     <%= render "patients/diagnostics/treatments/show/treatment_end", patient: @patient, diagnostic: @diagnostic, treatment: @treatment %>

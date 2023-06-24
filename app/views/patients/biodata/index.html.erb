@@ -1,3 +1,10 @@
 <div class="container mt-16 md:mt-0">
-  <%= render "patients/biodata/index/biodata", biodata: @biodata if @biodata.any? %>
+  <h2>Biodados do paciente</h2>
+  <p class="mt-3 text-center">Consulte os biodados do paciente por exame, sendo o primeiro o mais recente baseado no último exame realizado.</p>
+
+  <% if @biodata.any? %>
+    <%= render "patients/biodata/index/biodata", biodata: @biodata %>
+  <% else %>
+    <p class="mt-3 text-center">Não há biodados para mostrar.</p>
+  <% end %>
 </div>

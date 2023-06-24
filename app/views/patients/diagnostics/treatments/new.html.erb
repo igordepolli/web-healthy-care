@@ -1,10 +1,9 @@
 <div class="container mt-16 md:mt-0">
   <%= fudgeball_return_button patient_diagnostic_treatments_path(@patient, @diagnostic) %>
-  <h2 class="mt-8">Cadastrar novo tratamento</h2>
+  <h2 class="mt-8">Cadastrar novo tratamento para a <%= @diagnostic.disease.name %> de <%= @patient.full_name %></h2>
   <p class="mt-4">
-    Registre tratamentos para o diagnóstico que cadastrou anteriormente. Adicione cirurgias, dietas ou prescrições médicas,
-    mantendo um histórico completo. A plataforma é fácil de usar e segura, Mantenha o histórico de saúde do paciente atualizado para
-    facilitar seu trabalho futuramente e o trabalho de outros médicos.
+    Registre tratamentos para o diagnóstico que cadastrou ou visualizou anteriormente. Adicione cirurgias, dietas ou prescrições médicas,
+    mantenha o histórico de saúde do paciente atualizado para facilitar seu trabalho futuramente e o trabalho de outros médicos.
   </p>
 
   <div class="mt-10 flex flex-wrap justify-around items-center">

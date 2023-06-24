@@ -1,13 +1,16 @@
 <div class="container mt-16 md:mt-0">
-  <% if @treatments.any? %>
-    <%= fudgeball_button "Novo tratamento", url: new_patient_diagnostic_treatment_path(@patient, @diagnostic) if current_user.doctor? %>
-    <%= render "patients/diagnostics/treatments/index/treatments", treatments: @treatments if @treatments.any? %>
-  <% else %>
-    <div class="mt-10">
-      <h2>Ainda não há tratamentos cadastrados para este diagnóstico</h2>
-      <div class="mt-5 flex justify-center">
-        <%= fudgeball_button "Novo tratamento", url: new_patient_diagnostic_treatment_path(@patient, @diagnostic) if current_user.doctor? %>
+  <h2>Tratamentos para <%= @diagnostic.disease.name %> de <%= @patient.full_name %></h2>
+  <div class="mt-10">
+    <% if @treatments.any? %>
+      <%= fudgeball_button "Novo tratamento", url: new_patient_diagnostic_treatment_path(@patient, @diagnostic) if current_user.doctor? %>
+      <%= render "patients/diagnostics/treatments/index/treatments", treatments: @treatments if @treatments.any? %>
+    <% else %>
+      <div class="mt-10">
+        <h2>Ainda não há tratamentos cadastrados para este diagnóstico</h2>
+        <div class="mt-5 flex justify-center">
+          <%= fudgeball_button "Novo tratamento", url: new_patient_diagnostic_treatment_path(@patient, @diagnostic) if current_user.doctor? %>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
