@@ -109,7 +109,7 @@ class Patients::Diagnostics::TreatmentsTest < ActionDispatch::IntegrationTest
     get new_patient_diagnostic_treatment_path(patients(:leo), diagnostics(:leo_flu))
 
     assert_select "a[href='#{patient_diagnostic_treatments_path(patients(:leo), diagnostics(:leo_flu))}']"
-    assert_select "h2", text: "Cadastrar novo tratamento"
+    assert_select "h2", text: "Cadastrar novo tratamento para a Gripe de Leonardo Maralha"
     assert_select "a[href='#{new_patient_diagnostic_surgery_path(patients(:leo), diagnostics(:leo_flu))}']", text: "Cirurgia"
     assert_select "a[href='#{new_patient_diagnostic_diet_path(patients(:leo), diagnostics(:leo_flu))}']", text: "Dieta"
     assert_select "a[href='#{new_patient_diagnostic_prescription_path(patients(:leo), diagnostics(:leo_flu))}']", text: "Receita"

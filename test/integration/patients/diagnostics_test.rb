@@ -185,7 +185,7 @@ class Patients::DiagnosticsTest < ActionDispatch::IntegrationTest
 
       diagnostic = Diagnostic.last
 
-      assert_redirected_to patient_diagnostic_path(patients(:leo), diagnostic)
+      assert_redirected_to new_patient_diagnostic_treatment_path(patients(:leo), diagnostic)
 
       assert_equal patients(:leo), diagnostic.patient
       assert_equal diseases(:flu), diagnostic.disease

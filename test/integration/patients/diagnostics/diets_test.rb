@@ -34,7 +34,7 @@ class Patients::Diagnostics::DietsTest < ActionDispatch::IntegrationTest
 
     assert_select "#aside-menu"
 
-    assert_select "a[href='#{patient_diagnostic_treatments_path(patients(:leo), diagnostics(:leo_flu))}']"
+    assert_select "a[href='#{new_patient_diagnostic_treatment_path(patients(:leo), diagnostics(:leo_flu))}']"
     assert_select "h2", text: "Cadastrar nova dieta"
     assert_select "form[action='#{patient_diagnostic_diets_path(patients(:leo), diagnostics(:leo_flu))}'][method='post']" do
       assert_select "input[name='diet[date]']"
