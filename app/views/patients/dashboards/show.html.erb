@@ -1,3 +1,7 @@
-<div class="flex flex-col items-center mt-48">
-  <%= render "shared/presentation_card", record: @patient %>
+<div class="flex flex-col items-center mt-16 md:mt-48">
+  <%= tag.h2 "Seja bem vindo(a), #{@patient.name}!" if @patient.user == current_user %>
+
+  <div class="mt-8 w-full flex justify-center">
+    <%= render "shared/presentation_card", record: @patient %>
+  </div>
 </div>

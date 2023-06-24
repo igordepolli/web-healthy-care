@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include Gatekeeper::Authorization
+  include SetVariant
 
   private
     def after_sign_in_path_for(resource)

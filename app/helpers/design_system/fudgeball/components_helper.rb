@@ -45,11 +45,11 @@ module DesignSystem::Fudgeball::ComponentsHelper
   end
 
   def fudgeball_form_alert(options = {})
-    if flash[:alert].present?
+    if flash[:alert].present? && flash[:alert] != "Você já está logado."
       message = flash[:alert]
       flash.discard
       fudgeball_alert(message, :red, options)
-    elsif flash[:error].present?
+    elsif flash[:error].present? && flash[:error] != "Você já está logado."
       response = flash[:error]
       flash.discard
 

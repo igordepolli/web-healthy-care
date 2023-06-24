@@ -1,5 +1,5 @@
 <div class="container flex items-center justify-center">
-  <div class="w-3/12">
+  <div class="md:w-3/12">
     <h2>Editar dados de médico</h2>
 
     <%= fudgeball_form model: @doctor, url: doctor_path(@doctor), class: "mt-8" do |form| %>
@@ -14,7 +14,7 @@
       <%= form.submit "Atualizar", class: "mt-5 w-full" %>
     <% end %>
 
-    <div class="mt-5">
+    <div class="mt-5 mb-5">
       <%= link_to "Editar dados de usuário", edit_user_registration_path %>
     </div>
   </div>

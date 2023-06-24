@@ -13,9 +13,9 @@
 
   <body>
     <%= render "layouts/navbar" %>
-    <main class="container mx-auto mt-10 px-5 flex">
+    <main class="container mx-auto md:mt-10 px-5 flex relative">
       <%= render "patients/shared/aside_menu", patient: @patient, doctor: @doctor, access_control: @access_control %>
-      <div id="content" class="p-4 sm:ml-64 mb-5 container">
+      <div id="content" class="p-4 md:ml-64 mb-5 container">
         <%= yield %>
       </div>
     </main>
