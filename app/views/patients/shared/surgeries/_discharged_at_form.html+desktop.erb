@@ -1,0 +1,7 @@
+<%= fudgeball_form model: surgery, url:, method: :patch, class: "mt-2" do |form| %>
+  <div class="flex items-center">
+    <p class="mr-3"><span class="font-bold">Data da alta:</span></p>
+    <%= form.input :discharged_at, :date, label: false, required: true, class: "mr-3" %>
+    <%= form.submit "Salvar data da alta" %>
+  </div>
+<% end %>

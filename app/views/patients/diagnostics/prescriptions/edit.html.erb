@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container mt-16 md:mt-0">
   <%= fudgeball_return_button @return_url %>
-  <div class="w-6/12 mx-auto">
+  <div class="md:w-6/12 mx-auto">
     <h2>Editar receita</h2>
 
     <%= fudgeball_form model: @prescription, url: patient_diagnostic_prescription_path(@patient, @diagnostic, @prescription, mode: params[:mode]), method: :patch, class: "mt-8" do |form| %>

@@ -7,7 +7,7 @@
     facilitar seu trabalho futuramente e o trabalho de outros médicos.
   </p>
 
-  <div class="mt-10 flex justify-around items-center">
+  <div class="mt-10 flex flex-wrap justify-around items-center">
     <%= fudgeball_call_to_action "Cirurgia", { url: new_patient_diagnostic_surgery_path(@patient, @diagnostic), icon: { name: :surgeries, color: :primary } }, { class: "mt-5 w-80" } %>
     <%= fudgeball_call_to_action "Dieta", { url: new_patient_diagnostic_diet_path(@patient, @diagnostic), icon: { name: :diets, color: :primary } }, { class: "mt-5 w-80" } %>
     <%= fudgeball_call_to_action "Receita", { url: new_patient_diagnostic_prescription_path(@patient, @diagnostic), icon: { name: :prescriptions, color: :primary } }, { class: "mt-5 w-80" } %>

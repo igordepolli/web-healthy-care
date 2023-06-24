@@ -1,4 +1,4 @@
-<div id="sub-content" class="container">
+<div id="sub-content" class="container mt-16 md:mt-0">
   <%= fudgeball_return_button patient_diagnostics_path(@patient) %>
 
   <div class="mt-8">
@@ -13,7 +13,7 @@
       <%= fudgeball_form model: @diagnostic, url: patient_diagnostic_path(@patient, @diagnostic), method: :patch, class: "mt-2" do |form| %>
         <%= fudgeball_form_alert class: "my-4" %>
         <p class="font-bold">Status:</p>
-        <%= form.select :status, { label: false }, { onchange: "this.form.requestSubmit()", class: "w-96" } %>
+        <%= form.select :status, { label: false }, { onchange: "this.form.requestSubmit()", class: "w-full md:w-96" } %>
       <% end %>
     <% else %>
       <p class="mt-2"><span class="font-bold">Status:</span> <%= t(@diagnostic.status, scope: "activerecord.attributes.diagnostic/status") %></p>
