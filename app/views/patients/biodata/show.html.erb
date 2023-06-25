@@ -1,18 +1,12 @@
 <div class="container mt-16 md:mt-0">
-  <%= fudgeball_return_button patient_biodata_path(@patient) %>
   <div class="mt-8">
-    <p class="mt-2"><span class="font-bold">Paciente:</span> <%= @biodatum.patient.full_name %></p>
+    <p class="mt-2"><span class="font-bold">Exame que constatou os biodados mais recentes:</span></p>
     <p class="mt-2"><span class="font-bold">Data do exame:</span> <%= @biodatum.exam.date.strftime("%d/%m/%Y") %></p>
     <p class="mt-2"><span class="font-bold">Tipo do exame:</span> <%= t(@biodatum.exam.classification, scope: "activerecord.attributes.exam/classification") %></p>
+    <p class="mt-2"><%= link_to "Visualizar", patient_exam_path(@patient, @biodatum.exam), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %></p>
 
     <div class="mt-16">
-      <p class="mt-2"><span class="font-bold">Pressão sistólica:</span> <%= @biodatum.systolic_pressure %></p>
-      <p class="mt-2"><span class="font-bold">Pressão diastólica:</span> <%= @biodatum.diastolic_pressure %></p>
-      <p class="mt-2"><span class="font-bold">Glicemia:</span> <%= @biodatum.glycemia %></p>
-      <p class="mt-2"><span class="font-bold">Frequencia cardíaca:</span> <%= @biodatum.heart_rate %></p>
-      <p class="mt-2"><span class="font-bold">Colesterol:</span> <%= @biodatum.cholesterol %></p>
-      <p class="mt-2"><span class="font-bold">Triglicérides:</span> <%= @biodatum.triglyceride %></p>
-      <p class="mt-2"><span class="font-bold">Creatinina:</span> <%= @biodatum.creatinine %></p>
+      <%= render "patients/biodata/show/table", biodatum: @biodatum %>
     </div>
   </div>
 </div>

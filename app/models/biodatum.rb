@@ -8,6 +8,14 @@ class Biodatum < ApplicationRecord
 
   validate :at_least_one_of_biodatas_not_nil
 
+  def hash_biodata
+    @hash_biodata ||= begin
+      @hash_biodata = {}
+      %i[systolic_pressure diastolic_pressure glycemia heart_rate cholesterol triglyceride creatinine].each { @hash_biodata[_1] = send(_1) }
+      @hash_biodata
+    end
+  end
+
   private
     def at_least_one_of_biodatas_not_nil
       if [systolic_pressure, diastolic_pressure, glycemia, heart_rate, cholesterol, triglyceride, creatinine].all?(&:nil?)

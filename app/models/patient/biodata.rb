@@ -5,7 +5,7 @@ module Patient::Biodata
 
   included do
     def biodatum
-      exams.last.biodatum
+      biodata.last
     end
 
     def biodata

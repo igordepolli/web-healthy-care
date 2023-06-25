@@ -57,7 +57,7 @@ module Permission
           owner?(patient, user)
         end
 
-        allow "patients/biodata", [:show, :index] do |(patient, doctor)|
+        allow "patients/biodata", [:show] do |(patient, doctor)|
           owner?(patient, user) || doctor&.allowed_by?(patient)
         end
 
