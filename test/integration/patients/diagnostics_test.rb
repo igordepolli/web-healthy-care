@@ -151,6 +151,8 @@ class Patients::DiagnosticsTest < ActionDispatch::IntegrationTest
 
     assert_select "#aside-menu"
     assert_select "#content" do
+      assert_select "a[href='#{patient_diagnostic_path(patients(:leo), diagnostics(:leo_flu))}']"
+
       assert_select "a[href='#{new_patient_diagnostic_path(patients(:leo))}']", text: "Novo diagnóstico"
       assert_select "table" do
         assert_select "th", text: "Data"

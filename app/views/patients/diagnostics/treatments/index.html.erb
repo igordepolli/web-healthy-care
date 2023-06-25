@@ -1,5 +1,6 @@
 <div class="container mt-16 md:mt-0">
-  <h2>Tratamentos para <%= @diagnostic.disease.name %> de <%= @patient.full_name %></h2>
+  <%= fudgeball_return_button patient_diagnostic_path(@patient, @diagnostic) %>
+  <h2 class="mt-5 md:mt-0">Tratamentos para <%= @diagnostic.disease.name %> de <%= @patient.full_name %></h2>
   <div class="mt-10">
     <% if @treatments.any? %>
       <%= fudgeball_button "Novo tratamento", url: new_patient_diagnostic_treatment_path(@patient, @diagnostic) if current_user.doctor? %>
