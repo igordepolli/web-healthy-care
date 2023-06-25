@@ -10,7 +10,7 @@ class PatientsController < ApplicationController
   end
 
   def index
-    @patients = Patient.where("last_name ~* ?", params[:last_name])
+    @patients = Patient.where("last_name ~* ?", params[:query])
   end
 
   def create

@@ -41,13 +41,13 @@ class PatientsTest < ActionDispatch::IntegrationTest
     get patients_path
 
     assert_select "h2", text: "Pacientes"
-    assert_select "input[name='last_name'][placeholder='Buscar por sobrenome']"
+    assert_select "input[name='query'][placeholder='Buscar por sobrenome']"
     assert_select "input[type='submit'][value='Buscar']"
 
-    get patients_path(last_name: "maralha")
+    get patients_path(query: "maralha")
 
     assert_select "h2", text: "Pacientes"
-    assert_select "input[name='last_name'][placeholder='Buscar por sobrenome']"
+    assert_select "input[name='query'][placeholder='Buscar por sobrenome']"
     assert_select "input[type='submit'][value='Buscar']"
     assert_select "table" do
       assert_select "th", text: "Nome"

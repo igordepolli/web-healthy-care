@@ -2,10 +2,16 @@
   <div class="w-full">
     <h2>Médicos</h2>
     <%= fudgeball_form url: doctors_path, method: :get, class: "mt-8 flex justify-center items-center" do |form| %>
-      <%= form.input :query, :text, autofocus: true, required: true, label: false, placeholder: "Buscar por sobrenome ou CRM", class: "md:w-96 mr-4" %>
+      <%= form.input :query, :text, autofocus: true, required: true, value: params[:query], label: false, placeholder: "Buscar por sobrenome ou CRM", class: "md:w-96 mr-4" %>
       <%= form.submit "Buscar" %>
     <% end %>
 
-    <%= render "doctors/index/doctors", doctors: @doctors if @doctors.present? %>
+    <div class="mt-8">
+      <% if @doctors.present? %>
+        <%= render "doctors/index/doctors", doctors: @doctors %>
+      <% elsif params[:query].present? %>
+        <p class="text-center">Não foram encontrados resultados para a busca pelo sobrenome ou CRM "<%= params[:query] %>".</p>
+      <% end %>
+    </div>
   </div>
 </div>

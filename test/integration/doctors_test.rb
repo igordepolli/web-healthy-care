@@ -51,6 +51,31 @@ class DoctorsTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{edit_user_registration_path}']", text: "Editar dados de usuário"
   end
 
+  test "index" do
+    sign_in users(:leo)
+
+    get doctors_path
+
+    assert_select "h2", text: "Médicos"
+    assert_select "input[name='query'][placeholder='Buscar por sobrenome ou CRM']"
+    assert_select "input[type='submit'][value='Buscar']"
+
+    get doctors_path(query: "regiani")
+
+    assert_select "h2", text: "Médicos"
+    assert_select "input[name='query'][placeholder='Buscar por sobrenome ou CRM']"
+    assert_select "input[type='submit'][value='Buscar']"
+    assert_select "table" do
+      assert_select "th", text: "Nome"
+      assert_select "th", text: "CRM"
+      assert_select "th", text: "Especialidade"
+
+      assert_select "th", text: "Milena Regiani"
+      assert_select "td", text: "123456-SP"
+      assert_select "td", text: "Cardiologista"
+    end
+  end
+
   test "create success" do
     sign_in users(:pending)
 
