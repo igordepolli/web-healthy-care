@@ -6,7 +6,7 @@
     <p class="mt-2"><%= link_to "Visualizar", patient_exam_path(@patient, @biodatum.exam), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %></p>
 
     <div class="mt-16">
-      <%= render "patients/biodata/show/table", biodatum: @biodatum %>
+      <%= render "patients/shared/exams/table", biodatum: @biodatum %>
     </div>
   </div>
 </div>

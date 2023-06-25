@@ -10,13 +10,7 @@
     <div class="mt-16">
       <% if @biodatum.present? %>
         <h2>Resultados</h2>
-        <p class="mt-2"><span class="font-bold">Pressão sistólica:</span> <%= @biodatum.systolic_pressure %></p>
-        <p class="mt-2"><span class="font-bold">Pressão diastólica:</span> <%= @biodatum.diastolic_pressure %></p>
-        <p class="mt-2"><span class="font-bold">Glicemia:</span> <%= @biodatum.glycemia %></p>
-        <p class="mt-2"><span class="font-bold">Frequencia cardíaca:</span> <%= @biodatum.heart_rate %></p>
-        <p class="mt-2"><span class="font-bold">Colesterol:</span> <%= @biodatum.cholesterol %></p>
-        <p class="mt-2"><span class="font-bold">Triglicérides:</span> <%= @biodatum.triglyceride %></p>
-        <p class="mt-2"><span class="font-bold">Creatinina:</span> <%= @biodatum.creatinine %></p>
+        <%= render "patients/shared/exams/table", biodatum: @biodatum %>
       <% elsif current_user.doctor? %>
         <%= fudgeball_button "Cadastrar resultados", url: new_patient_exam_biodatum_path(@patient, @exam) if current_user.doctor? %>
       <% else %>

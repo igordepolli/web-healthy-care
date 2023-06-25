@@ -101,8 +101,11 @@ class Patients::ExamsTest < ActionDispatch::IntegrationTest
       assert_select "p", text: "Tipo do exame: Hemograma"
       assert_select "p", text: "Local do exame: Hospital de Alegre"
 
-      assert_select "p", text: "Pressão sistólica: 12"
-      assert_select "p", text: "Pressão diastólica: 8"
+      assert_select "th", text: "Pressão sistólica"
+      assert_select "td", text: "12"
+
+      assert_select "th", text: "Pressão diastólica"
+      assert_select "td", text: "8"
     end
   end
 
