@@ -5,7 +5,7 @@
     <p class="mt-2"><span class="font-bold">Paciente:</span> <%= @diagnostic.patient.full_name %></p>
     <p class="mt-2"><span class="font-bold">Doença:</span> <%= @diagnostic.disease.name %></p>
     <p class="mt-2"><span class="font-bold">Data do diagnóstico:</span> <%= @diagnostic.diagnosed_at.strftime("%d/%m/%Y") %></p>
-    <p class="mt-2"><span class="font-bold">Data da cura:</span> <%= @diagnostic.cured_at&.strftime("%d/%m/%Y") %></p>
+    <p class="mt-2"><span class="font-bold">Data do diagnóstico negativo:</span> <%= @diagnostic.cured_at&.strftime("%d/%m/%Y") %></p>
     <p class="mt-2 font-bold">Sintomas relatados:</p>
     <p class="mt-2 mb-5"><%= @diagnostic.related_symptoms %></p>
 

@@ -116,7 +116,7 @@ class Patients::DiagnosticsTest < ActionDispatch::IntegrationTest
       assert_select "p", text: "Paciente: Leonardo Maralha"
       assert_select "p", text: "Doença: Gripe"
       assert_select "p", text: "Data do diagnóstico: #{Date.current.strftime("%d/%m/%Y")}"
-      assert_select "p", text: "Data da cura: #{Date.current.strftime("%d/%m/%Y")}"
+      assert_select "p", text: "Data do diagnóstico negativo: #{Date.current.strftime("%d/%m/%Y")}"
       assert_select "p", text: "Corisa, catarro e mal estar"
       assert_select "p", text: "Status: Ativa"
     end
