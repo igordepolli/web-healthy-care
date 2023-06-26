@@ -11,7 +11,7 @@ class Doctor < ApplicationRecord
   validates :cpf, presence: true, cpf: true, uniqueness: true
   validates :crm, presence: true, crm: true, uniqueness: true
   validates :specialty, presence: true
-  validates :email, email: true, uniqueness: { allow_blank: true }
+  validates :email, email: true
 
   def full_name
     "#{name} #{last_name}"

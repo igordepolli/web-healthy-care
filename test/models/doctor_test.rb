@@ -74,18 +74,6 @@ class DoctorTest < ActiveSupport::TestCase
     assert_equal ["já foi usado"], new_doctor.errors[:crm]
   end
 
-  test "uniqueness email" do
-    doctors(:milena).update_column :email, "milena@gmail.com"
-
-    new_doctor = doctors(:milena).dup
-    new_doctor.cpf = "873.981.950-79"
-    new_doctor.crm = "456789-ES"
-
-    assert new_doctor.invalid?
-    assert_equal 1, new_doctor.errors.count
-    assert_equal ["já foi usado"], new_doctor.errors[:email]
-  end
-
   test "full name" do
     assert_equal "Milena Regiani", doctors(:milena).full_name
   end
