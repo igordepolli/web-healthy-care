@@ -52,7 +52,9 @@ class DoctorTest < ActiveSupport::TestCase
     assert_equal ["inválido"], doctors(:milena).errors[:crm]
 
     doctors(:milena).crm = "431234-ES"
+    assert doctors(:milena).valid?
 
+    doctors(:milena).crm = "CRM/ES 431234"
     assert doctors(:milena).valid?
   end
 

@@ -15,6 +15,9 @@ class CrmValidator < ActiveModel::EachValidator
       # Número seguido de traço e sigla de um dos 27 estados do Brasil
       return true if value.match?(/^\d+-[A-Z]{2}$/) && ::STATE_ABBREVIATIONS.include?(value[-2..-1])
 
+      # Sigla CRM/Estado seguido de números
+      return true if value.match?(/^CRM\/[A-Z]{2}\s\d+$/) && ::STATE_ABBREVIATIONS.include?(value[4..5])
+
       # Número seguido da letra ‘P’
       return true if value.match?(/\d+P$/)
 

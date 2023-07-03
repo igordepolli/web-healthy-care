@@ -10,6 +10,7 @@ class PatientsController < ApplicationController
   end
 
   def index
+    # Exemplo simples de uso do ActiveRecord: Chamamos o modelo 'Patient' com o método where método este cujo primeiro argumento é uma string com uma query SQL e o segundo argumento é o valor que deve ser substituído no lugar do '?' na query SQL. Ao final, é assim que o ActiveRecord monta a query SQL: SELECT "patients".* FROM "patients" WHERE (last_name ~* 'valor_do_parametro_query')
     @patients = Patient.where("last_name ~* ?", params[:query])
   end
 
