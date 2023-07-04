@@ -11,6 +11,10 @@ class PatientsTest < ActionDispatch::IntegrationTest
     sign_in users(:pending)
     get new_patient_path
     assert_response :ok
+
+    sign_in users(:leo)
+    get edit_patient_path(patients(:leo))
+    assert_response :ok
   end
 
   test "new layout" do

@@ -6,11 +6,7 @@ module DesignSystem::Fudgeball::ComponentsHelper
     color      = options.delete(:color) || :primary
     classes    = html_options.delete(:class)
 
-    if options[:type] == :button
-      tag.button text, class: "btn-#{color} #{classes}".squish, type: :button, **html_options
-    else
-      link_to text, url, class: "btn-#{color} #{classes}".squish, **html_options
-    end
+    link_to text, url, class: "btn-#{color} #{classes}".squish, **html_options
   end
 
   def fudgeball_return_button(url, options = {})
@@ -79,21 +75,6 @@ module DesignSystem::Fudgeball::ComponentsHelper
     svg.html_safe
   end
 
-  def fudgeball_icon_link(icon, options = {}, html_options = {})
-    url  = options.delete(:url)
-    type = options.delete(:type)
-
-    if type == :button
-      tag.button class: "btn-icon", type: :button, **html_options do
-        concat(fudgeball_icon(icon, **options))
-      end
-    else
-      link_to url, class: "btn-icon", **html_options do
-        concat(fudgeball_icon(icon, **options))
-      end
-    end
-  end
-
   private
     def fudgeball_form_id(model, prefix = nil)
       model = model.last if model.is_a?(Array)
@@ -123,8 +104,6 @@ module DesignSystem::Fudgeball::ComponentsHelper
         "#F05252"
       when :white
         "#FFFFFF"
-      when :black
-        "#000000"
       else
         "#3B82F6"
       end
