@@ -6,6 +6,7 @@ class Patients::DashboardsController < ApplicationController
   before_action :set_access_control
 
   def show
+    generic_response patient: @patient, doctor: @doctor, access_control: @access_control
   end
 
   private
