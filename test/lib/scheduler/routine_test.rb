@@ -5,15 +5,11 @@ require "scheduler/routine"
 
 module Scheduler
   class RoutineTest < ActiveSupport::TestCase
-    test "clean access controls" do
-      assert_no_difference -> { AccessControl.count } do
-        Routine.clean_access_controls
-      end
+    test "expires access controls" do
+      access_controls(:milena_leo).update_columns expires_at: Time.zone.now - 1.minute, status: :authorized
 
-      access_controls(:milena_leo).update_column :expires_at, Time.zone.now - 1.minute
-
-      assert_difference -> { AccessControl.count } => -1 do
-        Routine.clean_access_controls
+      assert_changes -> { access_controls(:milena_leo).reload.status }, from: "authorized", to: "expired" do
+        Routine.expires_access_controls
       end
     end
   end

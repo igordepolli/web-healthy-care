@@ -5,7 +5,7 @@ require "test_helper"
 
 class Patients::Diagnostics::TreatmentsTest < ActionDispatch::IntegrationTest
   setup do
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
+    access_controls(:milena_leo).update_columns expires_at: Time.zone.now + 2.hours, status: :authorized
 
     sign_in users(:milena)
   end

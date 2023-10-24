@@ -20,7 +20,7 @@ leo_patient   = Patient.create! user: leo,    name: "Leonardo", last_name: "Mara
 milena_doctor = Doctor.create!  user: milena, name: "Milena",   last_name: "Regiani", email: "milena@gmail.com", cpf: "153.316.417-76", crm: "123456-SP", specialty: "Cardiologista"
 
 # Authorizations
-AccessControl.create! doctor: milena_doctor, patient: leo_patient, expires_at: Time.zone.now + 2.hours
+AccessControl.create! doctor: milena_doctor, patient: leo_patient, expires_at: Time.zone.now + 2.hours, status: :authorized
 
 # Consultations
 consultation = Consultation.create! doctor: milena_doctor, patient: leo_patient, date: Time.zone.now

@@ -16,7 +16,7 @@ class Patients::ConsultationsTest < ActionDispatch::IntegrationTest
     get new_patient_consultation_path(patients(:leo))
     assert_response :redirect
 
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
+    access_controls(:milena_leo).update_columns expires_at: Time.zone.now + 2.hours, status: :authorized
 
     get new_patient_consultation_path(patients(:leo))
     assert_response :ok
@@ -39,7 +39,7 @@ class Patients::ConsultationsTest < ActionDispatch::IntegrationTest
     get patient_consultation_path(patients(:leo), consultations(:suspected_flu))
     assert_response :redirect
 
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
+    access_controls(:milena_leo).update_columns expires_at: Time.zone.now + 2.hours, status: :authorized
 
     get patient_consultation_path(patients(:leo), consultations(:suspected_flu))
     assert_response :ok
@@ -62,7 +62,7 @@ class Patients::ConsultationsTest < ActionDispatch::IntegrationTest
     get patient_consultations_path(patients(:leo))
     assert_response :redirect
 
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
+    access_controls(:milena_leo).update_columns expires_at: Time.zone.now + 2.hours, status: :authorized
 
     get patient_consultations_path(patients(:leo))
     assert_response :ok
@@ -74,7 +74,7 @@ class Patients::ConsultationsTest < ActionDispatch::IntegrationTest
   end
 
   test "layout new" do
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
+    access_controls(:milena_leo).update_columns expires_at: Time.zone.now + 2.hours, status: :authorized
     sign_in users(:milena)
 
     get new_patient_consultation_path(patients(:leo))
@@ -108,7 +108,7 @@ class Patients::ConsultationsTest < ActionDispatch::IntegrationTest
   end
 
   test "layout index" do
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
+    access_controls(:milena_leo).update_columns expires_at: Time.zone.now + 2.hours, status: :authorized
     sign_in users(:milena)
 
     get patient_consultations_path(patients(:leo))
@@ -131,7 +131,7 @@ class Patients::ConsultationsTest < ActionDispatch::IntegrationTest
   end
 
   test "create" do
-    access_controls(:milena_leo).update_column :expires_at, Time.zone.now + 2.hours
+    access_controls(:milena_leo).update_columns expires_at: Time.zone.now + 2.hours, status: :authorized
     sign_in users(:milena)
 
     assert_difference -> { Consultation.count } => 1 do

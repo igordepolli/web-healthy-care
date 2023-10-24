@@ -4,7 +4,7 @@ module Scheduler
   Task = Struct.new(:name, :hours)
 
   mattr_accessor :tasks, default: [
-    Task.new("clean_access_controls", [6, 18])
+    Task.new("expires_access_controls", [6, 18])
   ]
 
   def hour

@@ -37,6 +37,8 @@ class Patients::AccessControlsTest < ActionDispatch::IntegrationTest
   end
 
   test "create" do
+    AccessControl.delete_all
+
     sign_in users(:milena)
 
     assert_difference -> { AccessControl.count } => 1 do
@@ -60,7 +62,7 @@ class Patients::AccessControlsTest < ActionDispatch::IntegrationTest
   test "destroy" do
     sign_in users(:leo)
 
-    assert_difference -> { AccessControl.count } => -1 do
+    assert_changes -> { access_controls(:milena_leo).reload.status }, from: "pending", to: "denied" do
       delete patient_access_control_path(patients(:leo), access_controls(:milena_leo))
     end
   end

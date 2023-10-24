@@ -68,7 +68,7 @@ class Patient::DashboardsTest < ActionDispatch::IntegrationTest
       assert_select "span", text: "Aguardando autorização"
     end
 
-    access_control.update_column :expires_at, Time.zone.now + 2.hours
+    access_control.update_columns expires_at: Time.zone.now + 2.hours, status: :authorized
 
     get patient_dashboard_path(patients(:leo))
 

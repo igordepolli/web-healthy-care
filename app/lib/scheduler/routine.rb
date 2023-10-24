@@ -2,8 +2,8 @@
 
 module Scheduler
   class Routine
-    def self.clean_access_controls
-      AccessControl.where(expires_at: ..Time.zone.now).delete_all
+    def self.expires_access_controls
+      AccessControl.where(expires_at: ..Time.zone.now).update_all status: :expired
     end
   end
 end

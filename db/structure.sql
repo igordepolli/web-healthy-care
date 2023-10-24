@@ -22,6 +22,7 @@ CREATE TABLE public.access_controls (
     doctor_id bigint NOT NULL,
     patient_id bigint NOT NULL,
     expires_at timestamp(6) without time zone,
+    status integer DEFAULT 0 NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -996,10 +997,10 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: idx_doctor_patient_expires_at_on_ac; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_doctor_patient_status_on_ac; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX idx_doctor_patient_expires_at_on_ac ON public.access_controls USING btree (doctor_id, patient_id, expires_at);
+CREATE UNIQUE INDEX idx_doctor_patient_status_on_ac ON public.access_controls USING btree (doctor_id, patient_id, status);
 
 
 --

@@ -5,6 +5,12 @@ class AccessControlTest < ActiveSupport::TestCase
     assert access_controls.all?(&:valid?)
   end
 
+  test "database defaults are set" do
+    blank = AccessControl.new
+
+    assert blank.pending?
+  end
+
   test "mandatory attributes are validated" do
     blank = AccessControl.new
 

@@ -8,7 +8,9 @@ class DiagnosticTest < ActiveSupport::TestCase
   end
 
   test "database defaults are set" do
-    assert diagnostics(:leo_flu).active?
+    blank = Diagnostic.new
+
+    assert blank.active?
   end
 
   test "mandatory attributes are validated" do
